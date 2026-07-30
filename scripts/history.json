@@ -1,0 +1,7097 @@
+{
+ "sessions": [
+  {
+   "day": "1",
+   "date": "2026-04-07",
+   "exercises": [
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x 3 PDC",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "8Kg tocmuch pour 3 séries / 12reps",
+     "sets": [
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "pull-machine",
+     "raw": "50Kg 3 séries / 10-12reps",
+     "sets": [
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x3 a 5sec pause 2sec en bas",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x15sec en haut et bas",
+     "sets": [
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3 séries / 10-12 Reps 9-18Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x10-12reps 4,5Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 4.5
+      },
+      {
+       "reps": 10,
+       "weight": 4.5
+      },
+      {
+       "reps": 10,
+       "weight": 4.5
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x10-12reps 12Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 12.0
+      },
+      {
+       "reps": 10,
+       "weight": 12.0
+      },
+      {
+       "reps": 10,
+       "weight": 12.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "3x10 Barre vide",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x8 / Jambes",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x 10reps vide (1s à 10Kg)",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 10.0
+      },
+      {
+       "reps": 10,
+       "weight": 10.0
+      },
+      {
+       "reps": 10,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x10-12reps 12-18Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 18.0
+      },
+      {
+       "reps": 10,
+       "weight": 18.0
+      },
+      {
+       "reps": 10,
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x20reps a vide",
+     "sets": [
+      {
+       "reps": 20
+      },
+      {
+       "reps": 20
+      },
+      {
+       "reps": 20
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "2",
+   "date": "2026-04-11",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x23Kg aide",
+     "sets": [
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x23Kg aide",
+     "sets": [
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x23Kg aide",
+     "sets": [
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      },
+      {
+       "assist": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x15 25Kg",
+     "sets": [
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x12 18Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "reps": 12,
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "1x4Kg / 2x5Kg",
+     "sets": [
+      {
+       "weight": 4.0
+      },
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 5.0
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x12reps 1:18Kg / 2x25Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "reps": 12,
+       "weight": 18.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x12 6,8Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 6.8
+      },
+      {
+       "reps": 12,
+       "weight": 6.8
+      },
+      {
+       "reps": 12,
+       "weight": 6.8
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "1x18Kg / 1x 14Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1xbarre vide / 5-5Kg / 10-10Kg",
+     "sets": [
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "1x4Kg / 6Kg / 8Kg",
+     "sets": [
+      {
+       "weight": 4.0
+      },
+      {
+       "weight": 6.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "1x0Kg / 5Kg / 7,5Kg",
+     "sets": [
+      {
+       "weight": 0.0
+      },
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 7.5
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x10-10Kg / 2x 15-15Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 10.0
+      },
+      {
+       "reps": 15,
+       "weight": 15.0
+      },
+      {
+       "reps": 15,
+       "weight": 15.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x27Kg",
+     "sets": [
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "3",
+   "date": "2026-04-14",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x 4 aide 18Kg",
+     "sets": [
+      {
+       "reps": 4,
+       "assist": 18.0
+      },
+      {
+       "reps": 4,
+       "assist": 18.0
+      },
+      {
+       "reps": 4,
+       "assist": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x3 18Kg",
+     "sets": [
+      {
+       "reps": 3,
+       "weight": 18.0
+      },
+      {
+       "reps": 3,
+       "weight": 18.0
+      },
+      {
+       "reps": 3,
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x3 18Kg",
+     "sets": [
+      {
+       "reps": 3,
+       "weight": 18.0
+      },
+      {
+       "reps": 3,
+       "weight": 18.0
+      },
+      {
+       "reps": 3,
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x15 25Kg",
+     "sets": [
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      },
+      {
+       "reps": 15,
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x12 23Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 23.0
+      },
+      {
+       "reps": 12,
+       "weight": 23.0
+      },
+      {
+       "reps": 12,
+       "weight": 23.0
+      },
+      {
+       "reps": 12,
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x12 5Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 5.0
+      },
+      {
+       "reps": 12,
+       "weight": 5.0
+      },
+      {
+       "reps": 12,
+       "weight": 5.0
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "1x25Kg 2x32Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x6,8Kg",
+     "sets": [
+      {
+       "weight": 6.8
+      },
+      {
+       "weight": 6.8
+      },
+      {
+       "weight": 6.8
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "1x18Kg 2x23Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x5/10/15",
+     "sets": [
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "1x8Kg 2x10Kg",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "1x7,5Kg/ 2x10Kg",
+     "sets": [
+      {
+       "weight": 7.5
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x 30Kg /40Kg /50Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x27Kg",
+     "sets": [
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "4",
+   "date": "2026-04-17",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x4 aide 14Kg",
+     "sets": [
+      {
+       "reps": 4,
+       "assist": 14.0
+      },
+      {
+       "reps": 4,
+       "assist": 14.0
+      },
+      {
+       "reps": 4,
+       "assist": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x3 aide 9Kg",
+     "sets": [
+      {
+       "reps": 3,
+       "assist": 9.0
+      },
+      {
+       "reps": 3,
+       "assist": 9.0
+      },
+      {
+       "reps": 3,
+       "assist": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x4 aide 14Kg",
+     "sets": [
+      {
+       "reps": 4,
+       "assist": 14.0
+      },
+      {
+       "reps": 4,
+       "assist": 14.0
+      },
+      {
+       "reps": 4,
+       "assist": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "1x 32Kg 3x12 25Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "reps": 12,
+       "weight": 25.0
+      },
+      {
+       "reps": 12,
+       "weight": 25.0
+      },
+      {
+       "reps": 12,
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x15 23Kg",
+     "sets": [
+      {
+       "reps": 15,
+       "weight": 23.0
+      },
+      {
+       "reps": 15,
+       "weight": 23.0
+      },
+      {
+       "reps": 15,
+       "weight": 23.0
+      },
+      {
+       "reps": 15,
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x12 6Kg",
+     "sets": [
+      {
+       "reps": 12,
+       "weight": 6.0
+      },
+      {
+       "reps": 12,
+       "weight": 6.0
+      },
+      {
+       "reps": 12,
+       "weight": 6.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "3x10rep",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x3reps",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "Haltère banc 8Kg",
+     "sets": [
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "Lever de Barre debout 20Kg 10rep",
+     "sets": [
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x5Kg 2x15Kg",
+     "sets": [
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "1x9Kg 2x10Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "1x10Kg 1x15Kg 1x20Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x60Kg 2x80Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x27Kg",
+     "sets": [
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg total",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "5",
+   "date": "2026-04-21",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x14Kg",
+     "sets": [
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x14Kg",
+     "sets": [
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x7Kg",
+     "sets": [
+      {
+       "weight": 7.0
+      },
+      {
+       "weight": 7.0
+      },
+      {
+       "weight": 7.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "3x10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "1x4 2x5",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "1x40sec 2x50sec",
+     "sets": [
+      {
+       "duration": 40
+      },
+      {
+       "duration": 50
+      },
+      {
+       "duration": 50
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x25Kg 1x32Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "1x9Kg 3x14Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "1x23Kg 2x27Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x15Kg 2x20Kg chaque côté",
+     "sets": [
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "2x12Kg 1x14Kg",
+     "sets": [
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x60Kg 2x80Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x27Kg",
+     "sets": [
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "6",
+   "date": "2026-04-25",
+   "exercises": [
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x8Kg 10rep",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "3x10rep",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x4rep",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x50sec",
+     "sets": [
+      {
+       "duration": 50
+      },
+      {
+       "duration": 50
+      },
+      {
+       "duration": 50
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "1x11,3Kg 2x9Kg",
+     "sets": [
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "1x20Kg 2x25Kg barre debout",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x15Kg 2x20Kg",
+     "sets": [
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "2x12Kg 2x14Kg",
+     "sets": [
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x10Kg 45sec",
+     "sets": [
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x60Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "7",
+   "date": "2026-04-28",
+   "exercises": [
+    {
+     "slug": "squat",
+     "raw": "8rep 40Kg Total 7rep 60Kg 1rep 80Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "1x16KG 8rep 20Kg 6rep 22Kg",
+     "sets": [
+      {
+       "weight": 16.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 22.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "Total : 1x80Kg 1x100Kg 6 rep 120Kg",
+     "sets": [
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "1x32Kg / 6rep 36Kg / 3rep 41Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "face-pull",
+     "raw": "6Kg",
+     "sets": [
+      {
+       "weight": 6.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "8",
+   "date": "2026-05-01",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3-3-2-2",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 2
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "4x10 9Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 9.0
+      },
+      {
+       "reps": 10,
+       "weight": 9.0
+      },
+      {
+       "reps": 10,
+       "weight": 9.0
+      },
+      {
+       "reps": 10,
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "2x20Kg 1x25Kg barre debout",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x45sec 10Kg",
+     "sets": [
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x40Kg 2x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "2x32Kg 1x27Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "face-pull",
+     "raw": "2x15 9Kg 1x4,5Kg",
+     "sets": [
+      {
+       "reps": 15,
+       "weight": 9.0
+      },
+      {
+       "reps": 15,
+       "weight": 9.0
+      },
+      {
+       "weight": 4.5
+      }
+     ]
+    },
+    {
+     "slug": "tirage-poulie-haute-serre",
+     "raw": "32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-decline",
+     "raw": "1x 3x8Kg",
+     "sets": [
+      {
+       "reps": 3,
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-incline",
+     "raw": "2x10Kg 2x8Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "9",
+   "date": "2026-05-05",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4434.0",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "1x3 2x2,5",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 2
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x39Kg 1x45Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "2x36Kg 2x32Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "face-pull",
+     "raw": "1x14Kg 2x23Kg",
+     "sets": [
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "10",
+   "date": "2026-05-09",
+   "exercises": [
+    {
+     "slug": "row-machine-vertical",
+     "raw": "1x52Kg6rep 3x45Kg 8rep",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "11",
+   "date": "2026-05-12",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3-3-2-2",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 2
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "2x36Kg 2x32Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x20Kg 1x30Kg 1x50Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x 10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x5Kg",
+     "sets": [
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 5.0
+      },
+      {
+       "weight": 5.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x80Kg total",
+     "sets": [
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x27Kg",
+     "sets": [
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x60Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "tirage-poulie-haute-serre",
+     "raw": "3x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-incline",
+     "raw": "4x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "tirage-poulies-cotes-dos",
+     "raw": "3x10 4,5Kg",
+     "sets": [
+      {
+       "reps": 10,
+       "weight": 4.5
+      },
+      {
+       "reps": 10,
+       "weight": 4.5
+      },
+      {
+       "reps": 10,
+       "weight": 4.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "12",
+   "date": "2026-05-15",
+   "exercises": [
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "2x36, 1x41Kg 1x32Kg",
+     "sets": [
+      {
+       "reps": 36
+      },
+      {
+       "reps": 36
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x8Kg",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x20Kg barre debout",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x30Kg 2x50Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "1x10Kg 1x15Kg 1x20Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x40Kg 1x50Kg 1x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-decline",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "13",
+   "date": "2026-05-19",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "44332.0",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "1x45Kg 3x52Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "1x36Kg 3x41Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "1x39Kg 2x45Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "2x11,3Kg 1x9Kg",
+     "sets": [
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "face-pull",
+     "raw": "3x23Kg 2x27Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "14",
+   "date": "2026-05-23",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "3x3",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x6 pause 1sec en haut",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "1x44,6Kg 3x41Kg",
+     "sets": [
+      {
+       "weight": 44.6
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "5x8rep",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "4x5rep",
+     "sets": [
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "1x11,3Kg 3x9Kg",
+     "sets": [
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg barre debout 12rep",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-decline",
+     "raw": "4x12Kg",
+     "sets": [
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-incline",
+     "raw": "2x12Kg 1x10Kg",
+     "sets": [
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "15",
+   "date": "2026-05-26",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "2x14Kg 1x18Kg",
+     "sets": [
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 14.0
+      },
+      {
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg barre debout",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x40Kg 1x50Kg 1x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x12Kg",
+     "sets": [
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      },
+      {
+       "weight": 12.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x59Kg",
+     "sets": [
+      {
+       "weight": 59.0
+      },
+      {
+       "weight": 59.0
+      },
+      {
+       "weight": 59.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x23Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "16",
+   "date": "2026-05-29",
+   "exercises": [
+    {
+     "slug": "squat",
+     "raw": "1x40Kg 2x30Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x8Kg/main",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x35sec pdc",
+     "sets": [
+      {
+       "duration": 35
+      },
+      {
+       "duration": 35
+      },
+      {
+       "duration": 35
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x40Kg 1x60Kg 1x80Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x18Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "17",
+   "date": "2026-06-02",
+   "exercises": [
+    {
+     "slug": "dips",
+     "raw": "3x10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x15-20sec",
+     "sets": [
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      },
+      {
+       "duration": 20
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x32",
+     "sets": [
+      {
+       "reps": 32
+      },
+      {
+       "reps": 32
+      },
+      {
+       "reps": 32
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "18",
+   "date": "2026-06-06",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "5-6-5-5-5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "0005-04-02 00:00:00",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "0004-04-01 00:00:00",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 1
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "41Kg",
+     "sets": [
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "4x8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x15-15",
+     "sets": [
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      },
+      {
+       "duration": 15
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x11,3Kg",
+     "sets": [
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 11.3
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "3x15Kg",
+     "sets": [
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x45sec 10Kg",
+     "sets": [
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x60Kg 2x100Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 100.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x18Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "19",
+   "date": "2026-06-09",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x5 négatives",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "5x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x4",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x41Kg",
+     "sets": [
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "5x8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "4x5",
+     "sets": [
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      }
+     ]
+    },
+    {
+     "slug": "developpe-decline",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "developpe-incline",
+     "raw": "3x10Kg",
+     "sets": [
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "20",
+   "date": "2026-06-12",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x5 négatives",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "5-6-6-6-6",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "0004-05-02 00:00:00",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x41Kg",
+     "sets": [
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "5x8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "4x5",
+     "sets": [
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      },
+      {
+       "duration": 5
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "1x45Kg 1x39Kg 1x32Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x11,3Kg",
+     "sets": [
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 11.3
+      },
+      {
+       "weight": 11.3
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x20Kg barre debout",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x15Kg 2x10Kg",
+     "sets": [
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 10.0
+      },
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x45 10Kg",
+     "sets": [
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      },
+      {
+       "duration": 45,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "1x60Kg 2x100Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 100.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x23Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "1x60Kg 3x80Kg",
+     "sets": [
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "21",
+   "date": "2026-06-16",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "6-6-7-6-6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x36Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x18Kg total",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "8-9-8-10-8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x36Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "2x11,3 1x13,5",
+     "sets": [
+      {
+       "reps": 11
+      },
+      {
+       "reps": 11
+      },
+      {
+       "reps": 13
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg barres debout",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x20Kg 3x30Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 10Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "2x100 1x120Kg 1x140Kg",
+     "sets": [
+      {
+       "reps": 100
+      },
+      {
+       "reps": 100
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 140.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg 20rep",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x23Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "22",
+   "date": "2026-06-20",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "6-6-6-6-6-6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x36Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "2x20Kg 10rep 1x7rep",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "reps": 7
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "8-9-9-9-9",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,5Kg",
+     "sets": [
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x20Kg 3x30Kg 1x40Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 10Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "2x100Kg 2x120Kg",
+     "sets": [
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "3x23Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "3x80Kg",
+     "sets": [
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 80.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "23",
+   "date": "2026-06-23",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "3x5",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "6-6-6-6-7-7",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x52Kg 2x32Kg 1x39Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x36Kg",
+     "sets": [
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "pull-machine",
+     "raw": "3x11,3",
+     "sets": [
+      {
+       "reps": 11
+      },
+      {
+       "reps": 11
+      },
+      {
+       "reps": 11
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "8-9-9-9-10",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x5 pause en bas 2 sec",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "2x23Kg 1x27Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "1x30Kg 3x40Kg 1x50Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg 18rep",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 10Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "2x100Kg 1x120Kg 1x140Kg",
+     "sets": [
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 100.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 140.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg 20rep",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "press-legere",
+     "raw": "1x80Kg 2x120Kg 20rep",
+     "sets": [
+      {
+       "weight": 80.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "24",
+   "date": "2026-06-26",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4-4-4-",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "6-6-7-7-8",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "5-4-4-",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x39Kg 1x32Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "2x41Kg 2x36Kg",
+     "sets": [
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "10-10-9-9-11",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 11
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x6 pause en bas",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,5Kg",
+     "sets": [
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "3x30Kg 2x40Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg 20rep",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 10Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 60,
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x120Kg",
+     "sets": [
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x20 40Kg",
+     "sets": [
+      {
+       "reps": 20,
+       "weight": 40.0
+      },
+      {
+       "reps": 20,
+       "weight": 40.0
+      },
+      {
+       "reps": 20,
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "25",
+   "date": "2026-06-30",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "444.0",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "6-6-6-6-7",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "334.0",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 3
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "2x41Kg 2x36Kg lent",
+     "sets": [
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 41.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "2x18Kg 1x15Kg 1x20Kg",
+     "sets": [
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "8-9-8-9-9",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13.5Kg",
+     "sets": [
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg barre debout",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x30Kg 2x40Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20Kg 20rep",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "1x1min 10Kg 2x20Kg 1:40sec 1 : 1min",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 10.0
+      },
+      {
+       "duration": 40,
+       "weight": 20.0
+      },
+      {
+       "duration": 40,
+       "weight": 20.0
+      },
+      {
+       "duration": 60
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "2x120Kg 1x160Kg",
+     "sets": [
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 160.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-curl-allonge",
+     "raw": "1x23Kg 2x18Kg",
+     "sets": [
+      {
+       "weight": 23.0
+      },
+      {
+       "weight": 18.0
+      },
+      {
+       "weight": 18.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "29",
+   "date": "2026-07-04",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "6-7-7-7-5",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3x4",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "Barre 15-10Kg 15 rep total",
+     "sets": [
+      {
+       "weight": 10.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "5x10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "3x30sec",
+     "sets": [
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      },
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,5Kg",
+     "sets": [
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "3x25Kg barre de debout",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x30Kg 2x40Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x20rep 20Kg",
+     "sets": [
+      {
+       "reps": 20,
+       "weight": 20.0
+      },
+      {
+       "reps": 20,
+       "weight": 20.0
+      },
+      {
+       "reps": 20,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "2x1min 1x45sec 20Kg",
+     "sets": [
+      {
+       "duration": 60
+      },
+      {
+       "duration": 60
+      },
+      {
+       "duration": 45,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "2x120Kg 1x160Kg",
+     "sets": [
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 160.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "30",
+   "date": "2026-07-07",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4-5-6-",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "7-7-7-7-5",
+     "sets": [
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "4-4-5-",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x39Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "1x32Kg 3x36Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      },
+      {
+       "weight": 36.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x16Kg",
+     "sets": [
+      {
+       "weight": 16.0
+      },
+      {
+       "weight": 16.0
+      },
+      {
+       "weight": 16.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "5x10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "3x6",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "1x20Kg 2x25Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "Barre debout 3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x30Kg 2x40Kg 1x50Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 20Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "10-12-13-",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 13
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "31",
+   "date": "2026-07-10",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "4-5-4-",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "tractions-rapides",
+     "raw": "7-7-6-7-6",
+     "sets": [
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "2x40Kg 1x35Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 35.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "3x35Kg",
+     "sets": [
+      {
+       "weight": 35.0
+      },
+      {
+       "weight": 35.0
+      },
+      {
+       "weight": 35.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x15Kg",
+     "sets": [
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      },
+      {
+       "weight": 15.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "10-10-10-10-10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "5-6-6-",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "1x1min",
+     "sets": [
+      {
+       "duration": 60
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "8-9-10-10",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "10-8-7x20Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x40Kg 3x50Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 20Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "12-13-15-",
+     "sets": [
+      {
+       "reps": 12
+      },
+      {
+       "reps": 13
+      },
+      {
+       "reps": 15
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "1x20Kg 2x40Kg",
+     "sets": [
+      {
+       "weight": 20.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "32",
+   "date": "2026-07-14",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "8-8-7-8-8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "3-5-6-",
+     "sets": [
+      {
+       "reps": 3
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "1x45Kg 2x40Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "4x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x7,5Kg",
+     "sets": [
+      {
+       "weight": 7.5
+      },
+      {
+       "weight": 7.5
+      },
+      {
+       "weight": 7.5
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "10-10-11-10-10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 11
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "0005-04-02 00:00:00",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 2
+      }
+     ]
+    },
+    {
+     "slug": "hold-dips",
+     "raw": "1x30sec",
+     "sets": [
+      {
+       "duration": 30
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "11-12-12-",
+     "sets": [
+      {
+       "reps": 11
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "2x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "10-11-",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 11
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x30Kg 3x50Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 50.0
+      },
+      {
+       "weight": 50.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x25Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 20Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "13-15-16",
+     "sets": [
+      {
+       "reps": 13
+      },
+      {
+       "reps": 15
+      },
+      {
+       "reps": 16
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "33",
+   "date": "2026-07-18",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "8-8-8-8-8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "5-5-5-",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "2x39Kg 1x45Kg",
+     "sets": [
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 39.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-horizontal",
+     "raw": "3x38Kg",
+     "sets": [
+      {
+       "weight": 38.0
+      },
+      {
+       "weight": 38.0
+      },
+      {
+       "weight": 38.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x8Kg",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "10-10-10-10-10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "6-6-6-",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "2x52Kg 1x45Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,6Kg",
+     "sets": [
+      {
+       "weight": 13.6
+      },
+      {
+       "weight": 13.6
+      },
+      {
+       "weight": 13.6
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x40Kg 3x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x28Kg",
+     "sets": [
+      {
+       "weight": 28.0
+      },
+      {
+       "weight": 28.0
+      },
+      {
+       "weight": 28.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 20Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x120Kg",
+     "sets": [
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "34",
+   "date": "2026-07-21",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "8-8-8-8-8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "5-6-5-",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "4x8Kg",
+     "sets": [
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      },
+      {
+       "weight": 8.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "10-10-10-10-10",
+     "sets": [
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 10
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "0006-06-04 00:00:00",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "3x52Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,6Kg",
+     "sets": [
+      {
+       "weight": 13.6
+      },
+      {
+       "weight": 13.6
+      },
+      {
+       "weight": 13.6
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "1x25Kg 2x30Kg",
+     "sets": [
+      {
+       "weight": 25.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "3x40Kg 1x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min 20Kg",
+     "sets": [
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      },
+      {
+       "duration": 60,
+       "weight": 20.0
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "3x120Kg",
+     "sets": [
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      },
+      {
+       "weight": 120.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "35",
+   "date": "2026-07-24",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "8-9-9-10-8",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 9
+      },
+      {
+       "reps": 10
+      },
+      {
+       "reps": 8
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "5-4-5-",
+     "sets": [
+      {
+       "reps": 5
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 5
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "4x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "12-12-12-12-12",
+     "sets": [
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "6-6-7-",
+     "sets": [
+      {
+       "reps": 6
+      },
+      {
+       "reps": 6
+      },
+      {
+       "reps": 7
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "1x45Kg 2x52Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "1x32Kg 2x27Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 27.0
+      },
+      {
+       "weight": 27.0
+      }
+     ]
+    },
+    {
+     "slug": "epaules-machine",
+     "raw": "2x30Kg 1x25Kg",
+     "sets": [
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 30.0
+      },
+      {
+       "weight": 25.0
+      }
+     ]
+    },
+    {
+     "slug": "squat",
+     "raw": "2x40Kg 2x60Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 60.0
+      },
+      {
+       "weight": 60.0
+      }
+     ]
+    },
+    {
+     "slug": "fentes-marchees",
+     "raw": "3x32Kg",
+     "sets": [
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      },
+      {
+       "weight": 32.0
+      }
+     ]
+    },
+    {
+     "slug": "wall-sit",
+     "raw": "3x1min",
+     "sets": [
+      {
+       "duration": 60
+      },
+      {
+       "duration": 60
+      },
+      {
+       "duration": 60
+      }
+     ]
+    },
+    {
+     "slug": "leg-press",
+     "raw": "Horizontal 1x59kg 1x66Kg 1x73Kg",
+     "sets": [
+      {
+       "weight": 59.0
+      },
+      {
+       "weight": 66.0
+      },
+      {
+       "weight": 73.0
+      }
+     ]
+    },
+    {
+     "slug": "mollet-assist-squat",
+     "raw": "3x40Kg",
+     "sets": [
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      },
+      {
+       "weight": 40.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "day": "36",
+   "date": "2026-07-28",
+   "exercises": [
+    {
+     "slug": "tractions",
+     "raw": "8-8-8-7-7",
+     "sets": [
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 7
+      },
+      {
+       "reps": 7
+      }
+     ]
+    },
+    {
+     "slug": "tractions-pause-haut",
+     "raw": "4-4-4-",
+     "sets": [
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      },
+      {
+       "reps": 4
+      }
+     ]
+    },
+    {
+     "slug": "row-machine-vertical",
+     "raw": "3x45Kg",
+     "sets": [
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      },
+      {
+       "weight": 45.0
+      }
+     ]
+    },
+    {
+     "slug": "curl-halteres",
+     "raw": "3x9Kg",
+     "sets": [
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      },
+      {
+       "weight": 9.0
+      }
+     ]
+    },
+    {
+     "slug": "dips",
+     "raw": "12-12-13-13-",
+     "sets": [
+      {
+       "reps": 12
+      },
+      {
+       "reps": 12
+      },
+      {
+       "reps": 13
+      },
+      {
+       "reps": 13
+      }
+     ]
+    },
+    {
+     "slug": "dips-negatives",
+     "raw": "-7-8-9",
+     "sets": [
+      {
+       "reps": 7
+      },
+      {
+       "reps": 8
+      },
+      {
+       "reps": 9
+      }
+     ]
+    },
+    {
+     "slug": "chest-press",
+     "raw": "2x52Kg 1x59Kg",
+     "sets": [
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 52.0
+      },
+      {
+       "weight": 59.0
+      }
+     ]
+    },
+    {
+     "slug": "extension-triceps-cable",
+     "raw": "3x13,5Kg",
+     "sets": [
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      },
+      {
+       "weight": 13.5
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+// Lectures serveur. Les policies RLS filtrent deja par utilisateur.
+import { createClient } from '@/lib/supabase/server';
+import type { Exercise, MuscleGroup, Profile, Workout, WorkoutSet } from '@/lib/database.types';
+
+export async function getUser() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+}
+
+export async function getProfile(): Promise<Profile | null> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data } = await supabase.from('profiles').select('*').eq('id', user.id).maybeSingle();
+
+  if (data) return data as Profile;
+
+  // Filet de securite si le trigger n'a pas tourne
+  const fallback = {
+    id: user.id,
+    email: user.email ?? null,
+    full_name:
+      (user.user_metadata?.full_name as string) ?? (user.user_metadata?.name as string) ?? null,
+    avatar_url: (user.user_metadata?.avatar_url as string) ?? null,
+  };
+  await supabase.from('profiles').upsert(fallback);
+  return fallback as Profile;
+}
+
+export async function getMuscleGroups(): Promise<MuscleGroup[]> {
+  const supabase = createClient();
+  const { data } = await supabase.from('muscle_groups').select('*').order('sort_order');
+  return (data ?? []) as MuscleGroup[];
+}
+
+export async function getExercises(): Promise<Exercise[]> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('exercises')
+    .select('*, muscle_groups(*)')
+    .eq('archived', false)
+    .order('sort_order');
+  return (data ?? []) as Exercise[];
+}
+
+export async function getExerciseBySlug(slug: string): Promise<Exercise | null> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('exercises')
+    .select('*, muscle_groups(*)')
+    .eq('slug', slug)
+    .maybeSingle();
+  return (data as Exercise) ?? null;
+}
+
+export interface WorkoutWithSets extends Workout {
+  workout_sets: WorkoutSet[];
+}
+
+export async function getRecentWorkouts(limit = 12): Promise<WorkoutWithSets[]> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workouts')
+    .select('*, workout_sets(*)')
+    .order('performed_on', { ascending: false })
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  return (data ?? []) as WorkoutWithSets[];
+}
+
+export async function getWorkout(id: string): Promise<WorkoutWithSets | null> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workouts')
+    .select('*, workout_sets(*)')
+    .eq('id', id)
+    .maybeSingle();
+  return (data as WorkoutWithSets) ?? null;
+}
+
+/** Toutes les series depuis une date, pour le reporting. */
+export async function getSetsSince(sinceISO: string): Promise<
+  Array<WorkoutSet & { workouts: { performed_on: string } | null }>
+> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workout_sets')
+    .select('*, workouts!inner(performed_on)')
+    .gte('workouts.performed_on', sinceISO)
+    .order('performed_at', { ascending: true });
+  return (data ?? []) as Array<WorkoutSet & { workouts: { performed_on: string } | null }>;
+}
+
+/** Historique complet d'un exercice. */
+export async function getExerciseHistory(exerciseId: string): Promise<
+  Array<WorkoutSet & { workouts: { performed_on: string } | null }>
+> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workout_sets')
+    .select('*, workouts(performed_on)')
+    .eq('exercise_id', exerciseId)
+    .order('performed_at', { ascending: true });
+  return (data ?? []) as Array<WorkoutSet & { workouts: { performed_on: string } | null }>;
+}
+
+/** Derniere performance connue pour chaque exercice (pour pre-remplir la saisie). */
+export async function getLastPerformances(): Promise<Record<string, WorkoutSet[]>> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workout_sets')
+    .select('*')
+    .order('performed_at', { ascending: false })
+    .limit(600);
+
+  const byExercise: Record<string, WorkoutSet[]> = {};
+  const seenWorkout: Record<string, string> = {};
+
+  for (const s of (data ?? []) as WorkoutSet[]) {
+    if (!seenWorkout[s.exercise_id]) seenWorkout[s.exercise_id] = s.workout_id;
+    if (seenWorkout[s.exercise_id] !== s.workout_id) continue;
+    (byExercise[s.exercise_id] ||= []).push(s);
+  }
+
+  for (const k of Object.keys(byExercise)) {
+    byExercise[k].sort((a, b) => a.set_index - b.set_index);
+  }
+  return byExercise;
+}
+
+export async function getOpenWorkout(): Promise<WorkoutWithSets | null> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workouts')
+    .select('*, workout_sets(*)')
+    .is('ended_at', null)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  return (data as WorkoutWithSets) ?? null;
+}

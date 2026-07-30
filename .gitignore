@@ -1,0 +1,15 @@
+node_modules
+.turbo
+scripts/history.local.json
+.next
+out
+build
+.DS_Store
+*.pem
+npm-debug.log*
+.env
+.env.local
+.env*.local
+.vercel
+next-env.d.ts
+tsconfig.tsbuildinfo
