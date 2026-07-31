@@ -52,7 +52,8 @@ export type PropKind =
   | 'cable-mid'
   | 'step';
 
-export type HeldKind = 'none' | 'dumbbell' | 'barbell' | 'handle' | 'rope' | 'plate-back';
+export type HeldKind =
+  | 'none' | 'dumbbell' | 'barbell' | 'handle' | 'rope' | 'plate-back' | 'sled' | 'roller';
 
 export interface ExerciseAnim {
   /** Duree d'un cycle complet, en secondes */
@@ -202,12 +203,12 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     duration: 2.6,
     prop: 'seat',
     held: 'handle',
-    focus: [106, 116],
+    focus: [104, 140],
     label: 'Tirage vertical',
     poses: [
-      P({ t: 0, torso: -6, hand: [140, 62], foot: [152, 200], footBend: -1 }),
-      P({ t: 46, torso: 8, hand: [130, 122], foot: [152, 200], footBend: -1 }),
-      P({ t: 100, torso: -6, hand: [140, 62], foot: [152, 200], footBend: -1 }),
+      P({ t: 0, bodyY: 24, torso: -7, hand: [148, 84], foot: [150, 178], footBend: -1 }),
+      P({ t: 46, bodyY: 24, torso: 7, hand: [142, 122], foot: [150, 178], footBend: -1 }),
+      P({ t: 100, bodyY: 24, torso: -7, hand: [148, 84], foot: [150, 178], footBend: -1 }),
     ],
   },
 
@@ -228,12 +229,12 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     duration: 2.6,
     prop: 'seat',
     held: 'handle',
-    focus: [108, 118],
+    focus: [104, 140],
     label: 'Rowing horizontal',
     poses: [
-      P({ t: 0, torso: -14, hand: [178, 108], foot: [152, 200], footBend: -1 }),
-      P({ t: 46, torso: 8, hand: [128, 118], foot: [152, 200], footBend: -1 }),
-      P({ t: 100, torso: -14, hand: [178, 108], foot: [152, 200], footBend: -1 }),
+      P({ t: 0, bodyY: 24, torso: -14, hand: [162, 112], foot: [150, 178], footBend: -1 }),
+      P({ t: 46, bodyY: 24, torso: 8, hand: [136, 122], foot: [150, 178], footBend: -1 }),
+      P({ t: 100, bodyY: 24, torso: -14, hand: [162, 112], foot: [150, 178], footBend: -1 }),
     ],
   },
 
@@ -255,12 +256,12 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     duration: 2.5,
     prop: 'seat',
     held: 'handle',
-    focus: [124, 106],
+    focus: [126, 128],
     label: 'Chest press',
     poses: [
-      P({ t: 0, torso: 4, hand: [126, 112], foot: [152, 200], footBend: -1, handBend: 1 }),
-      P({ t: 46, torso: 2, hand: [176, 104], foot: [152, 200], footBend: -1, handBend: 1 }),
-      P({ t: 100, torso: 4, hand: [126, 112], foot: [152, 200], footBend: -1, handBend: 1 }),
+      P({ t: 0, bodyY: 24, torso: 5, hand: [134, 116], foot: [150, 178], footBend: -1, handBend: 1 }),
+      P({ t: 46, bodyY: 24, torso: 3, hand: [168, 106], foot: [150, 178], footBend: -1, handBend: 1 }),
+      P({ t: 100, bodyY: 24, torso: 5, hand: [134, 116], foot: [150, 178], footBend: -1, handBend: 1 }),
     ],
   },
 
@@ -394,9 +395,9 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     focus: [108, 172],
     label: 'Squat',
     poses: [
-      P({ t: 0, bodyY: 0, torso: -4, hand: [104, 100], foot: [110, 206], footBend: 1 }),
-      P({ t: 48, bodyY: 26, torso: -17, hand: [98, 106], foot: [116, 180], footBend: 1 }),
-      P({ t: 100, bodyY: 0, torso: -4, hand: [104, 100], foot: [110, 206], footBend: 1 }),
+      P({ t: 0, bodyY: 0, torso: -4, hand: [106, 100], foot: [112, 206], footBend: 1 }),
+      P({ t: 48, bodyY: 22, torso: -17, hand: [96, 102], foot: [114, 184], footBend: 1 }),
+      P({ t: 100, bodyY: 0, torso: -4, hand: [106, 100], foot: [112, 206], footBend: 1 }),
     ],
   },
 
@@ -430,6 +431,7 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
   'leg-press': {
     duration: 2.8,
     prop: 'legpress',
+    held: 'sled',
     heldOnFoot: true,
     baseRot: 52,
     offset: [-16, 6],
@@ -445,6 +447,8 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
   'leg-curl': {
     duration: 2.6,
     prop: 'legcurl',
+    held: 'roller',
+    heldOnFoot: true,
     baseRot: -92,
     offset: [26, -18],
     focus: [108, 182],

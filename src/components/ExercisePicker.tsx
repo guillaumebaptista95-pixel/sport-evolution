@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import type { Exercise, MuscleGroup } from '@/lib/database.types';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
+import { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
 import { cn } from '@/lib/format';
 
 export default function ExercisePicker({
@@ -14,15 +15,17 @@ export default function ExercisePicker({
   groups,
   onPick,
   onClose,
+  defaultGroupId = null,
 }: {
   open: boolean;
   exercises: Exercise[];
   groups: MuscleGroup[];
   onPick: (e: Exercise) => void;
   onClose: () => void;
+  defaultGroupId?: string | null;
 }) {
   const [q, setQ] = useState('');
-  const [group, setGroup] = useState<string | null>(null);
+  const [group, setGroup] = useState<string | null>(defaultGroupId);
 
   const norm = (s: string) =>
     s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -141,8 +144,9 @@ export default function ExercisePicker({
                           </span>
                           <span className="min-w-0 flex-1">
                             <span className="block truncate text-[14.5px] font-semibold">{e.name}</span>
-                            <span className="block truncate text-[12px] capitalize text-ink-400">
-                              {e.equipment?.replace(/-/g, ' ')}
+                            <span className="block truncate text-[12px] text-ink-400">
+                              {MACHINE_LABEL[(e.machine ?? 'aucun') as MachineKey] ??
+                                e.equipment?.replace(/-/g, ' ')}
                             </span>
                           </span>
                         </button>

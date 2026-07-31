@@ -3,10 +3,13 @@ import Link from 'next/link';
 import { ArrowUpRight, ChevronRight, Flame, Play, Timer, TrendingUp } from 'lucide-react';
 import {
   getExercises,
+  getMuscleGroups,
   getOpenWorkout,
+  getPlan,
   getProfile,
   getRecentWorkouts,
 } from '@/lib/queries';
+import { WEEKDAYS, todayWeekday } from '@/lib/plan';
 import {
   fmtDateLong,
   fmtNumber,
@@ -24,12 +27,18 @@ import VolumeSpark from '@/components/VolumeSpark';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [profile, workouts, exercises, open] = await Promise.all([
+  const [profile, workouts, exercises, open, plan, muscleGroups] = await Promise.all([
     getProfile(),
     getRecentWorkouts(40),
     getExercises(),
     getOpenWorkout(),
+    getPlan(),
+    getMuscleGroups(),
   ]);
+
+  const weekday = todayWeekday();
+  const today = plan.find((d) => d.weekday === weekday);
+  const groupBySlug = new Map(muscleGroups.map((g) => [g.slug, g]));
 
   const typeById = new Map(exercises.map((e) => [e.id, e.tracking_type]));
   const groupById = new Map(exercises.map((e) => [e.id, e.muscle_groups]));
@@ -126,38 +135,87 @@ export default async function HomePage() {
         </Link>
       </Reveal>
 
-      {/* -------- Carte principale -------- */}
-      <Reveal delay={0.05}>
-        <Link
-          href="/seance"
-          className="press group relative block overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-brand-500 via-brand-600 to-[#2C2270] p-5 shadow-glow"
-        >
-          <div className="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
-          <div className="relative flex items-start justify-between">
-            <div>
+      {/* -------- Programme du jour -------- */}
+      {today?.is_rest ? (
+        <Reveal delay={0.05}>
+          <div className="card p-6 text-center">
+            <p className="text-[32px]">🌙</p>
+            <h2 className="mt-2 text-[21px] font-extrabold">Aujourd&apos;hui, c&apos;est repos</h2>
+            <p className="mt-2 text-[14px] leading-relaxed text-ink-300">
+              Ton programme ne prevoit pas de seance. Le muscle se construit pendant la
+              recuperation.
+            </p>
+            <Link href="/programme" className="btn-ghost mt-5 w-full">
+              Modifier mon programme
+            </Link>
+          </div>
+        </Reveal>
+      ) : (
+        <Reveal delay={0.05}>
+          <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-brand-500 via-brand-600 to-[#2C2270] p-5 shadow-glow">
+            <div className="absolute -right-10 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative">
               <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">
-                {open ? 'Seance en cours' : fmtDateLong(todayISO())}
+                {open ? 'Seance en cours' : `${WEEKDAYS[weekday - 1]} · programme du jour`}
               </p>
-              <p className="mt-2 max-w-[210px] font-display text-[24px] font-extrabold leading-[1.12] text-white">
-                {open ? 'Reprendre ou tu en etais' : 'Pret a soulever ?'}
+              <p className="mt-2 font-display text-[26px] font-extrabold leading-[1.1] text-white">
+                {open ? 'Reprendre ou tu en etais' : today?.label || 'Seance libre'}
               </p>
-              <p className="mt-2 text-[13px] text-white/70">
-                {open
-                  ? `${open.workout_sets.length} serie${open.workout_sets.length > 1 ? 's' : ''} deja enregistree${open.workout_sets.length > 1 ? 's' : ''}`
-                  : `${exercises.length} exercices dans ta bibliotheque`}
-              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {(today?.groups ?? []).map((slug) => (
+                  <span
+                    key={slug}
+                    className="rounded-full border border-white/25 bg-white/15 px-3 py-1.5 text-[12.5px] font-semibold text-white"
+                  >
+                    {groupBySlug.get(slug)?.name ?? slug}
+                  </span>
+                ))}
+              </div>
             </div>
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-brand-600 transition-transform group-active:scale-95">
-              <Play size={20} strokeWidth={2.6} className="ml-0.5 fill-current" />
-            </span>
           </div>
+        </Reveal>
+      )}
 
-          <div className="relative mt-6 flex items-center gap-2 text-[13px] font-semibold text-white">
-            {open ? 'Continuer la seance' : 'Demarrer une seance'}
-            <ArrowUpRight size={16} />
-          </div>
-        </Link>
-      </Reveal>
+      {/* -------- Par quoi tu commences -------- */}
+      {!today?.is_rest && (today?.groups ?? []).length > 0 && (
+        <>
+          <p className="label mt-6">
+            {open ? 'Continue ta seance' : 'Choisis par quoi tu commences'}
+          </p>
+          <Stagger className="mt-3 space-y-2.5">
+            {(today?.groups ?? []).map((slug) => {
+              const g = groupBySlug.get(slug);
+              const count = exercises.filter((e) => e.muscle_group_id === g?.id).length;
+              return (
+                <StaggerItem key={slug}>
+                  <Link
+                    href={`/seance?groupe=${slug}`}
+                    className="press card flex items-center gap-3.5 p-4"
+                  >
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ background: g?.color ?? '#6C5CE7' }}
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[16px] font-bold">{g?.name ?? slug}</span>
+                      <span className="block text-[12.5px] text-ink-300">
+                        {count} exercices possibles
+                      </span>
+                    </span>
+                    <ChevronRight size={18} className="shrink-0 text-ink-500" />
+                  </Link>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
+
+          <Link href="/seance" className="btn-primary mt-3 w-full">
+            <Play size={17} strokeWidth={2.6} className="fill-current" />
+            {open ? 'Reprendre la seance' : 'Voir tous les exercices'}
+            <ArrowUpRight size={15} />
+          </Link>
+        </>
+      )}
 
       {/* -------- Objectif hebdo + stats -------- */}
       <Stagger className="mt-4 grid grid-cols-2 gap-3">

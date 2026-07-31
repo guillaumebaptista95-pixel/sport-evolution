@@ -12,6 +12,7 @@ import {
   trackingLabel,
 } from '@/lib/format';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
+import MachineArt, { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
 import ProgressChart from '@/components/ProgressChart';
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 
@@ -76,11 +77,26 @@ export default async function ExerciseDetail({ params }: { params: { slug: strin
       </Reveal>
 
       <Reveal delay={0.05}>
-        <div
-          className="card mb-4 overflow-hidden"
-          style={{ background: `linear-gradient(160deg, ${color}22, transparent 65%)` }}
-        >
-          <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="mx-auto h-[240px]" />
+        <div className="mb-4 grid grid-cols-2 gap-2.5">
+          <div
+            className="card relative overflow-hidden pb-6"
+            style={{ background: `linear-gradient(160deg, ${color}22, transparent 65%)` }}
+          >
+            <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="w-full" />
+            <span className="absolute inset-x-0 bottom-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
+              Le mouvement
+            </span>
+          </div>
+          <div className="card relative grid place-items-center overflow-hidden pb-6">
+            <MachineArt
+              kind={(exercise.machine ?? 'aucun') as MachineKey}
+              color={color}
+              className="w-full px-2 pt-2"
+            />
+            <span className="absolute inset-x-0 bottom-2 px-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
+              {MACHINE_LABEL[(exercise.machine ?? 'aucun') as MachineKey]}
+            </span>
+          </div>
         </div>
       </Reveal>
 

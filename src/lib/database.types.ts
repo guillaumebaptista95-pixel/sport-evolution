@@ -30,7 +30,19 @@ export interface Exercise {
   sort_order: number | null;
   archived: boolean | null;
   created_at: string;
+  /** Cle d'illustration du materiel, voir components/MachineArt. */
+  machine: string;
   muscle_groups?: MuscleGroup | null;
+}
+
+/** Une journee du programme hebdomadaire (1 = lundi ... 7 = dimanche). */
+export interface PlanDay {
+  user_id: string;
+  weekday: number;
+  groups: string[];
+  label: string | null;
+  is_rest: boolean;
+  updated_at: string;
 }
 
 export interface Workout {

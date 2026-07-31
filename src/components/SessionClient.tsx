@@ -20,6 +20,7 @@ import type { WorkoutWithSets } from '@/lib/queries';
 import { deleteSet, finishWorkout, saveSet, startWorkout } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
 import ExercisePicker from '@/components/ExercisePicker';
+import MachineArt, { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
 import RestTimer from '@/components/RestTimer';
 import Stepper from '@/components/Stepper';
 import {
@@ -43,6 +44,7 @@ export default function SessionClient({
   lastPerf,
   restDefault,
   bodyweight,
+  initialGroupId = null,
 }: {
   workout: WorkoutWithSets | null;
   exercises: Exercise[];
@@ -50,6 +52,7 @@ export default function SessionClient({
   lastPerf: Record<string, WorkoutSet[]>;
   restDefault: number;
   bodyweight: number;
+  initialGroupId?: string | null;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
@@ -60,7 +63,7 @@ export default function SessionClient({
   );
   const [sets, setSets] = useState<LocalSet[]>((workout?.workout_sets ?? []) as LocalSet[]);
   const [active, setActive] = useState<Exercise | null>(null);
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(Boolean(initialGroupId));
   const [rest, setRest] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [finishing, setFinishing] = useState(false);
@@ -292,6 +295,7 @@ export default function SessionClient({
         open={pickerOpen}
         exercises={exercises}
         groups={groups}
+        defaultGroupId={initialGroupId}
         onPick={(e) => start(() => setActive(e))}
         onClose={() => setPickerOpen(false)}
       />
@@ -385,21 +389,37 @@ function Logger({
         </button>
       </div>
 
-      {/* Animation du mouvement */}
-      <div
-        className="card relative mb-4 overflow-hidden"
-        style={{ background: `linear-gradient(160deg, ${color}20, transparent 60%)` }}
-      >
-        <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="mx-auto h-[210px]" />
-        {best !== null && (
-          <div className="absolute bottom-3 left-4 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[11.5px] font-semibold backdrop-blur">
-            <TrendingUp size={12} style={{ color }} />
-            {type === 'time' || type === 'weighted_time'
-              ? `Record ${best} s`
-              : `1RM estime ${fmtWeight(best)}`}
-          </div>
-        )}
+      {/* Le mouvement, et la machine sur laquelle le faire */}
+      <div className="mb-4 grid grid-cols-2 gap-2.5">
+        <div
+          className="card relative overflow-hidden pb-6"
+          style={{ background: `linear-gradient(160deg, ${color}20, transparent 60%)` }}
+        >
+          <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="w-full" />
+          <span className="absolute inset-x-0 bottom-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
+            Le mouvement
+          </span>
+        </div>
+        <div className="card relative grid place-items-center overflow-hidden pb-6">
+          <MachineArt
+            kind={(exercise.machine ?? 'aucun') as MachineKey}
+            color={color}
+            className="w-full px-2 pt-2"
+          />
+          <span className="absolute inset-x-0 bottom-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
+            La machine
+          </span>
+        </div>
       </div>
+
+      {best !== null && (
+        <div className="card-flat mb-4 flex items-center gap-2 px-4 py-2.5 text-[12.5px] font-semibold">
+          <TrendingUp size={13} style={{ color }} />
+          {type === 'time' || type === 'weighted_time'
+            ? `Ton record : ${best} s`
+            : `Ta force estimee : ${fmtWeight(best)}`}
+        </div>
+      )}
 
       <AnimatePresence>
         {showHow && (

@@ -4,7 +4,20 @@ Ton carnet de musculation, pensé pour le téléphone. Il remplace le tableur : 
 
 ---
 
-## Ce qu'il y a dans la V1
+## Ce qu'il y a dedans
+
+**Programme de la semaine**
+
+- Un écran par jour, du lundi au dimanche : tu choisis les groupes musculaires travaillés
+- Le programme se répète automatiquement chaque semaine, jusqu'à ce que tu le changes
+- Préconfiguré d'après ton tableur : trois séances complètes par semaine
+- Chaque modification est enregistrée immédiatement
+
+**Aujourd'hui**
+
+- L'accueil affiche directement le programme du jour : « Vendredi · Haut du corps »
+- Un bouton par groupe musculaire à travailler, qui ouvre la liste des exercices correspondants
+- Les jours sans séance affichent un écran de repos, pas une page vide
 
 **Séance en cours**
 
@@ -18,7 +31,8 @@ Ton carnet de musculation, pensé pour le téléphone. Il remplace le tableur : 
 **Bibliothèque d'exercices**
 
 - 25 exercices repris de ton tableur, classés en 7 groupes musculaires
-- Chaque mouvement est **animé** : silhouette articulée en boucle, avec le matériel, la trajectoire de la main et le muscle ciblé en surbrillance
+- Chaque mouvement est **animé** : silhouette humaine complète (tête, buste, bras et jambes volumétriques) articulée en boucle, avec le matériel, la trajectoire de la main et le muscle ciblé en surbrillance
+- À côté de chaque mouvement, une **illustration de la machine** à utiliser, dessinée à la main : aucune image externe, aucun problème de droits
 - Fiche technique : étapes d'exécution et points à retenir
 - Historique complet et courbe de progression par exercice
 
@@ -53,6 +67,7 @@ Ton carnet de musculation, pensé pour le téléphone. Il remplace le tableur : 
 3. Une fois le projet créé : **SQL Editor → New query**
 4. Colle le contenu de `supabase/migrations/0001_schema.sql` → **Run**
 5. Nouvelle requête : colle `supabase/migrations/0002_referentiel.sql` → **Run**
+6. Nouvelle requête : colle `supabase/migrations/0003_planning.sql` → **Run**
 
 Tu dois voir apparaître les tables dans **Table Editor** : `profiles`, `muscle_groups`, `exercises`, `workouts`, `workout_sets`.
 

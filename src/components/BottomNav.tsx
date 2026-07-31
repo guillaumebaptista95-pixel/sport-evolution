@@ -4,15 +4,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { BarChart3, Dumbbell, Home, Library, User } from 'lucide-react';
+import { BarChart3, CalendarDays, Dumbbell, Home, Library } from 'lucide-react';
 import { cn } from '@/lib/format';
 
 const ITEMS = [
-  { href: '/', label: 'Accueil', Icon: Home },
-  { href: '/exercices', label: 'Exercices', Icon: Library },
+  { href: '/', label: "Aujourd'hui", Icon: Home },
+  { href: '/programme', label: 'Programme', Icon: CalendarDays },
   { href: '/seance', label: 'Seance', Icon: Dumbbell, primary: true },
-  { href: '/stats', label: 'Stats', Icon: BarChart3 },
-  { href: '/profil', label: 'Profil', Icon: User },
+  { href: '/exercices', label: 'Exercices', Icon: Library },
+  { href: '/stats', label: 'Progres', Icon: BarChart3 },
 ];
 
 export default function BottomNav() {

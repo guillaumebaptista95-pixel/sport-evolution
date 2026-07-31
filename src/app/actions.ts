@@ -164,6 +164,24 @@ export async function updateProfile(patch: {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Programme hebdomadaire                                             */
+/* ------------------------------------------------------------------ */
+
+export async function savePlanDay(weekday: number, groups: string[], label: string) {
+  const { supabase, user } = await requireUser();
+  const { error } = await supabase.from('plan_days').upsert({
+    user_id: user.id,
+    weekday,
+    groups,
+    label,
+    is_rest: groups.length === 0,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+}
+
+/* ------------------------------------------------------------------ */
 /*  Exercices personnels                                               */
 /* ------------------------------------------------------------------ */
 

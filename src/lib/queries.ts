@@ -1,6 +1,13 @@
 // Lectures serveur. Les policies RLS filtrent deja par utilisateur.
 import { createClient } from '@/lib/supabase/server';
-import type { Exercise, MuscleGroup, Profile, Workout, WorkoutSet } from '@/lib/database.types';
+import type {
+  Exercise,
+  MuscleGroup,
+  PlanDay,
+  Profile,
+  Workout,
+  WorkoutSet,
+} from '@/lib/database.types';
 
 export async function getUser() {
   const supabase = createClient();
@@ -132,6 +139,37 @@ export async function getLastPerformances(): Promise<Record<string, WorkoutSet[]
     byExercise[k].sort((a, b) => a.set_index - b.set_index);
   }
   return byExercise;
+}
+
+/** Programme de la semaine, toujours 7 lignes triees du lundi au dimanche. */
+export async function getPlan(): Promise<PlanDay[]> {
+  const supabase = createClient();
+  const { data } = await supabase.from('plan_days').select('*').order('weekday');
+  const rows = (data ?? []) as PlanDay[];
+  if (rows.length === 7) return rows;
+
+  // Filet de securite si le trigger n'a pas tourne
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return rows;
+
+  const defaults: Array<Pick<PlanDay, 'weekday' | 'groups' | 'label' | 'is_rest'>> = [
+    { weekday: 1, groups: ['dos', 'pectoraux', 'triceps'], label: 'Haut du corps', is_rest: false },
+    { weekday: 2, groups: [], label: 'Repos', is_rest: true },
+    { weekday: 3, groups: ['jambes', 'epaules'], label: 'Jambes et epaules', is_rest: false },
+    { weekday: 4, groups: [], label: 'Repos', is_rest: true },
+    { weekday: 5, groups: ['dos', 'pectoraux', 'biceps'], label: 'Haut du corps', is_rest: false },
+    { weekday: 6, groups: [], label: 'Repos', is_rest: true },
+    { weekday: 7, groups: [], label: 'Repos', is_rest: true },
+  ];
+  const missing = defaults.filter((d) => !rows.some((r) => r.weekday === d.weekday));
+  if (missing.length) {
+    await supabase.from('plan_days').upsert(missing.map((d) => ({ ...d, user_id: user.id })));
+    const { data: again } = await supabase.from('plan_days').select('*').order('weekday');
+    return (again ?? []) as PlanDay[];
+  }
+  return rows;
 }
 
 export async function getOpenWorkout(): Promise<WorkoutWithSets | null> {
