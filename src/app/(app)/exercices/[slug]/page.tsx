@@ -2,7 +2,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Award, Repeat, Zap } from 'lucide-react';
-import { getExerciseBySlug, getExerciseHistory, getProfile } from '@/lib/queries';
+import {
+  getExerciseBySlug,
+  getExerciseHistory,
+  getMachinePhotos,
+  getProfile,
+} from '@/lib/queries';
 import {
   describeSet,
   estimate1RM,
@@ -12,7 +17,8 @@ import {
   trackingLabel,
 } from '@/lib/format';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
-import MachineArt, { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
+import { type MachineKey } from '@/components/MachineArt';
+import MachinePanel from '@/components/MachinePanel';
 import ProgressChart from '@/components/ProgressChart';
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 
@@ -22,7 +28,11 @@ export default async function ExerciseDetail({ params }: { params: { slug: strin
   const exercise = await getExerciseBySlug(params.slug);
   if (!exercise) notFound();
 
-  const [history, profile] = await Promise.all([getExerciseHistory(exercise.id), getProfile()]);
+  const [history, profile, photos] = await Promise.all([
+    getExerciseHistory(exercise.id),
+    getProfile(),
+    getMachinePhotos(),
+  ]);
   const color = exercise.muscle_groups?.color ?? '#6C5CE7';
   const type = exercise.tracking_type;
   const isTime = type === 'time' || type === 'weighted_time';
@@ -87,16 +97,11 @@ export default async function ExerciseDetail({ params }: { params: { slug: strin
               Le mouvement
             </span>
           </div>
-          <div className="card relative grid place-items-center overflow-hidden pb-6">
-            <MachineArt
-              kind={(exercise.machine ?? 'aucun') as MachineKey}
-              color={color}
-              className="w-full px-2 pt-2"
-            />
-            <span className="absolute inset-x-0 bottom-2 px-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
-              {MACHINE_LABEL[(exercise.machine ?? 'aucun') as MachineKey]}
-            </span>
-          </div>
+          <MachinePanel
+            machine={(exercise.machine ?? 'aucun') as MachineKey}
+            color={color}
+            photoUrl={photos[exercise.machine ?? 'aucun']}
+          />
         </div>
       </Reveal>
 

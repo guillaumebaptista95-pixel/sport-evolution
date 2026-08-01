@@ -172,6 +172,18 @@ export async function getPlan(): Promise<PlanDay[]> {
   return rows;
 }
 
+/** Photos de machines de l'utilisateur, indexees par cle de machine. */
+export async function getMachinePhotos(): Promise<Record<string, string>> {
+  const supabase = createClient();
+  const { data } = await supabase.from('machine_photos').select('machine, path');
+  const out: Record<string, string> = {};
+  for (const row of (data ?? []) as Array<{ machine: string; path: string }>) {
+    const { data: pub } = supabase.storage.from('machines').getPublicUrl(row.path);
+    out[row.machine] = pub.publicUrl;
+  }
+  return out;
+}
+
 export async function getOpenWorkout(): Promise<WorkoutWithSets | null> {
   const supabase = createClient();
   const { data } = await supabase

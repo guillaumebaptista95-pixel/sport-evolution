@@ -164,6 +164,22 @@ export async function updateProfile(patch: {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Photos des machines                                                */
+/* ------------------------------------------------------------------ */
+
+export async function saveMachinePhoto(machine: string, path: string) {
+  const { supabase, user } = await requireUser();
+  const { error } = await supabase.from('machine_photos').upsert({
+    user_id: user.id,
+    machine,
+    path,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+}
+
+/* ------------------------------------------------------------------ */
 /*  Programme hebdomadaire                                             */
 /* ------------------------------------------------------------------ */
 

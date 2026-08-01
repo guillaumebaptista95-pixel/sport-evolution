@@ -20,7 +20,8 @@ import type { WorkoutWithSets } from '@/lib/queries';
 import { deleteSet, finishWorkout, saveSet, startWorkout } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
 import ExercisePicker from '@/components/ExercisePicker';
-import MachineArt, { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
+import { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
+import MachinePanel from '@/components/MachinePanel';
 import RestTimer from '@/components/RestTimer';
 import Stepper from '@/components/Stepper';
 import {
@@ -45,6 +46,7 @@ export default function SessionClient({
   restDefault,
   bodyweight,
   initialGroupId = null,
+  photos = {},
 }: {
   workout: WorkoutWithSets | null;
   exercises: Exercise[];
@@ -53,6 +55,7 @@ export default function SessionClient({
   restDefault: number;
   bodyweight: number;
   initialGroupId?: string | null;
+  photos?: Record<string, string>;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
@@ -185,6 +188,7 @@ export default function SessionClient({
               onAdd={addSet}
               onRemove={removeSet}
               bodyweight={bodyweight}
+              photoUrl={photos[active.machine ?? 'aucun']}
             />
           </motion.div>
         ) : (
@@ -324,11 +328,13 @@ function Logger({
   onAdd,
   onRemove,
   bodyweight,
+  photoUrl,
 }: {
   exercise: Exercise;
   color: string;
   sets: LocalSet[];
   last: WorkoutSet[];
+  photoUrl?: string;
   onBack: () => void;
   onAdd: (p: {
     weightKg?: number | null;
@@ -400,16 +406,11 @@ function Logger({
             Le mouvement
           </span>
         </div>
-        <div className="card relative grid place-items-center overflow-hidden pb-6">
-          <MachineArt
-            kind={(exercise.machine ?? 'aucun') as MachineKey}
-            color={color}
-            className="w-full px-2 pt-2"
-          />
-          <span className="absolute inset-x-0 bottom-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
-            La machine
-          </span>
-        </div>
+        <MachinePanel
+          machine={(exercise.machine ?? 'aucun') as MachineKey}
+          color={color}
+          photoUrl={photoUrl}
+        />
       </div>
 
       {best !== null && (

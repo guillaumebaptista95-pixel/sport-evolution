@@ -3,6 +3,7 @@ import SessionClient from '@/components/SessionClient';
 import {
   getExercises,
   getLastPerformances,
+  getMachinePhotos,
   getMuscleGroups,
   getOpenWorkout,
   getProfile,
@@ -16,12 +17,13 @@ export default async function SeancePage({
 }: {
   searchParams: { groupe?: string };
 }) {
-  const [exercises, groups, workout, lastPerf, profile] = await Promise.all([
+  const [exercises, groups, workout, lastPerf, profile, photos] = await Promise.all([
     getExercises(),
     getMuscleGroups(),
     getOpenWorkout(),
     getLastPerformances(),
     getProfile(),
+    getMachinePhotos(),
   ]);
 
   const initialGroupId = searchParams.groupe
@@ -37,6 +39,7 @@ export default async function SeancePage({
       restDefault={profile?.rest_seconds ?? 120}
       bodyweight={profile?.weight_kg ?? 75}
       initialGroupId={initialGroupId}
+      photos={photos}
     />
   );
 }
