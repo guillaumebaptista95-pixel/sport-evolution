@@ -1,16 +1,19 @@
 // Accueil : le programme du jour, l'objectif de la semaine, l'historique jour par jour.
 import Link from 'next/link';
-import { ArrowRight, Moon } from 'lucide-react';
+import { ArrowRight, Award, ChevronRight, Flame, Moon } from 'lucide-react';
 import {
   getMuscleGroups,
   getOpenWorkout,
   getPlan,
   getProfile,
   getSessionDays,
+  getTopRecords,
   getTrainedDaysThisWeek,
+  getWeekStreak,
+  getWeekStrip,
 } from '@/lib/queries';
 import { WEEKDAYS, todayWeekday } from '@/lib/plan';
-import { greeting, initials } from '@/lib/format';
+import { fmtWeight, greeting, initials, relativeDay } from '@/lib/format';
 import { Reveal } from '@/components/Reveal';
 import ProgressRing from '@/components/ProgressRing';
 import HistoryCarousel from '@/components/HistoryCarousel';
@@ -18,14 +21,18 @@ import HistoryCarousel from '@/components/HistoryCarousel';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [profile, plan, muscleGroups, days, trainedDays, open] = await Promise.all([
-    getProfile(),
-    getPlan(),
-    getMuscleGroups(),
-    getSessionDays(30),
-    getTrainedDaysThisWeek(),
-    getOpenWorkout(),
-  ]);
+  const [profile, plan, muscleGroups, days, trainedDays, open, week, streak, records] =
+    await Promise.all([
+      getProfile(),
+      getPlan(),
+      getMuscleGroups(),
+      getSessionDays(30),
+      getTrainedDaysThisWeek(),
+      getOpenWorkout(),
+      getWeekStrip(),
+      getWeekStreak(),
+      getTopRecords(3),
+    ]);
 
   const weekday = todayWeekday();
   const today = plan.find((d) => d.weekday === weekday);
@@ -133,8 +140,96 @@ export default async function HomePage() {
         </Reveal>
       )}
 
+      {/* -------- La semaine en cours + la serie -------- */}
+      <Reveal delay={0.14} className="mt-4">
+        <div className="card p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="label">Ma semaine</p>
+            {streak > 0 && (
+              <span className="flex items-center gap-1.5 rounded-full bg-lime-500/12 px-2.5 py-1 text-[12px] font-bold text-lime-400">
+                <Flame size={13} />
+                {streak} semaine{streak > 1 ? 's' : ''} d&apos;affilee
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between">
+            {week.map((d) => (
+              <div key={d.date} className="flex flex-1 flex-col items-center gap-2">
+                <span
+                  className={
+                    d.isToday
+                      ? 'text-[11px] font-extrabold text-white'
+                      : 'text-[11px] font-semibold text-ink-500'
+                  }
+                >
+                  {d.letter}
+                </span>
+                <span
+                  className={
+                    'grid h-8 w-8 place-items-center rounded-xl text-[11px] font-bold transition-colors ' +
+                    (d.done
+                      ? 'bg-gradient-to-br from-lime-400 to-lime-600 text-ink-950'
+                      : d.isFuture
+                        ? 'bg-white/[0.03] text-ink-600'
+                        : 'bg-white/[0.06] text-ink-500')
+                  }
+                  style={
+                    d.isToday && !d.done
+                      ? { boxShadow: 'inset 0 0 0 1.5px rgba(138,120,255,.6)' }
+                      : undefined
+                  }
+                >
+                  {d.done ? '✓' : d.date.slice(8)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* -------- Records personnels -------- */}
+      {records.length > 0 && (
+        <Reveal delay={0.18} className="mt-4">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-[17px] font-bold">
+              <Award size={17} className="text-gold-400" />
+              Mes records
+            </h2>
+            <Link href="/stats" className="press text-[12.5px] font-medium text-ink-400">
+              Tout voir
+            </Link>
+          </div>
+          <div className="space-y-2.5">
+            {records.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/exercices/${r.slug}`}
+                className="press card flex items-center gap-3 p-3.5"
+              >
+                <span
+                  className="h-9 w-1.5 shrink-0 rounded-full"
+                  style={{ background: r.color }}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[14px] font-semibold">{r.name}</p>
+                  <p className="text-[11.5px] text-ink-500">{relativeDay(r.date)}</p>
+                </div>
+                <span
+                  className="num shrink-0 text-[15px] font-bold"
+                  style={{ color: r.color }}
+                >
+                  {r.unit === 'kg' ? fmtWeight(r.value) : `${r.value} ${r.unit}`}
+                </span>
+                <ChevronRight size={16} className="shrink-0 text-ink-600" />
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+      )}
+
       {/* -------- Historique jour par jour -------- */}
-      <Reveal delay={0.15} className="mt-8">
+      <Reveal delay={0.22} className="mt-8">
         <HistoryCarousel days={days} />
       </Reveal>
     </div>

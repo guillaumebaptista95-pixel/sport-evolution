@@ -252,6 +252,132 @@ export async function getTrainedDaysThisWeek(): Promise<number> {
   return days.size;
 }
 
+export interface WeekDot {
+  letter: string;
+  date: string;
+  done: boolean;
+  isToday: boolean;
+  isFuture: boolean;
+}
+
+/** Les 7 jours de la semaine en cours, avec ceux ou l'on s'est entraine. */
+export async function getWeekStrip(): Promise<WeekDot[]> {
+  const workouts = await getRecentWorkouts(60);
+  const trained = new Set(
+    workouts.filter((w) => w.ended_at).map((w) => w.performed_on.slice(0, 10))
+  );
+
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+
+  const letters = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+  return letters.map((letter, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
+      d.getDate()
+    ).padStart(2, '0')}`;
+    return {
+      letter,
+      date: iso,
+      done: trained.has(iso),
+      isToday: d.getTime() === now.getTime(),
+      isFuture: d.getTime() > now.getTime(),
+    };
+  });
+}
+
+/**
+ * Nombre de semaines consecutives avec au moins une seance.
+ * La semaine en cours ne casse pas la serie tant qu'elle est en cours :
+ * si elle est encore vide, on repart de la semaine derniere.
+ */
+export async function getWeekStreak(): Promise<number> {
+  const workouts = await getRecentWorkouts(200);
+  const dates = workouts
+    .filter((w) => w.ended_at)
+    .map((w) => {
+      const [y, m, d] = w.performed_on.slice(0, 10).split('-').map(Number);
+      return new Date(y, m - 1, d).getTime();
+    });
+  if (dates.length === 0) return 0;
+
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+
+  const hasWeek = (offset: number) => {
+    const start = new Date(monday);
+    start.setDate(monday.getDate() - offset * 7);
+    const end = new Date(start);
+    end.setDate(start.getDate() + 7);
+    return dates.some((t) => t >= start.getTime() && t < end.getTime());
+  };
+
+  let streak = 0;
+  let i = hasWeek(0) ? 0 : 1;
+  const from = i;
+  while (hasWeek(i) && i < 260) {
+    streak++;
+    i++;
+  }
+  // Aucune seance ni cette semaine ni la precedente : la serie est rompue.
+  return from === 1 && streak === 0 ? 0 : streak;
+}
+
+export interface RecordRow {
+  slug: string;
+  name: string;
+  color: string;
+  value: number;
+  unit: string;
+  date: string;
+}
+
+/** Meilleures performances, toutes seances confondues. */
+export async function getTopRecords(limit = 3): Promise<RecordRow[]> {
+  const [workouts, exercises] = await Promise.all([getRecentWorkouts(200), getExercises()]);
+  const exById = new Map(exercises.map((e) => [e.id, e]));
+  const { estimate1RM } = await import('@/lib/format');
+
+  const best = new Map<string, RecordRow>();
+
+  for (const w of workouts) {
+    if (!w.ended_at) continue;
+    for (const s of w.workout_sets) {
+      const ex = exById.get(s.exercise_id);
+      if (!ex) continue;
+      const isTime = ex.tracking_type === 'time' || ex.tracking_type === 'weighted_time';
+      const isCount = ex.tracking_type === 'assisted' || ex.tracking_type === 'bodyweight';
+      const value = isTime
+        ? (s.duration_seconds ?? 0)
+        : isCount
+          ? (s.reps ?? 0)
+          : estimate1RM(s.weight_kg ?? 0, s.reps ?? 0);
+      if (value <= 0) continue;
+
+      const prev = best.get(ex.id);
+      if (!prev || value > prev.value) {
+        best.set(ex.id, {
+          slug: ex.slug,
+          name: ex.name,
+          color: ex.muscle_groups?.color ?? '#6C5CE7',
+          value: Math.round(value),
+          unit: isTime ? 's' : isCount ? 'reps' : 'kg',
+          date: w.performed_on,
+        });
+      }
+    }
+  }
+
+  return Array.from(best.values())
+    .sort((a, b) => b.value - a.value)
+    .slice(0, limit);
+}
+
 /** Photos de machines de l'utilisateur, indexees par cle de machine. */
 export async function getMachinePhotos(): Promise<Record<string, string>> {
   const supabase = createClient();
