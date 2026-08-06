@@ -1,6 +1,10 @@
 // Composition de la seance : on coche les exercices par groupe.
-// Avec ?date=YYYY-MM-DD on rattrape une seance oubliee : le programme affiche
-// est celui du jour de la semaine correspondant, et la seance est datee ainsi.
+//
+// ?date=YYYY-MM-DD : rattraper une seance oubliee (le programme affiche est
+//                    celui du jour de la semaine correspondant).
+// ?jour=1..7       : faire aujourd'hui le programme d'un autre jour, quand le
+//                    cycle a ete decale. Ne modifie pas le planning.
+// ?libre=1         : seance libre, tous les groupes disponibles.
 import { redirect } from 'next/navigation';
 import {
   getExercises,
@@ -19,7 +23,7 @@ export const metadata = { title: 'Composer ma seance — Sport Evolution' };
 export default async function ComposerPage({
   searchParams,
 }: {
-  searchParams: { date?: string };
+  searchParams: { date?: string; jour?: string; libre?: string };
 }) {
   const [plan, groups, exercises, lastPerf, open] = await Promise.all([
     getPlan(),
@@ -30,25 +34,37 @@ export default async function ComposerPage({
   ]);
 
   const today = todayISO();
-  const raw = searchParams.date;
-  const valid = raw && /^\d{4}-\d{2}-\d{2}$/.test(raw) && raw <= today ? raw : null;
-  const date = valid ?? today;
+  const rawDate = searchParams.date;
+  const date =
+    rawDate && /^\d{4}-\d{2}-\d{2}$/.test(rawDate) && rawDate <= today ? rawDate : today;
   const isPast = date !== today;
 
-  const weekday = isPast ? weekdayOf(date) : todayWeekday();
-  const day = plan.find((d) => d.weekday === weekday);
+  // Jour de la semaine reel de la date, puis eventuelle bascule manuelle.
+  const natural = isPast ? weekdayOf(date) : todayWeekday();
+  const asked = Number(searchParams.jour);
+  const picked = asked >= 1 && asked <= 7 ? asked : natural;
+
+  const day = plan.find((d) => d.weekday === picked);
   const rest = !day || day.is_rest || day.groups.length === 0;
+  const free = searchParams.libre === '1' || rest;
 
-  // Aujourd'hui, un jour de repos n'a rien a composer : retour a l'accueil.
-  if (rest && !isPast) redirect('/');
+  // Aujourd'hui, un jour de repos non force n'a rien a composer : retour accueil.
+  if (rest && !isPast && !searchParams.jour && !searchParams.libre) redirect('/');
 
-  // Sur une date passee tombant un jour de repos, on ouvre tous les groupes
-  // pour pouvoir saisir librement ce qui a ete fait.
-  const free = rest;
+  // Les autres jours du planning proposes en bascule.
+  const options = plan
+    .filter((d) => !d.is_rest && d.groups.length > 0)
+    .map((d) => ({
+      weekday: d.weekday,
+      label: d.label || WEEKDAYS[d.weekday - 1],
+      short: WEEKDAYS[d.weekday - 1].slice(0, 3),
+    }))
+    .sort((a, b) => a.weekday - b.weekday);
 
   return (
     <SessionBuilder
-      label={free ? 'Seance libre' : day!.label || WEEKDAYS[weekday - 1]}
+      key={`${date}-${picked}-${free}`}
+      label={free ? 'Seance libre' : day!.label || WEEKDAYS[picked - 1]}
       groups={free ? groups.map((g) => g.slug) : day!.groups}
       targets={free ? {} : (day!.targets ?? {})}
       showTargets={!free}
@@ -58,6 +74,9 @@ export default async function ComposerPage({
       preselected={open?.performed_on === date ? (open?.planned_exercise_ids ?? []) : []}
       date={date}
       isPast={isPast}
+      dayOptions={options}
+      activeWeekday={free ? null : picked}
+      naturalWeekday={natural}
     />
   );
 }

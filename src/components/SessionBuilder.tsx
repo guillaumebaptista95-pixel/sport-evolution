@@ -22,6 +22,9 @@ export default function SessionBuilder({
   preselected,
   date,
   isPast,
+  dayOptions,
+  activeWeekday,
+  naturalWeekday,
 }: {
   label: string;
   groups: string[];
@@ -33,6 +36,9 @@ export default function SessionBuilder({
   preselected: string[];
   date: string;
   isPast: boolean;
+  dayOptions: { weekday: number; label: string; short: string }[];
+  activeWeekday: number | null;
+  naturalWeekday: number;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
@@ -77,10 +83,24 @@ export default function SessionBuilder({
     });
   }
 
+  /** Construit l'URL de l'ecran : la date, et le programme choisi. */
+  function href(opts: { date?: string; weekday?: number | 'libre' }) {
+    const d = opts.date ?? date;
+    const p = new URLSearchParams();
+    if (d !== today) p.set('date', d);
+    if (opts.weekday === 'libre') p.set('libre', '1');
+    else if (typeof opts.weekday === 'number') p.set('jour', String(opts.weekday));
+    const q = p.toString();
+    return q ? `/seance/composer?${q}` : '/seance/composer';
+  }
+
   function changeDate(value: string) {
     if (!value || value > today) return;
+    // Nouvelle date : on repart du programme naturel de ce jour-la.
     router.push(value === today ? '/seance/composer' : `/seance/composer?date=${value}`);
   }
+
+  const shifted = activeWeekday !== null && activeWeekday !== naturalWeekday;
 
   return (
     <div className="pb-32 pt-4">
@@ -134,6 +154,67 @@ export default function SessionBuilder({
           className="shrink-0 rounded-xl border border-white/10 bg-white/[0.05] px-2.5 py-2 text-[12.5px] font-medium text-ink-200 [color-scheme:dark]"
         />
       </label>
+
+      {/* Bascule de programme : utile quand le cycle a ete decale. */}
+      <div className="mb-5">
+        <p className="label mb-2">
+          Programme {shifted || activeWeekday === null ? '· modifie pour cette seance' : 'du jour'}
+        </p>
+        <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {dayOptions.map((o) => {
+            const on = activeWeekday === o.weekday;
+            return (
+              <button
+                key={o.weekday}
+                onClick={() => router.push(href({ weekday: o.weekday }))}
+                className={cn(
+                  'press shrink-0 rounded-xl border px-3 py-2 text-left transition-colors',
+                  on
+                    ? 'border-brand-400/60 bg-brand-500/20'
+                    : 'border-white/[0.08] bg-ink-850/90'
+                )}
+              >
+                <span
+                  className={cn(
+                    'block text-[10px] font-bold uppercase tracking-[0.12em]',
+                    on ? 'text-brand-200' : 'text-ink-500'
+                  )}
+                >
+                  {o.short}
+                  {o.weekday === naturalWeekday ? ' · prevu' : ''}
+                </span>
+                <span className="block whitespace-nowrap text-[13px] font-semibold">
+                  {o.label}
+                </span>
+              </button>
+            );
+          })}
+          <button
+            onClick={() => router.push(href({ weekday: 'libre' }))}
+            className={cn(
+              'press shrink-0 rounded-xl border px-3 py-2 text-left transition-colors',
+              activeWeekday === null
+                ? 'border-brand-400/60 bg-brand-500/20'
+                : 'border-white/[0.08] bg-ink-850/90'
+            )}
+          >
+            <span
+              className={cn(
+                'block text-[10px] font-bold uppercase tracking-[0.12em]',
+                activeWeekday === null ? 'text-brand-200' : 'text-ink-500'
+              )}
+            >
+              Au choix
+            </span>
+            <span className="block whitespace-nowrap text-[13px] font-semibold">Seance libre</span>
+          </button>
+        </div>
+        {shifted && (
+          <p className="mt-2 text-[11.5px] leading-snug text-ink-500">
+            Ton planning n&apos;est pas modifie : ce changement ne vaut que pour cette seance.
+          </p>
+        )}
+      </div>
 
       {blocked && (
         <div className="mb-5 rounded-2xl border border-rose-400/40 bg-rose-500/10 p-3.5 text-[13px] leading-snug text-rose-200">

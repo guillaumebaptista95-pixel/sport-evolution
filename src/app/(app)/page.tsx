@@ -82,8 +82,15 @@ export default async function HomePage() {
                 <br />
                 aujourd&apos;hui
               </p>
-              <Link href="/programme" className="mt-3 text-[12.5px] font-semibold text-brand-300">
-                Modifier
+              <Link
+                href="/seance/composer?libre=1"
+                className="press mt-3 flex items-center gap-1.5 text-[12.5px] font-semibold text-brand-300"
+              >
+                M&apos;entrainer quand meme
+                <ArrowRight size={14} />
+              </Link>
+              <Link href="/programme" className="mt-1.5 text-[12.5px] font-medium text-ink-500">
+                Modifier le planning
               </Link>
             </div>
           ) : (
