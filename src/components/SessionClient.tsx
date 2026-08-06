@@ -29,10 +29,12 @@ import {
   describeSet,
   estimate1RM,
   fmtClock,
+  fmtDateLong,
   fmtNumber,
   fmtWeight,
   relativeDay,
   setVolume,
+  todayISO,
   trackingLabel,
 } from '@/lib/format';
 
@@ -68,6 +70,8 @@ export default function SessionClient({
   const [active, setActive] = useState<Exercise | null>(null);
   const [pickerOpen, setPickerOpen] = useState(Boolean(initialGroupId));
   const planned = workout?.planned_exercise_ids ?? [];
+  // Seance rattrapee : elle porte une date anterieure a aujourd'hui.
+  const isBackfill = !!workout && workout.performed_on !== todayISO();
   const [rest, setRest] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [finishing, setFinishing] = useState(false);
@@ -214,13 +218,23 @@ export default function SessionClient({
           >
             {/* En-tete de seance */}
             <div className="mb-5 flex items-end justify-between">
-              <div>
+              <div className="min-w-0">
                 <p className="text-[13px] font-medium text-ink-400">
-                  {workoutId ? 'Seance en cours' : 'Nouvelle seance'}
+                  {isBackfill
+                    ? 'Seance oubliee'
+                    : workoutId
+                      ? 'Seance en cours'
+                      : 'Nouvelle seance'}
                 </p>
-                <h1 className="num mt-0.5 text-[32px] font-extrabold leading-none">
-                  {workoutId ? fmtClock(elapsed) : '0:00'}
-                </h1>
+                {isBackfill ? (
+                  <h1 className="mt-0.5 truncate text-[22px] font-extrabold capitalize leading-tight text-gold-400">
+                    {fmtDateLong(workout!.performed_on)}
+                  </h1>
+                ) : (
+                  <h1 className="num mt-0.5 text-[32px] font-extrabold leading-none">
+                    {workoutId ? fmtClock(elapsed) : '0:00'}
+                  </h1>
+                )}
               </div>
               <div className="text-right">
                 <p className="num text-[19px] font-bold leading-none">{sets.length}</p>

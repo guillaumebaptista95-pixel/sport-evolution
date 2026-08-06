@@ -50,19 +50,31 @@ export async function startWorkout(title?: string) {
 /**
  * Compose la seance : enregistre la liste d'exercices retenus et ouvre la
  * seance si elle ne l'est pas deja.
+ *
+ * `performedOn` permet de rattraper une seance oubliee : la seance est datee
+ * du jour choisi au lieu d'aujourd'hui.
  */
-export async function composeWorkout(exerciseIds: string[], title?: string) {
+export async function composeWorkout(
+  exerciseIds: string[],
+  title?: string,
+  performedOn?: string
+): Promise<{ id: string } | { error: 'open'; date: string }> {
   const { supabase, user } = await requireUser();
+  const date = performedOn ?? todayISO();
 
   const { data: open } = await supabase
     .from('workouts')
-    .select('id')
+    .select('id, performed_on')
     .is('ended_at', null)
     .order('created_at', { ascending: false })
     .limit(1)
     .maybeSingle();
 
   if (open) {
+    // Une seance est deja ouverte a une autre date : on refuse de l'ecraser.
+    if (open.performed_on !== date) {
+      return { error: 'open', date: open.performed_on as string };
+    }
     const { error } = await supabase
       .from('workouts')
       .update({ planned_exercise_ids: exerciseIds, title: title ?? null })
@@ -77,7 +89,7 @@ export async function composeWorkout(exerciseIds: string[], title?: string) {
     .insert({
       user_id: user.id,
       title: title ?? null,
-      performed_on: todayISO(),
+      performed_on: date,
       started_at: new Date().toISOString(),
       planned_exercise_ids: exerciseIds,
     })

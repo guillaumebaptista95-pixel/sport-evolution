@@ -1,6 +1,6 @@
 // Accueil : le programme du jour, l'objectif de la semaine, l'historique jour par jour.
 import Link from 'next/link';
-import { ArrowRight, Award, ChevronRight, Flame, Moon } from 'lucide-react';
+import { ArrowRight, Award, CalendarPlus, ChevronRight, Flame, Moon } from 'lucide-react';
 import {
   getMuscleGroups,
   getOpenWorkout,
@@ -13,7 +13,7 @@ import {
   getWeekStrip,
 } from '@/lib/queries';
 import { WEEKDAYS, todayWeekday } from '@/lib/plan';
-import { fmtWeight, greeting, initials, relativeDay } from '@/lib/format';
+import { fmtWeight, greeting, initials, relativeDay, yesterdayISO } from '@/lib/format';
 import { Reveal } from '@/components/Reveal';
 import ProgressRing from '@/components/ProgressRing';
 import HistoryCarousel from '@/components/HistoryCarousel';
@@ -191,6 +191,14 @@ export default async function HomePage() {
       {/* -------- Historique jour par jour -------- */}
       <Reveal delay={0.18} className="mt-8">
         <HistoryCarousel days={days} />
+
+        <Link
+          href={`/seance/composer?date=${yesterdayISO()}`}
+          className="press mt-3 flex items-center justify-center gap-2 rounded-2xl border border-dashed border-white/15 py-3 text-[13px] font-semibold text-ink-300"
+        >
+          <CalendarPlus size={16} />
+          Ajouter une seance oubliee
+        </Link>
       </Reveal>
 
       {/* -------- Records personnels : tout mene a l'onglet Progres -------- */}

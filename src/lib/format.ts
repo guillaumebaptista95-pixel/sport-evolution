@@ -52,6 +52,15 @@ export function todayISO() {
   ).padStart(2, '0')}`;
 }
 
+/** Date d'hier au format YYYY-MM-DD (valeur par defaut du rattrapage). */
+export function yesterdayISO() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
+    d.getDate()
+  ).padStart(2, '0')}`;
+}
+
 export function fmtDateLong(iso: string) {
   const d = parseDate(iso);
   return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
