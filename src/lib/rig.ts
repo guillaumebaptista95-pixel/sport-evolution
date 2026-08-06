@@ -64,6 +64,11 @@ export interface ExerciseAnim {
   offset?: Vec;
   poses: Pose[];
   prop?: PropKind;
+  /**
+   * Dessine le materiel dans le repere du corps (avant baseRot) plutot qu'a
+   * l'ecran : le banc suit alors exactement le dos, quel que soit l'angle.
+   */
+  propLocal?: boolean;
   held?: HeldKind;
   /** Le materiel tenu suit le pied plutot que la main (leg press) */
   heldOnFoot?: boolean;
@@ -268,42 +273,46 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
   'bench-incline': {
     duration: 2.6,
     prop: 'bench-incline',
+    propLocal: true,
     held: 'dumbbell',
-    baseRot: -32,
-    offset: [4, 12],
+    baseRot: -52,
+    offset: [16, 22],
     focus: [124, 104],
     label: 'Developpe incline',
     poses: [
-      P({ t: 0, torso: 0, hand: [128, 116], foot: [128, 200], footBend: -1 }),
-      P({ t: 46, torso: 0, hand: [122, 60], foot: [128, 200], footBend: -1 }),
-      P({ t: 100, torso: 0, hand: [128, 116], foot: [128, 200], footBend: -1 }),
+      P({ t: 0, torso: 0, hand: [136, 120], foot: [138, 202], footBend: 1 }),
+      P({ t: 46, torso: 0, hand: [146, 56], foot: [138, 202], footBend: 1 }),
+      P({ t: 100, torso: 0, hand: [136, 120], foot: [138, 202], footBend: 1 }),
     ],
   },
 
   'bench-decline': {
     duration: 2.6,
     prop: 'bench-decline',
+    propLocal: true,
     held: 'dumbbell',
-    baseRot: 22,
-    offset: [-2, 4],
+    baseRot: -106,
+    offset: [12, 44],
     focus: [124, 110],
     label: 'Developpe decline',
     poses: [
-      P({ t: 0, torso: 0, hand: [130, 118], foot: [128, 200], footBend: -1 }),
-      P({ t: 46, torso: 0, hand: [124, 62], foot: [128, 200], footBend: -1 }),
-      P({ t: 100, torso: 0, hand: [130, 118], foot: [128, 200], footBend: -1 }),
+      P({ t: 0, torso: 0, hand: [136, 120], foot: [138, 202], footBend: 1 }),
+      P({ t: 46, torso: 0, hand: [146, 56], foot: [138, 202], footBend: 1 }),
+      P({ t: 100, torso: 0, hand: [136, 120], foot: [138, 202], footBend: 1 }),
     ],
   },
 
+  /* Dips : les mains restent a hauteur de hanche, le corps monte et descend,
+     les jambes flechies vers l'arriere, bien decollees du sol. */
   dip: {
     duration: 2.6,
     prop: 'dip-bars',
     focus: [126, 108],
     label: 'Dips',
     poses: [
-      P({ t: 0, bodyY: 0, torso: -10, hand: [136, 142], foot: [92, 196], footBend: -1 }),
-      P({ t: 46, bodyY: 26, torso: -16, hand: [136, 116], foot: [92, 196], footBend: -1 }),
-      P({ t: 100, bodyY: 0, torso: -10, hand: [136, 142], foot: [92, 196], footBend: -1 }),
+      P({ t: 0, bodyY: -20, torso: -12, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 46, bodyY: 20, torso: -20, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 100, bodyY: -20, torso: -12, hand: [134, 140], foot: [86, 176], footBend: -1 }),
     ],
   },
 
@@ -314,11 +323,11 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     label: 'Dips negatives',
     ease: 'linear',
     poses: [
-      P({ t: 0, bodyY: 0, torso: -10, hand: [136, 142], foot: [92, 196], footBend: -1 }),
-      P({ t: 55, bodyY: 26, torso: -16, hand: [136, 116], foot: [92, 196], footBend: -1 }),
-      P({ t: 74, bodyY: 26, torso: -16, hand: [136, 116], foot: [92, 196], footBend: -1 }),
-      P({ t: 88, bodyY: 0, torso: -10, hand: [136, 142], foot: [92, 196], footBend: -1 }),
-      P({ t: 100, bodyY: 0, torso: -10, hand: [136, 142], foot: [92, 196], footBend: -1 }),
+      P({ t: 0, bodyY: -20, torso: -12, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 55, bodyY: 20, torso: -20, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 74, bodyY: 20, torso: -20, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 88, bodyY: -20, torso: -12, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 100, bodyY: -20, torso: -12, hand: [134, 140], foot: [86, 176], footBend: -1 }),
     ],
   },
 
@@ -329,9 +338,9 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     label: 'Maintien bras tendus',
     ease: 'ease-in-out',
     poses: [
-      P({ t: 0, bodyY: 0, torso: -8, hand: [136, 142], foot: [92, 196], footBend: -1 }),
-      P({ t: 50, bodyY: 2.5, torso: -10, hand: [136, 142], foot: [92, 194], footBend: -1 }),
-      P({ t: 100, bodyY: 0, torso: -8, hand: [136, 142], foot: [92, 196], footBend: -1 }),
+      P({ t: 0, bodyY: -20, torso: -10, hand: [134, 140], foot: [86, 176], footBend: -1 }),
+      P({ t: 50, bodyY: -16, torso: -12, hand: [134, 140], foot: [86, 174], footBend: -1 }),
+      P({ t: 100, bodyY: -20, torso: -10, hand: [134, 140], foot: [86, 176], footBend: -1 }),
     ],
   },
 
@@ -431,6 +440,7 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
   'leg-press': {
     duration: 2.8,
     prop: 'legpress',
+    propLocal: true,
     held: 'sled',
     heldOnFoot: true,
     baseRot: 52,
@@ -444,19 +454,21 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     ],
   },
 
+  // Allonge sur le ventre : baseRot positif met la face avant vers le bas.
   'leg-curl': {
     duration: 2.6,
     prop: 'legcurl',
+    propLocal: true,
     held: 'roller',
     heldOnFoot: true,
-    baseRot: -92,
-    offset: [26, -18],
+    baseRot: 92,
+    offset: [-4, 30],
     focus: [108, 182],
     label: 'Leg curl allonge',
     poses: [
-      P({ t: 0, torso: 4, hand: [140, 130], foot: [114, 206], footBend: 1 }),
-      P({ t: 46, torso: 4, hand: [140, 130], foot: [86, 166], footBend: 1 }),
-      P({ t: 100, torso: 4, hand: [140, 130], foot: [114, 206], footBend: 1 }),
+      P({ t: 0, torso: -6, hand: [104, 118], foot: [113, 206], footBend: -1 }),
+      P({ t: 46, torso: -6, hand: [104, 118], foot: [84, 184], footBend: -1 }),
+      P({ t: 100, torso: -6, hand: [104, 118], foot: [113, 206], footBend: -1 }),
     ],
   },
 
@@ -466,9 +478,9 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     focus: [110, 198],
     label: 'Mollets',
     poses: [
-      P({ t: 0, bodyY: 6, torso: -2, hand: [122, 150], foot: [112, 206], footBend: 1 }),
-      P({ t: 46, bodyY: -8, torso: -2, hand: [122, 150], foot: [112, 206], footBend: 1 }),
-      P({ t: 100, bodyY: 6, torso: -2, hand: [122, 150], foot: [112, 206], footBend: 1 }),
+      P({ t: 0, bodyY: 9, torso: -2, hand: [122, 150], foot: [112, 204], footBend: 1 }),
+      P({ t: 46, bodyY: -15, torso: -2, hand: [122, 150], foot: [112, 204], footBend: 1 }),
+      P({ t: 100, bodyY: 9, torso: -2, hand: [122, 150], foot: [112, 204], footBend: 1 }),
     ],
   },
 
@@ -488,4 +500,54 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
 
 export function getAnimation(key: string | undefined | null): ExerciseAnim {
   return (key && ANIMATIONS[key]) || ANIMATIONS.generic;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Muscles sollicites : ce sont eux qui s'allument pendant le geste    */
+/* ------------------------------------------------------------------ */
+
+export type MuscleKey =
+  | 'pectoraux'
+  | 'dos'
+  | 'epaules'
+  | 'biceps'
+  | 'triceps'
+  | 'abdos'
+  | 'fessiers'
+  | 'quadriceps'
+  | 'ischios'
+  | 'mollets';
+
+const DOS_BICEPS: MuscleKey[] = ['dos', 'biceps'];
+const PEC_TRI: MuscleKey[] = ['pectoraux', 'triceps'];
+
+export const MUSCLES: Record<string, MuscleKey[]> = {
+  pullup: DOS_BICEPS,
+  'pullup-fast': DOS_BICEPS,
+  'pullup-hold': DOS_BICEPS,
+  'row-vertical': DOS_BICEPS,
+  'lat-pulldown': DOS_BICEPS,
+  'row-horizontal': DOS_BICEPS,
+  'straight-arm-pulldown': ['dos'],
+  'chest-press': ['pectoraux', 'triceps', 'epaules'],
+  'bench-incline': ['pectoraux', 'epaules', 'triceps'],
+  'bench-decline': PEC_TRI,
+  dip: PEC_TRI,
+  'dip-negative': PEC_TRI,
+  'dip-hold': PEC_TRI,
+  'triceps-pushdown': ['triceps'],
+  'biceps-curl': ['biceps'],
+  'shoulder-press': ['epaules', 'triceps'],
+  'face-pull': ['epaules', 'dos'],
+  squat: ['quadriceps', 'fessiers'],
+  lunge: ['quadriceps', 'fessiers'],
+  'wall-sit': ['quadriceps'],
+  'leg-press': ['quadriceps', 'fessiers'],
+  'leg-curl': ['ischios'],
+  'calf-raise': ['mollets'],
+  generic: [],
+};
+
+export function musclesOf(key: string | undefined | null): MuscleKey[] {
+  return (key && MUSCLES[key]) || [];
 }
