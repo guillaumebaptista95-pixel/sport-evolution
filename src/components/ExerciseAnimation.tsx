@@ -333,7 +333,7 @@ export function Body({
 
       {held && held !== 'none' && (
         <g style={s('held', delay)}>
-          <Held kind={held} color={flat ?? sk.glow} />
+          <Held kind={held} color={flat ?? sk.glow} grip={near} ink={ink} />
         </g>
       )}
     </g>
@@ -465,62 +465,150 @@ export default function ExerciseAnimation({
 /* ------------------------------------------------------------------ */
 /*  Materiel tenu en main                                              */
 /* ------------------------------------------------------------------ */
-function Held({ kind, color }: { kind: HeldKind; color: string }) {
-  const steel = '#9AA3B4';
+const STEEL = '#9AA3B4';
+const STEEL_D = '#6E7787';
+
+/** Moletage : les stries de la zone de prise d'une barre. */
+function Knurl({ x, w, y = 0 }: { x: number; w: number; y?: number }) {
+  const n = Math.max(2, Math.round(w / 3));
+  return (
+    <g stroke={STEEL_D} strokeWidth="0.8" opacity="0.65">
+      {Array.from({ length: n }, (_, i) => {
+        const cx = x + ((i + 0.5) * w) / n;
+        return <line key={i} x1={cx} y1={y - 2.2} x2={cx} y2={y + 2.2} />;
+      })}
+    </g>
+  );
+}
+
+/** Disque olympique vu de cote : jante, bord et moyeu. */
+function Plate({ cx, r, color }: { cx: number; r: number; color: string }) {
+  return (
+    <g>
+      <ellipse cx={cx} cy="0" rx={r * 0.34} ry={r} fill={color} />
+      <ellipse cx={cx} cy="0" rx={r * 0.34} ry={r} fill="none" stroke={STEEL_D} strokeWidth="0.8" opacity="0.5" />
+      <ellipse cx={cx} cy="0" rx={r * 0.12} ry={r * 0.34} fill={STEEL_D} opacity="0.55" />
+    </g>
+  );
+}
+
+/** Les doigts refermes par-dessus la barre : c'est ce qui fait la prise. */
+function Grip({ skin, ink, tall = 5.6 }: { skin: string; ink?: string; tall?: number }) {
+  return (
+    <g>
+      <path
+        d={`M-4.2 ${-tall} C-0.8 ${-tall - 1.2} 3.2 ${-tall - 0.9} 4.8 ${-tall + 1} L4.8 ${tall - 0.8} C3.2 ${tall + 1} -0.8 ${tall + 1.2} -4.2 ${tall} Z`}
+        fill={skin}
+      />
+      {ink && (
+        <g stroke={ink} strokeWidth="0.7" opacity="0.45" fill="none">
+          <path d={`M-3.4 ${-tall / 2} L4.3 ${-tall / 2 + 0.2}`} />
+          <path d="M-3.4 0.4 L4.4 0.5" />
+          <path d={`M-3.4 ${tall / 2} L4.3 ${tall / 2 - 0.1}`} />
+        </g>
+      )}
+    </g>
+  );
+}
+
+function Held({
+  kind,
+  color,
+  grip,
+  ink,
+}: {
+  kind: HeldKind;
+  color: string;
+  grip: string;
+  ink?: string;
+}) {
   switch (kind) {
     case 'dumbbell':
       return (
         <g>
-          <rect x="-12" y="-3" width="24" height="6" rx="3" fill={steel} />
-          <rect x="-20" y="-9.5" width="8" height="19" rx="3.5" fill={color} />
-          <rect x="12" y="-9.5" width="8" height="19" rx="3.5" fill={color} />
+          <rect x="-11" y="-2.4" width="22" height="4.8" rx="2.4" fill={STEEL} />
+          <Knurl x={-6} w={12} />
+          <rect x="-13.5" y="-5" width="3" height="10" rx="1.5" fill={STEEL_D} />
+          <rect x="10.5" y="-5" width="3" height="10" rx="1.5" fill={STEEL_D} />
+          <Plate cx={-17.5} r={10} color={color} />
+          <Plate cx={17.5} r={10} color={color} />
+          <Grip skin={grip} ink={ink} />
         </g>
       );
     case 'barbell':
-      return (
-        <g>
-          <rect x="-46" y="-3" width="92" height="6" rx="3" fill={steel} />
-          <rect x="-44" y="-14" width="9" height="28" rx="4" fill={color} />
-          <rect x="35" y="-14" width="9" height="28" rx="4" fill={color} />
-        </g>
-      );
     case 'plate-back':
       return (
         <g>
-          <rect x="-44" y="-3" width="88" height="6" rx="3" fill={steel} />
-          <rect x="-42" y="-16" width="10" height="32" rx="4.5" fill={color} />
-          <rect x="32" y="-16" width="10" height="32" rx="4.5" fill={color} />
+          <rect x="-46" y="-2.6" width="92" height="5.2" rx="2.6" fill={STEEL} />
+          <Knurl x={-16} w={32} />
+          <rect x="-33" y="-5.4" width="3.4" height="10.8" rx="1.7" fill={STEEL_D} />
+          <rect x="29.6" y="-5.4" width="3.4" height="10.8" rx="1.7" fill={STEEL_D} />
+          <Plate cx={-38} r={15} color={color} />
+          <Plate cx={-30} r={11} color={color} />
+          <Plate cx={38} r={15} color={color} />
+          <Plate cx={30} r={11} color={color} />
+          <Grip skin={grip} ink={ink} />
         </g>
       );
     case 'handle':
+      // Poignee en D : etrier, mousqueton et cable qui repart vers la poulie.
       return (
         <g>
-          <rect x="-3.5" y="-14" width="7" height="28" rx="3.5" fill={steel} />
-          <circle cx="0" cy="0" r="4.5" fill={color} />
+          <path d="M0 -20 L0 -12" stroke={STEEL_D} strokeWidth="1.3" strokeLinecap="round" fill="none" />
+          <rect x="-1.7" y="-12.4" width="3.4" height="4.4" rx="1.2" fill={STEEL_D} />
+          <path
+            d="M-6.2 -8 C-9.4 -3.6 -9.4 3.6 -6.2 8 L-3 8 C-5.8 3.6 -5.8 -3.6 -3 -8 Z"
+            fill={color}
+            opacity="0.9"
+          />
+          <rect x="-3.6" y="-8.4" width="7.2" height="16.8" rx="3.6" fill={STEEL} />
+          <Grip skin={grip} ink={ink} tall={5} />
         </g>
       );
     case 'rope':
+      // Corde a triceps : deux brins tresses et leurs embouts.
       return (
         <g>
-          <path d="M-2 -3 L-8 15" stroke={steel} strokeWidth="4" strokeLinecap="round" fill="none" />
-          <path d="M2 -3 L8 15" stroke={steel} strokeWidth="4" strokeLinecap="round" fill="none" />
-          <circle cx="-8" cy="16" r="3.2" fill={color} />
-          <circle cx="8" cy="16" r="3.2" fill={color} />
+          <path d="M0 -26 L0 -8" stroke={STEEL_D} strokeWidth="1.4" strokeLinecap="round" fill="none" />
+          <rect x="-3" y="-9" width="6" height="6" rx="2" fill={STEEL_D} />
+          <path d="M-1.6 -3 C-4 4 -6.4 10 -8.4 15" stroke={color} strokeWidth="4.2" strokeLinecap="round" fill="none" opacity="0.9" />
+          <path d="M1.6 -3 C4 4 6.4 10 8.4 15" stroke={color} strokeWidth="4.2" strokeLinecap="round" fill="none" opacity="0.9" />
+          <g stroke={STEEL_D} strokeWidth="0.7" opacity="0.5" fill="none">
+            <path d="M-3.4 3 L-1.2 4.4" />
+            <path d="M-5 8 L-2.8 9.4" />
+            <path d="M3.4 3 L1.2 4.4" />
+            <path d="M5 8 L2.8 9.4" />
+          </g>
+          <ellipse cx="-9.2" cy="17.4" rx="3.6" ry="4.4" fill={STEEL_D} />
+          <ellipse cx="9.2" cy="17.4" rx="3.6" ry="4.4" fill={STEEL_D} />
+          <Grip skin={grip} ink={ink} tall={5} />
         </g>
       );
     case 'sled':
+      // Plateau de presse a cuisses : platine, raidisseur et rail.
       return (
         <g>
-          <rect x="-3" y="-27" width="11" height="54" rx="5" fill={steel} />
-          <rect x="8" y="-19" width="8" height="38" rx="4" fill={color} />
+          <rect x="-2" y="-30" width="9" height="60" rx="3" fill={STEEL} />
+          <g stroke={STEEL_D} strokeWidth="0.9" opacity="0.5">
+            <line x1="-1" y1="-20" x2="6" y2="-20" />
+            <line x1="-1" y1="0" x2="6" y2="0" />
+            <line x1="-1" y1="20" x2="6" y2="20" />
+          </g>
+          <rect x="7" y="-22" width="7" height="44" rx="3" fill={color} />
+          <rect x="14" y="-10" width="14" height="20" rx="4" fill={STEEL_D} opacity="0.7" />
         </g>
       );
     case 'roller':
+      // Boudins de leg curl : deux mousses sur un axe.
       return (
         <g>
-          <rect x="-16" y="-7" width="32" height="14" rx="7" fill={steel} />
-          <circle cx="-14" cy="0" r="7.5" fill={color} />
-          <circle cx="14" cy="0" r="7.5" fill={color} />
+          <rect x="-15" y="-2.4" width="30" height="4.8" rx="2.4" fill={STEEL_D} />
+          <rect x="-19" y="-8" width="13" height="16" rx="6.5" fill={color} />
+          <rect x="6" y="-8" width="13" height="16" rx="6.5" fill={color} />
+          <g stroke={STEEL_D} strokeWidth="0.8" opacity="0.4" fill="none">
+            <path d="M-12.6 -6.4 L-12.6 6.4" />
+            <path d="M12.6 -6.4 L12.6 6.4" />
+          </g>
         </g>
       );
     default:
@@ -531,49 +619,145 @@ function Held({ kind, color }: { kind: HeldKind; color: string }) {
 /* ------------------------------------------------------------------ */
 /*  Materiel fixe                                                      */
 /* ------------------------------------------------------------------ */
+/** Coussin capitonne : mousse + surpiqure, comme sur les machines. */
+function Pad({
+  x,
+  y,
+  w,
+  h,
+  fill,
+  seams = 3,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  fill: string;
+  seams?: number;
+}) {
+  const horiz = w >= h;
+  const r = Math.min(w, h) / 2;
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={r} fill={fill} />
+      <g stroke="rgba(0,0,0,0.3)" strokeWidth="0.9" strokeLinecap="round">
+        {Array.from({ length: seams }, (_, i) => {
+          const k = (i + 1) / (seams + 1);
+          return horiz ? (
+            <line key={i} x1={x + w * k} y1={y + 2.6} x2={x + w * k} y2={y + h - 2.6} />
+          ) : (
+            <line key={i} x1={x + 2.6} y1={y + h * k} x2={x + w - 2.6} y2={y + h * k} />
+          );
+        })}
+      </g>
+    </g>
+  );
+}
+
+/** Colonne de charges : les plaques empilees d'une machine a poulie. */
+function Stack({ x, y, w = 30, n = 7, color }: { x: number; y: number; w?: number; n?: number; color: string }) {
+  const h = 7.5;
+  return (
+    <g>
+      <rect x={x - 4} y={y - 8} width={w + 8} height={n * h + 20} rx="5" fill="rgba(255,255,255,0.05)" />
+      <line x1={x + w / 2} y1={y - 6} x2={x + w / 2} y2={y + n * h + 8} stroke="rgba(255,255,255,0.22)" strokeWidth="2" />
+      {Array.from({ length: n }, (_, i) => (
+        <rect
+          key={i}
+          x={x}
+          y={y + i * h}
+          width={w}
+          height={h - 1.6}
+          rx="2"
+          fill={i < 3 ? color : 'rgba(255,255,255,0.2)'}
+          opacity={i < 3 ? 0.75 : 1}
+        />
+      ))}
+    </g>
+  );
+}
+
+/** Poulie : gorge, rayons et chape. */
+function Pulley({ cx, cy, r = 8, color }: { cx: number; cy: number; r?: number; color: string }) {
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={r} fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.32)" strokeWidth="2.4" />
+      <circle cx={cx} cy={cy} r={r * 0.34} fill={color} opacity="0.85" />
+      <g stroke="rgba(255,255,255,0.28)" strokeWidth="1.1">
+        <line x1={cx - r * 0.7} y1={cy} x2={cx + r * 0.7} y2={cy} />
+        <line x1={cx} y1={cy - r * 0.7} x2={cx} y2={cy + r * 0.7} />
+      </g>
+    </g>
+  );
+}
+
 export function Equipment({ kind, color }: { kind: PropKind; color: string }) {
   const frame = 'rgba(255,255,255,0.14)';
   const solid = 'rgba(255,255,255,0.28)';
   const pad = 'rgba(255,255,255,0.34)';
+  const cable = 'rgba(255,255,255,0.42)';
 
   switch (kind) {
     case 'bar-high':
+      // Cage a tractions : montants, pieds au sol, barre moletee au centre.
       return (
         <g>
-          <line x1="46" y1="42" x2="46" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <line x1="194" y1="42" x2="194" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <line x1="42" y1="54" x2="198" y2="54" stroke={solid} strokeWidth="8" strokeLinecap="round" />
-          <line x1="102" y1="54" x2="146" y2="54" stroke={color} strokeWidth="8" strokeLinecap="round" opacity="0.9" />
+          <rect x="42" y="44" width="8" height={GROUND - 40} rx="4" fill={frame} />
+          <rect x="190" y="44" width="8" height={GROUND - 40} rx="4" fill={frame} />
+          <rect x="30" y={GROUND + 1} width="32" height="7" rx="3.5" fill={frame} />
+          <rect x="178" y={GROUND + 1} width="32" height="7" rx="3.5" fill={frame} />
+          <rect x="38" y="50" width="164" height="8" rx="4" fill={solid} />
+          <rect x="100" y="49" width="48" height="10" rx="5" fill={color} opacity="0.85" />
+          <g stroke="rgba(0,0,0,0.35)" strokeWidth="0.9">
+            {Array.from({ length: 11 }, (_, i) => (
+              <line key={i} x1={103 + i * 4.2} y1="51" x2={103 + i * 4.2} y2="57" />
+            ))}
+          </g>
         </g>
       );
     case 'dip-bars':
-      // Deux barres courtes de part et d'autre du corps, montees sur un chassis :
-      // le sujet est suspendu entre les deux, pas assis dessus.
+      // Deux barres paralleles sur un chassis en A : on est suspendu entre elles.
       return (
         <g>
-          <line x1="70" y1="136" x2="106" y2="136" stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <line x1="124" y1="140" x2="164" y2="140" stroke={solid} strokeWidth="8" strokeLinecap="round" />
-          <line x1="126" y1="140" x2="146" y2="140" stroke={color} strokeWidth="8" strokeLinecap="round" opacity="0.9" />
-          <line x1="160" y1="140" x2="172" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <line x1="76" y1="136" x2="64" y2={GROUND + 4} stroke={frame} strokeWidth="6" strokeLinecap="round" opacity="0.5" />
+          <rect x="68" y="133" width="40" height="6" rx="3" fill={frame} />
+          <rect x="122" y="136" width="44" height="8" rx="4" fill={solid} />
+          <rect x="124" y="136" width="24" height="8" rx="4" fill={color} opacity="0.85" />
+          <g stroke="rgba(0,0,0,0.32)" strokeWidth="0.9">
+            {Array.from({ length: 6 }, (_, i) => (
+              <line key={i} x1={127 + i * 3.6} y1="137.4" x2={127 + i * 3.6} y2="142.6" />
+            ))}
+          </g>
+          <path d="M160 144 L172 205" stroke={frame} strokeWidth="7" strokeLinecap="round" fill="none" />
+          <path d="M76 139 L64 205" stroke={frame} strokeWidth="6" strokeLinecap="round" fill="none" opacity="0.5" />
+          <rect x="56" y={GROUND + 1} width="30" height="7" rx="3.5" fill={frame} opacity="0.6" />
+          <rect x="156" y={GROUND + 1} width="32" height="7" rx="3.5" fill={frame} />
         </g>
       );
     case 'seat':
-      // Assise + dossier : la hanche repose sur le coussin, le dos sur le dossier.
+      // Machine assise : colonne de charges, poulie, assise et dossier capitonnes.
       return (
         <g>
-          <rect x="98" y="177" width="78" height="13" rx="6.5" fill={pad} />
-          <rect x="91" y="116" width="14" height="66" rx="7" fill={pad} />
-          <line x1="136" y1="190" x2="136" y2={GROUND + 4} stroke={frame} strokeWidth="8" strokeLinecap="round" />
-          <line x1="110" y1={GROUND + 4} x2="166" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
+          <rect x="34" y="62" width="42" height={GROUND - 58} rx="6" fill="rgba(255,255,255,0.05)" />
+          <rect x="30" y={GROUND + 1} width="50" height="7" rx="3.5" fill={frame} />
+          <Stack x={40} y={112} color={color} />
+          <Pulley cx={55} cy={76} r={7} color={color} />
+          <line x1="55" y1="83" x2="55" y2="104" stroke={cable} strokeWidth="1.6" />
+          <line x1="62" y1="74" x2="104" y2="88" stroke={cable} strokeWidth="1.6" />
+          <Pad x={98} y={177} w={78} h={13} fill={pad} seams={4} />
+          <Pad x={91} y={116} w={14} h={66} fill={pad} seams={4} />
+          <rect x="130" y="188" width="10" height={GROUND - 186} rx="4" fill={frame} />
+          <rect x="106" y={GROUND + 1} width="62" height="7" rx="3.5" fill={frame} />
+          <rect x="96" y="180" width="12" height="30" rx="4" fill={frame} opacity="0.7" />
         </g>
       );
     case 'bench-flat':
       return (
         <g>
-          <rect x="66" y="150" width="126" height="13" rx="6.5" fill={pad} />
-          <line x1="86" y1="163" x2="86" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <line x1="174" y1="163" x2="174" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
+          <Pad x={66} y={150} w={126} h={13} fill={pad} seams={5} />
+          <path d="M86 163 L80 205" stroke={frame} strokeWidth="7" strokeLinecap="round" fill="none" />
+          <path d="M174 163 L180 205" stroke={frame} strokeWidth="7" strokeLinecap="round" fill="none" />
+          <rect x="66" y={GROUND + 1} width="28" height="7" rx="3.5" fill={frame} />
+          <rect x="166" y={GROUND + 1} width="28" height="7" rx="3.5" fill={frame} />
         </g>
       );
     // Bancs inclines et declines : dessines dans le repere du corps. Le dossier
@@ -583,50 +767,69 @@ export function Equipment({ kind, color }: { kind: PropKind; color: string }) {
     case 'bench-decline':
       return (
         <g>
-          <rect x="89" y="70" width="15" height="118" rx="7.5" fill={pad} />
+          <Pad x={89} y={70} w={15} h={118} fill={pad} seams={6} />
           <rect x="92" y="186" width="9" height="30" rx="4" fill={frame} />
-          <rect x="80" y="210" width="34" height="8" rx="4" fill={frame} />
+          <rect x="80" y="212" width="36" height="8" rx="4" fill={frame} />
+          <rect x="86" y="66" width="21" height="7" rx="3.5" fill={frame} opacity="0.7" />
         </g>
       );
     case 'wall':
-      return <rect x="91" y="44" width="13" height={GROUND - 40} rx="4" fill={solid} />;
-    // Repere du corps : dossier colle au dos, assise sous le bassin.
+      return (
+        <g>
+          <rect x="91" y="44" width="13" height={GROUND - 40} rx="4" fill={solid} />
+          <g stroke="rgba(0,0,0,0.22)" strokeWidth="1">
+            <line x1="93" y1="100" x2="102" y2="100" />
+            <line x1="93" y1="150" x2="102" y2="150" />
+          </g>
+        </g>
+      );
+    // Repere du corps : dossier colle au dos, rail de la presse derriere.
     case 'legpress':
       return (
         <g>
-          <rect x="88" y="80" width="15" height="106" rx="7.5" fill={pad} />
+          <Pad x={88} y={80} w={15} h={106} fill={pad} seams={5} />
+          <rect x="78" y="96" width="9" height="80" rx="4" fill={frame} opacity="0.8" />
+          <rect x="82" y="186" width="26" height="8" rx="4" fill={frame} />
         </g>
       );
     // Repere du corps : le sujet est a plat ventre, le coussin est cote face.
     case 'legcurl':
       return (
         <g>
-          <rect x="130" y="82" width="15" height="106" rx="7.5" fill={pad} />
+          <Pad x={130} y={82} w={15} h={106} fill={pad} seams={5} />
+          <rect x="145" y="96" width="8" height="76" rx="4" fill={frame} opacity="0.8" />
           <rect x="118" y="188" width="10" height="26" rx="5" fill={frame} />
+          <rect x="108" y="212" width="32" height="8" rx="4" fill={frame} />
         </g>
       );
     case 'cable-high':
+      // Colonne a poulie haute : bati, charges, poulie et cable tendu.
       return (
         <g>
-          <line x1="198" y1="32" x2="198" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <circle cx="198" cy="40" r="8" fill="none" stroke={solid} strokeWidth="4" />
-          <line x1="198" y1="40" x2="150" y2="52" stroke={solid} strokeWidth="2" />
+          <rect x="192" y="30" width="10" height={GROUND - 26} rx="5" fill={frame} />
+          <rect x="178" y={GROUND + 1} width="38" height="7" rx="3.5" fill={frame} />
+          <Stack x={182} y={110} w={26} n={7} color={color} />
+          <Pulley cx={197} cy={42} color={color} />
+          <line x1="197" y1="34" x2="150" y2="46" stroke={cable} strokeWidth="1.8" />
         </g>
       );
     case 'cable-mid':
       return (
         <g>
-          <line x1="208" y1="44" x2="208" y2={GROUND + 4} stroke={frame} strokeWidth="7" strokeLinecap="round" />
-          <circle cx="208" cy="88" r="8" fill="none" stroke={solid} strokeWidth="4" />
-          <line x1="208" y1="88" x2="178" y2="90" stroke={solid} strokeWidth="2" />
+          <rect x="202" y="42" width="10" height={GROUND - 38} rx="5" fill={frame} />
+          <rect x="188" y={GROUND + 1} width="38" height="7" rx="3.5" fill={frame} />
+          <Stack x={192} y={122} w={26} n={6} color={color} />
+          <Pulley cx={207} cy={88} color={color} />
+          <line x1="207" y1="80" x2="176" y2="84" stroke={cable} strokeWidth="1.8" />
         </g>
       );
     case 'step':
       // Plateforme basse : les orteils dessus, le talon dans le vide derriere.
       return (
         <g>
-          <rect x="108" y="206" width="84" height="9" rx="4.5" fill={pad} />
-          <rect x="112" y="213" width="76" height="7" rx="3.5" fill={frame} />
+          <rect x="108" y="206" width="84" height="9" rx="3" fill={pad} />
+          <rect x="110" y="207" width="80" height="3.4" rx="1.7" fill="rgba(0,0,0,0.25)" />
+          <rect x="112" y="215" width="76" height="7" rx="2" fill={frame} />
         </g>
       );
     default:
