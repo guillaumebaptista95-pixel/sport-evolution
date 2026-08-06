@@ -31,7 +31,7 @@ export default async function HomePage() {
       getOpenWorkout(),
       getWeekStrip(),
       getWeekStreak(),
-      getTopRecords(3),
+      getTopRecords(2),
     ]);
 
   const weekday = todayWeekday();
@@ -188,9 +188,14 @@ export default async function HomePage() {
         </div>
       </Reveal>
 
-      {/* -------- Records personnels -------- */}
+      {/* -------- Historique jour par jour -------- */}
+      <Reveal delay={0.18} className="mt-8">
+        <HistoryCarousel days={days} />
+      </Reveal>
+
+      {/* -------- Records personnels : tout mene a l'onglet Progres -------- */}
       {records.length > 0 && (
-        <Reveal delay={0.18} className="mt-4">
+        <Reveal delay={0.22} className="mt-8">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="flex items-center gap-2 text-[17px] font-bold">
               <Award size={17} className="text-gold-400" />
@@ -202,11 +207,7 @@ export default async function HomePage() {
           </div>
           <div className="space-y-2.5">
             {records.map((r) => (
-              <Link
-                key={r.slug}
-                href={`/exercices/${r.slug}`}
-                className="press card flex items-center gap-3 p-3.5"
-              >
+              <Link key={r.slug} href="/stats" className="press card flex items-center gap-3 p-3.5">
                 <span
                   className="h-9 w-1.5 shrink-0 rounded-full"
                   style={{ background: r.color }}
@@ -227,11 +228,6 @@ export default async function HomePage() {
           </div>
         </Reveal>
       )}
-
-      {/* -------- Historique jour par jour -------- */}
-      <Reveal delay={0.22} className="mt-8">
-        <HistoryCarousel days={days} />
-      </Reveal>
     </div>
   );
 }
