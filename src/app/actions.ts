@@ -47,6 +47,48 @@ export async function startWorkout(title?: string) {
   return { id: data!.id as string };
 }
 
+/**
+ * Compose la seance : enregistre la liste d'exercices retenus et ouvre la
+ * seance si elle ne l'est pas deja.
+ */
+export async function composeWorkout(exerciseIds: string[], title?: string) {
+  const { supabase, user } = await requireUser();
+
+  const { data: open } = await supabase
+    .from('workouts')
+    .select('id')
+    .is('ended_at', null)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (open) {
+    const { error } = await supabase
+      .from('workouts')
+      .update({ planned_exercise_ids: exerciseIds, title: title ?? null })
+      .eq('id', open.id);
+    if (error) throw new Error(error.message);
+    revalidatePath('/', 'layout');
+    return { id: open.id as string };
+  }
+
+  const { data, error } = await supabase
+    .from('workouts')
+    .insert({
+      user_id: user.id,
+      title: title ?? null,
+      performed_on: todayISO(),
+      started_at: new Date().toISOString(),
+      planned_exercise_ids: exerciseIds,
+    })
+    .select('id')
+    .single();
+
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+  return { id: data!.id as string };
+}
+
 export async function finishWorkout(workoutId: string, notes?: string, feeling?: number) {
   const { supabase } = await requireUser();
   const { error } = await supabase
@@ -183,13 +225,19 @@ export async function saveMachinePhoto(machine: string, path: string) {
 /*  Programme hebdomadaire                                             */
 /* ------------------------------------------------------------------ */
 
-export async function savePlanDay(weekday: number, groups: string[], label: string) {
+export async function savePlanDay(
+  weekday: number,
+  groups: string[],
+  label: string,
+  targets: Record<string, number> = {}
+) {
   const { supabase, user } = await requireUser();
   const { error } = await supabase.from('plan_days').upsert({
     user_id: user.id,
     weekday,
     groups,
     label,
+    targets,
     is_rest: groups.length === 0,
     updated_at: new Date().toISOString(),
   });

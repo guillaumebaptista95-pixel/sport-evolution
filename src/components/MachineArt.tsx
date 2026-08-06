@@ -1,4 +1,5 @@
-// Illustrations vectorielles du materiel. Dessinees a la main : aucune image
+// Illustrations vectorielles du materiel, utilisees tant qu'aucune photo n'est
+// disponible. Dessinees a la main : aucune image
 // externe, aucun probleme de droits, et le style reste coherent avec l'app.
 // La couleur d'accent marque toujours l'endroit ou l'on pose les mains ou le corps.
 

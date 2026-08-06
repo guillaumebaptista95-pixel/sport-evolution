@@ -1,4 +1,5 @@
 // Helpers du programme hebdomadaire, utilisables cote client comme serveur.
+// Volontairement sans dependance a Supabase pour rester importable partout.
 
 export const WEEKDAYS = [
   'Lundi',

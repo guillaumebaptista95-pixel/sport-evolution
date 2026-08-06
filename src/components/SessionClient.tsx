@@ -67,6 +67,7 @@ export default function SessionClient({
   const [sets, setSets] = useState<LocalSet[]>((workout?.workout_sets ?? []) as LocalSet[]);
   const [active, setActive] = useState<Exercise | null>(null);
   const [pickerOpen, setPickerOpen] = useState(Boolean(initialGroupId));
+  const planned = workout?.planned_exercise_ids ?? [];
   const [rest, setRest] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [finishing, setFinishing] = useState(false);
@@ -82,6 +83,15 @@ export default function SessionClient({
     const id = setInterval(() => setElapsed(Math.floor((Date.now() - startedAt) / 1000)), 1000);
     return () => clearInterval(id);
   }, [startedAt]);
+
+  // Seance fraichement composee : on ouvre directement le premier exercice.
+  useEffect(() => {
+    if (sets.length > 0 || planned.length === 0) return;
+    const first = exercises.find((e) => e.id === planned[0]);
+    if (first) setActive(first);
+    // volontairement au montage uniquement
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /* ---------------------------------------------------------------- */
   /*  Demarrage                                                        */
@@ -162,7 +172,10 @@ export default function SessionClient({
   /* ---------------------------------------------------------------- */
   /*  Rendu                                                            */
   /* ---------------------------------------------------------------- */
-  const usedExerciseIds = Array.from(new Set(sets.map((s) => s.exercise_id)));
+  // Les exercices prevus a la composition, puis ceux ajoutes en cours de route.
+  const usedExerciseIds = Array.from(
+    new Set([...planned, ...sets.map((s) => s.exercise_id)])
+  ).filter((id) => exById.has(id));
   const totalVolume = sets.reduce(
     (a, s) => a + setVolume(s, exById.get(s.exercise_id)?.tracking_type ?? 'weight_reps', bodyweight),
     0
@@ -264,7 +277,9 @@ export default function SessionClient({
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-[15px] font-semibold">{ex.name}</span>
                       <span className="num mt-0.5 block truncate text-[12.5px] text-ink-400">
-                        {list.map((s) => describeSet(s, ex.tracking_type)).join('  ·  ')}
+                        {list.length === 0
+                          ? 'A faire'
+                          : list.map((s) => describeSet(s, ex.tracking_type)).join('  ·  ')}
                       </span>
                     </span>
                     <ChevronRight size={17} className="shrink-0 text-ink-500" />

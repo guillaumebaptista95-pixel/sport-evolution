@@ -27,18 +27,34 @@ export default function PlanClient({
 
   const byId = new Map(groups.map((g) => [g.slug, g]));
 
-  function apply(weekday: number, next: string[]) {
+  function apply(weekday: number, next: string[], nextTargets?: Record<string, number>) {
     const label = next.length
       ? next.map((s) => byId.get(s)?.name ?? s).join(' + ')
       : 'Repos';
+
+    const current = days.find((d) => d.weekday === weekday);
+    const targets =
+      nextTargets ??
+      Object.fromEntries(next.map((s) => [s, current?.targets?.[s] ?? 2]));
+
     setDays((d) =>
       d.map((x) =>
-        x.weekday === weekday ? { ...x, groups: next, label, is_rest: next.length === 0 } : x
+        x.weekday === weekday
+          ? { ...x, groups: next, label, targets, is_rest: next.length === 0 }
+          : x
       )
     );
     start(async () => {
-      await savePlanDay(weekday, next, label);
+      await savePlanDay(weekday, next, label, targets);
     });
+  }
+
+  /** Nombre d'exercices attendu pour un groupe donne. */
+  function bumpTarget(weekday: number, slug: string, delta: number) {
+    const day = days.find((d) => d.weekday === weekday);
+    if (!day) return;
+    const value = Math.min(6, Math.max(1, (day.targets?.[slug] ?? 2) + delta));
+    apply(weekday, day.groups, { ...(day.targets ?? {}), [slug]: value });
   }
 
   return (
@@ -137,6 +153,42 @@ export default function PlanClient({
                           );
                         })}
                       </div>
+                      {d.groups.length > 0 && (
+                        <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-3">
+                          <p className="label mb-2.5">Exercices par groupe</p>
+                          <div className="space-y-2">
+                            {d.groups.map((s) => (
+                              <div key={s} className="flex items-center gap-3">
+                                <span
+                                  className="h-2 w-2 shrink-0 rounded-full"
+                                  style={{ background: byId.get(s)?.color ?? '#6C5CE7' }}
+                                />
+                                <span className="flex-1 truncate text-[13.5px]">
+                                  {byId.get(s)?.name ?? s}
+                                </span>
+                                <button
+                                  onClick={() => bumpTarget(d.weekday, s, -1)}
+                                  aria-label="Moins"
+                                  className="press grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.05] text-[17px] font-bold"
+                                >
+                                  &minus;
+                                </button>
+                                <span className="num w-5 text-center text-[15px] font-bold">
+                                  {d.targets?.[s] ?? 2}
+                                </span>
+                                <button
+                                  onClick={() => bumpTarget(d.weekday, s, 1)}
+                                  aria-label="Plus"
+                                  className="press grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.05] text-[17px] font-bold"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       <button
                         onClick={() => apply(d.weekday, [])}
                         className="btn-ghost mt-3 w-full"

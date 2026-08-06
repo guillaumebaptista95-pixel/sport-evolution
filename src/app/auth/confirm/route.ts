@@ -1,4 +1,4 @@
-// Secours pour les liens magiques au format token_hash (selon le gabarit
+// Secours pour les liens de validation au format token_hash (selon le gabarit
 // d'e-mail configure dans Supabase). Le format « code » passe par /auth/callback.
 import { NextResponse, type NextRequest } from 'next/server';
 import type { EmailOtpType } from '@supabase/supabase-js';

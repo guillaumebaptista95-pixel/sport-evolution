@@ -5,6 +5,7 @@ import type {
   MuscleGroup,
   PlanDay,
   Profile,
+  SessionDay,
   Workout,
   WorkoutSet,
 } from '@/lib/database.types';
@@ -170,6 +171,85 @@ export async function getPlan(): Promise<PlanDay[]> {
     return (again ?? []) as PlanDay[];
   }
   return rows;
+}
+
+/**
+ * Historique regroupe par journee, du plus recent au plus ancien.
+ * Une journee peut contenir plusieurs seances : elles sont fusionnees,
+ * puisque l'utilisateur raisonne en jours et non en sessions.
+ */
+export async function getSessionDays(limit = 30): Promise<SessionDay[]> {
+  const [workouts, exercises] = await Promise.all([getRecentWorkouts(120), getExercises()]);
+  const exById = new Map(exercises.map((e) => [e.id, e]));
+
+  const byDate = new Map<string, SessionDay>();
+
+  for (const w of workouts) {
+    if (!w.ended_at) continue;
+    const date = w.performed_on;
+    let day = byDate.get(date);
+    if (!day) {
+      day = { date, workoutIds: [], entries: [], totalSets: 0, volumeKg: 0 };
+      byDate.set(date, day);
+    }
+    day.workoutIds.push(w.id);
+
+    const ordered = [...w.workout_sets].sort(
+      (a, b) => a.exercise_order - b.exercise_order || a.set_index - b.set_index
+    );
+
+    for (const s of ordered) {
+      const ex = exById.get(s.exercise_id);
+      if (!ex) continue;
+      let entry = day.entries.find((e) => e.exerciseId === s.exercise_id);
+      if (!entry) {
+        entry = {
+          exerciseId: ex.id,
+          name: ex.name,
+          color: ex.muscle_groups?.color ?? '#6C5CE7',
+          groupName: ex.muscle_groups?.name ?? '',
+          trackingType: ex.tracking_type,
+          machine: ex.machine ?? 'aucun',
+          sets: [],
+        };
+        day.entries.push(entry);
+      }
+      entry.sets.push(s);
+      day.totalSets += 1;
+    }
+  }
+
+  // Volume calcule une fois toutes les series rassemblees
+  const { setVolume } = await import('@/lib/format');
+  const profile = await getProfile();
+  const bw = profile?.weight_kg ?? 75;
+  for (const day of byDate.values()) {
+    day.volumeKg = day.entries.reduce(
+      (a, e) => a + e.sets.reduce((x, s) => x + setVolume(s, e.trackingType, bw), 0),
+      0
+    );
+  }
+
+  return Array.from(byDate.values())
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
+    .slice(0, limit);
+}
+
+/** Jours distincts d'entrainement depuis le lundi de la semaine en cours. */
+export async function getTrainedDaysThisWeek(): Promise<number> {
+  const workouts = await getRecentWorkouts(60);
+  const now = new Date();
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+  monday.setHours(0, 0, 0, 0);
+
+  const days = new Set<string>();
+  for (const w of workouts) {
+    if (!w.ended_at) continue;
+    const [y, m, d] = w.performed_on.slice(0, 10).split('-').map(Number);
+    if (new Date(y, m - 1, d) >= monday) days.add(w.performed_on.slice(0, 10));
+  }
+  return days.size;
 }
 
 /** Photos de machines de l'utilisateur, indexees par cle de machine. */

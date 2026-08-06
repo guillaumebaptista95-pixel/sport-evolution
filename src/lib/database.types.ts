@@ -42,7 +42,26 @@ export interface PlanDay {
   groups: string[];
   label: string | null;
   is_rest: boolean;
+  /** Nombre d'exercices attendu par groupe : { "pectoraux": 2, "triceps": 2 } */
+  targets: Record<string, number>;
   updated_at: string;
+}
+
+/** Une journee d'entrainement telle qu'affichee dans l'historique. */
+export interface SessionDay {
+  date: string;
+  workoutIds: string[];
+  entries: Array<{
+    exerciseId: string;
+    name: string;
+    color: string;
+    groupName: string;
+    trackingType: TrackingType;
+    machine: string;
+    sets: WorkoutSet[];
+  }>;
+  totalSets: number;
+  volumeKg: number;
 }
 
 export interface Workout {
@@ -54,6 +73,8 @@ export interface Workout {
   ended_at: string | null;
   notes: string | null;
   feeling: number | null;
+  /** Exercices retenus au moment de composer la seance, dans l'ordre. */
+  planned_exercise_ids: string[];
   created_at: string;
 }
 

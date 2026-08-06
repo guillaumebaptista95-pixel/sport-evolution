@@ -1,4 +1,5 @@
-// Programme hebdomadaire : ce que l'on travaille chaque jour de la semaine.
+// Programme hebdomadaire : les groupes travailles et le nombre d'exercices
+// attendu pour chacun, jour par jour.
 import { getMuscleGroups, getPlan } from '@/lib/queries';
 import PlanClient from '@/components/PlanClient';
 
