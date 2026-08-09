@@ -430,7 +430,7 @@ function Logger({
           className="card relative overflow-hidden pb-6"
           style={{ background: `linear-gradient(160deg, ${color}20, transparent 60%)` }}
         >
-          <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="w-full" />
+          <ExerciseAnimation animationKey={exercise.animation_key} color={color} className="w-full" hd />
           <span className="absolute inset-x-0 bottom-2 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-ink-400">
             Le mouvement
           </span>

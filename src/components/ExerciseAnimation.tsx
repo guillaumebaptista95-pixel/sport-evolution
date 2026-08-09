@@ -7,6 +7,7 @@
 // muscles sollicites par le mouvement s'allument dans la couleur du groupe.
 import { useId, useMemo } from 'react';
 import {
+  ANIMATIONS,
   FOREARM,
   GROUND,
   HIP,
@@ -22,6 +23,7 @@ import {
   type MuscleKey,
   type PropKind,
 } from '@/lib/rig';
+import { cn } from '@/lib/format';
 
 /** Une fonction qui donne le style d'une articulation (anime ou fige). */
 export type JointStyle = (
@@ -352,7 +354,41 @@ interface Props {
   ghosts?: number;
 }
 
+/**
+ * Lecteur des sequences rendues en 3D. Chaque mouvement est une planche
+ * verticale de 12 images (le demi-cycle) : l'animation la parcourt par pas,
+ * puis repart en sens inverse, ce qui donne le va-et-vient du geste.
+ */
 export default function ExerciseAnimation({
+  animationKey,
+  color = '#6C5CE7',
+  className,
+  paused = false,
+  trail = true,
+  ghosts = 1,
+  hd = false,
+}: Props & { hd?: boolean }) {
+  const key = animationKey && animationKey in ANIMATIONS ? animationKey : 'generic';
+  const anim = getAnimation(key);
+
+  return (
+    <div className={cn('relative aspect-square overflow-hidden', className)}>
+      <div
+        className="sprite3d absolute inset-0"
+        style={{
+          backgroundImage: `url(/anim/${key}${hd ? '' : '-sm'}.png)`,
+          animationDuration: `${(anim.duration / 2).toFixed(2)}s`,
+          animationPlayState: paused ? 'paused' : 'running',
+        }}
+        role="img"
+        aria-label={anim.label ?? 'Mouvement'}
+      />
+    </div>
+  );
+}
+
+/** Ancien rendu vectoriel, conserve comme secours. */
+export function SvgAnimation({
   animationKey,
   color = '#6C5CE7',
   className,

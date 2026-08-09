@@ -51,6 +51,34 @@
   }
 }
 
+/* Lecture des sequences 3D : une planche verticale de 10 images, parcourue
+   par pas puis en sens inverse pour donner l'aller-retour du mouvement. */
+@keyframes sprite-play {
+  from {
+    background-position: 50% 0%;
+  }
+  to {
+    background-position: 50% 100%;
+  }
+}
+
+.sprite3d {
+  background-repeat: no-repeat;
+  background-size: 100% 1000%;
+  image-rendering: auto;
+  animation-name: sprite-play;
+  animation-timing-function: steps(9);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sprite3d {
+    animation: none;
+    background-position: 50% 100%;
+  }
+}
+
 @layer components {
   .app-shell {
     padding-top: var(--sat);

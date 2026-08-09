@@ -121,7 +121,7 @@ export default function LoginClient({ next, error }: { next?: string; error?: st
           className="relative mx-auto mt-4 w-full max-w-[200px]"
         >
           <div className="absolute inset-0 -z-10 rounded-full bg-brand-500/20 blur-3xl" />
-          <ExerciseAnimation animationKey="pullup" color="#8A78FF" className="w-full" ghosts={0} />
+          <ExerciseAnimation animationKey="pullup" color="#8A78FF" className="w-full" hd />
         </motion.div>
 
         <h1 className="mt-1 text-[30px] font-extrabold leading-[1.08]">
