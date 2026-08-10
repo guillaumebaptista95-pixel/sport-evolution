@@ -4,6 +4,7 @@
 // glisser horizontalement. La plus recente est affichee en premier ; on va
 // vers la droite pour remonter le temps.
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { SessionDay } from '@/lib/database.types';
 import { describeSet, fmtDateLong, fmtNumber, relativeDay } from '@/lib/format';
@@ -106,6 +107,16 @@ export default function HistoryCarousel({ days }: { days: SessionDay[] }) {
                 </div>
               ))}
             </div>
+
+            {day.workoutIds.length > 0 && (
+              <Link
+                href={`/seance/${day.workoutIds[0]}`}
+                className="press flex items-center justify-center gap-1.5 border-t border-white/[0.06] py-2.5 text-[12.5px] font-semibold text-ink-300"
+              >
+                Ouvrir · completer
+                <ChevronRight size={14} />
+              </Link>
+            )}
           </article>
         ))}
       </div>

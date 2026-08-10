@@ -84,6 +84,29 @@ export async function composeWorkout(
     return { id: open.id as string };
   }
 
+  // Une seance deja validee ce jour-la : on la rouvre et on la complete,
+  // plutot que d'en creer une seconde a la meme date.
+  const { data: sameDay } = await supabase
+    .from('workouts')
+    .select('id, planned_exercise_ids')
+    .eq('performed_on', date)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (sameDay) {
+    const merged = Array.from(
+      new Set([...((sameDay.planned_exercise_ids as string[]) ?? []), ...exerciseIds])
+    );
+    const { error } = await supabase
+      .from('workouts')
+      .update({ planned_exercise_ids: merged, ended_at: null })
+      .eq('id', sameDay.id);
+    if (error) throw new Error(error.message);
+    revalidatePath('/', 'layout');
+    return { id: sameDay.id as string };
+  }
+
   const { data, error } = await supabase
     .from('workouts')
     .insert({
@@ -113,6 +136,35 @@ export async function finishWorkout(workoutId: string, notes?: string, feeling?:
     .eq('id', workoutId);
   if (error) throw new Error(error.message);
   revalidatePath('/', 'layout');
+}
+
+/**
+ * Rouvre une seance deja validee pour y ajouter ce qu'on avait oublie.
+ * Refuse s'il y a deja une seance en cours ailleurs.
+ */
+export async function reopenWorkout(
+  workoutId: string
+): Promise<{ ok: true } | { error: 'open'; date: string }> {
+  const { supabase } = await requireUser();
+
+  const { data: open } = await supabase
+    .from('workouts')
+    .select('id, performed_on')
+    .is('ended_at', null)
+    .limit(1)
+    .maybeSingle();
+
+  if (open && open.id !== workoutId) {
+    return { error: 'open', date: open.performed_on as string };
+  }
+
+  const { error } = await supabase
+    .from('workouts')
+    .update({ ended_at: null })
+    .eq('id', workoutId);
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+  return { ok: true };
 }
 
 export async function deleteWorkout(workoutId: string) {

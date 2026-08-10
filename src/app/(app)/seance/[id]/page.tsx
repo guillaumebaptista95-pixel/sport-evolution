@@ -11,6 +11,7 @@ import {
   setVolume,
 } from '@/lib/format';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
+import ReopenButton from '@/components/ReopenButton';
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 
 export const dynamic = 'force-dynamic';
@@ -135,6 +136,9 @@ export default async function WorkoutDetail({ params }: { params: { id: string }
           <p className="text-[13.5px] leading-relaxed text-ink-200">{workout.notes}</p>
         </div>
       )}
+
+      {/* Un exercice oublie ? On rouvre la seance pour le rajouter. */}
+      {workout.ended_at && <ReopenButton workoutId={workout.id} />}
     </div>
   );
 }
