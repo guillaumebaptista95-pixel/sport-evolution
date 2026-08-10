@@ -53,7 +53,7 @@ if __name__ == '__main__':
     size = int(os.environ.get('SIZE', 160))
     ss = int(os.environ.get('SS', 2))
     budget = float(os.environ.get('BUDGET', 30))
-    outdir = os.path.join(HERE, 'out')
+    outdir = os.path.join(HERE, os.environ.get('OUT', 'out'))
     fdir = os.path.join(outdir, 'frames')
     os.makedirs(fdir, exist_ok=True)
     t0 = time.time()

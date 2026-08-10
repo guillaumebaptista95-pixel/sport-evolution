@@ -140,8 +140,8 @@ class Scene:
                 d, col = gd, gc
                 continue
             # entre groupes : fondu tres court, juste pour lisser les jonctions
-            h = np.clip(0.5 + 0.5 * (d - gd) / 2.2, 0.0, 1.0)
-            d = d + (gd - d) * h - 2.2 * h * (1.0 - h)
+            h = np.clip(0.5 + 0.5 * (d - gd) / 1.1, 0.0, 1.0)
+            d = d + (gd - d) * h - 1.1 * h * (1.0 - h)
             col = col + (gc - col) * h[:, None]
         for prim in self.hard:
             di, ci = self._d(prim, p)
@@ -207,7 +207,7 @@ def render(scene, W=256, cam_az=26.0, cam_el=7.0, dist=430.0, target=(0, -6, 0),
             nrm += np.array(off, float) * scene.dist(p + o)[:, None]
         nrm /= np.maximum(_norm(nrm)[:, None], 1e-9)
 
-        key = np.array([-0.42, 0.72, 0.55]); key /= np.linalg.norm(key)
+        key = np.array([-0.40, 0.66, 0.62]); key /= np.linalg.norm(key)
         ndl = np.clip(nrm @ key, 0, 1)
 
         # ombre douce
@@ -224,16 +224,18 @@ def render(scene, W=256, cam_az=26.0, cam_el=7.0, dist=430.0, target=(0, -6, 0),
         ao = np.ones(hi.size)
         for i in range(1, 4):
             h = 0.5 * i
-            ao -= (h - np.clip(scene.dist(p + nrm * h), None, h)) * (0.52 / i)
+            ao -= (h - np.clip(scene.dist(p + nrm * h), None, h)) * (0.62 / i)
         ao = np.clip(ao, 0.22, 1.0)
 
-        sky = 0.46 + 0.30 * np.clip(nrm[:, 1], -1, 1)
+        sky = 0.34 + 0.26 * np.clip(nrm[:, 1], -1, 1)
         rim = np.power(1.0 - np.clip((nrm * -rd[hi]).sum(-1), 0, 1), 3.2)
         hv = key - rd[hi]
         hv /= np.maximum(_norm(hv)[:, None], 1e-9)
-        spec = np.power(np.clip((nrm * hv).sum(-1), 0, 1), 26.0) * sh * 0.30
-        lit = (base * ((sky * ao)[:, None] + (ndl * sh * 1.02)[:, None])
-               + spec[:, None] + rim[:, None] * 0.26)
+        spec = np.power(np.clip((nrm * hv).sum(-1), 0, 1), 14.0) * sh * 0.16
+        warm = np.array([1.06, 0.98, 0.90], F)
+        cool = np.array([0.80, 0.86, 1.00], F)
+        lit = (base * (cool * (sky * ao)[:, None] + warm * (ndl * sh * 1.14)[:, None])
+               + spec[:, None] + rim[:, None] * 0.20)
         img[hi, :3] = np.clip(lit, 0, 1)
         img[hi, 3] = 1.0
 

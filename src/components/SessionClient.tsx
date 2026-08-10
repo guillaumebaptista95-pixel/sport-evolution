@@ -376,13 +376,25 @@ function Logger({
 }) {
   const type = exercise.tracking_type;
   const nextIndex = sets.length + 1;
-  const reference = last[Math.min(sets.length, Math.max(0, last.length - 1))] ?? last[0];
+  // La derniere serie de la seance precedente : c'est la charge de reference.
+  const reference = last[last.length - 1];
 
   const [weight, setWeight] = useState<number>(reference?.weight_kg ?? 20);
   const [reps, setReps] = useState<number>(reference?.reps ?? 10);
   const [duration, setDuration] = useState<number>(reference?.duration_seconds ?? 30);
   const [assist, setAssist] = useState<number>(reference?.assist_kg ?? 0);
   const [showHow, setShowHow] = useState(false);
+
+  /** Rappel sous le champ : ce qui a ete fait la derniere fois. */
+  const recall = (v: number | null | undefined, label: string, unit: string) =>
+    v == null || v <= 0 ? null : (
+      <p className="mt-1.5 text-center text-[11px] text-ink-500">
+        {label} :{' '}
+        <span className="num font-semibold text-ink-300">
+          {unit === 'kg' ? fmtWeight(v) : `${v} ${unit}`}
+        </span>
+      </p>
+    );
 
   const best = useMemo(() => {
     if (!last.length) return null;
@@ -542,42 +554,54 @@ function Logger({
       {/* Saisie */}
       <div className="grid grid-cols-2 gap-3">
         {(type === 'weight_reps' || type === 'weighted_time' || type === 'bodyweight') && (
-          <Stepper
-            label={type === 'bodyweight' ? 'Lest' : 'Charge'}
-            value={weight}
-            onChange={setWeight}
-            step={2.5}
-            max={500}
-            suffix="kg"
-            decimals={weight % 1 === 0 ? 0 : 1}
-            accent={color}
-          />
+          <div>
+            <Stepper
+              label={type === 'bodyweight' ? 'Lest' : 'Charge'}
+              value={weight}
+              onChange={setWeight}
+              step={2.5}
+              max={500}
+              suffix="kg"
+              decimals={weight % 1 === 0 ? 0 : 1}
+              accent={color}
+            />
+            {recall(reference?.weight_kg, 'Derniere charge', 'kg')}
+          </div>
         )}
         {type === 'assisted' && (
-          <Stepper
-            label="Aide"
-            value={assist}
-            onChange={setAssist}
-            step={2.5}
-            max={120}
-            suffix="kg"
-            decimals={assist % 1 === 0 ? 0 : 1}
-            accent={color}
-          />
+          <div>
+            <Stepper
+              label="Aide"
+              value={assist}
+              onChange={setAssist}
+              step={2.5}
+              max={120}
+              suffix="kg"
+              decimals={assist % 1 === 0 ? 0 : 1}
+              accent={color}
+            />
+            {recall(reference?.assist_kg, 'Derniere aide', 'kg')}
+          </div>
         )}
         {(type === 'time' || type === 'weighted_time') && (
-          <Stepper
-            label="Duree"
-            value={duration}
-            onChange={setDuration}
-            step={5}
-            max={600}
-            suffix="s"
-            accent={color}
-          />
+          <div>
+            <Stepper
+              label="Duree"
+              value={duration}
+              onChange={setDuration}
+              step={5}
+              max={600}
+              suffix="s"
+              accent={color}
+            />
+            {recall(reference?.duration_seconds, 'Dernier temps', 's')}
+          </div>
         )}
         {type !== 'time' && type !== 'weighted_time' && (
-          <Stepper label="Repetitions" value={reps} onChange={setReps} step={1} max={100} accent={color} />
+          <div>
+            <Stepper label="Repetitions" value={reps} onChange={setReps} step={1} max={100} accent={color} />
+            {recall(reference?.reps, 'Dernieres reps', 'reps')}
+          </div>
         )}
       </div>
 

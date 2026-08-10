@@ -390,6 +390,7 @@ export async function getMachinePhotos(): Promise<Record<string, string>> {
   return out;
 }
 
+/** Derniere seance ouverte, s'il y en a une. */
 export async function getOpenWorkout(): Promise<WorkoutWithSets | null> {
   const supabase = createClient();
   const { data } = await supabase
