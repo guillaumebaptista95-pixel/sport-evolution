@@ -4,13 +4,14 @@ import { Award, ChevronRight } from 'lucide-react';
 import { getExercises, getProfile, getRecentWorkouts } from '@/lib/queries';
 import {
   estimate1RM,
+  fmtDateShort,
   fmtNumber,
-  fmtWeight,
   parseDate,
+  fmtWeight,
   relativeDay,
   setVolume,
 } from '@/lib/format';
-import ProgressChart from '@/components/ProgressChart';
+import LoadProgress, { type ExerciseSerie } from '@/components/LoadProgress';
 import ActivityGrid from '@/components/ActivityGrid';
 import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 
@@ -28,37 +29,50 @@ export default async function StatsPage() {
   const bw = profile?.weight_kg ?? 75;
   const done = workouts.filter((w) => w.ended_at);
 
-  /* ---- Volume par semaine (12 dernieres) ---- */
-  const now = new Date();
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-  monday.setHours(0, 0, 0, 0);
-
-  const weekly: { label: string; value: number }[] = [];
-  for (let i = 11; i >= 0; i--) {
-    const start = new Date(monday);
-    start.setDate(monday.getDate() - i * 7);
-    const end = new Date(start);
-    end.setDate(start.getDate() + 7);
-    const vol = done
-      .filter((w) => {
-        const d = parseDate(w.performed_on);
-        return d >= start && d < end;
-      })
-      .reduce(
-        (a, w) =>
-          a +
-          w.workout_sets.reduce(
-            (x, s) => x + setVolume(s, exById.get(s.exercise_id)?.tracking_type ?? 'weight_reps', bw),
-            0
-          ),
-        0
-      );
-    weekly.push({
-      label: `${start.getDate()}/${start.getMonth() + 1}`,
-      value: Math.round(vol / 100) / 10,
-    });
+  /* ---- Evolution par exercice : charge et repetitions ---- */
+  const byEx = new Map<
+    string,
+    { name: string; color: string; type: string; days: Map<string, { w: number; r: number; d: number }> }
+  >();
+  for (const w of done) {
+    for (const s of w.workout_sets) {
+      const ex = exById.get(s.exercise_id);
+      if (!ex) continue;
+      const e =
+        byEx.get(ex.id) ??
+        {
+          name: ex.name,
+          color: ex.muscle_groups?.color ?? '#6C5CE7',
+          type: ex.tracking_type,
+          days: new Map<string, { w: number; r: number; d: number }>(),
+        };
+      const cur = e.days.get(w.performed_on) ?? { w: 0, r: 0, d: 0 };
+      cur.w = Math.max(cur.w, s.weight_kg ?? 0);
+      cur.r = Math.max(cur.r, s.reps ?? 0);
+      cur.d = Math.max(cur.d, s.duration_seconds ?? 0);
+      e.days.set(w.performed_on, cur);
+      byEx.set(ex.id, e);
+    }
   }
+
+  const series: ExerciseSerie[] = Array.from(byEx.entries())
+    .filter(([, e]) => e.days.size >= 2)
+    .sort((a, b) => b[1].days.size - a[1].days.size)
+    .map(([id, e]) => ({
+      id,
+      name: e.name,
+      color: e.color,
+      type: e.type,
+      points: Array.from(e.days.entries())
+        .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+        .slice(-20)
+        .map(([date, v]) => ({
+          label: fmtDateShort(date),
+          weight: v.w,
+          reps: v.r,
+          seconds: v.d,
+        })),
+    }));
 
   /* ---- Repartition par groupe musculaire (90 j) ---- */
   const recent = done.filter(
@@ -148,10 +162,8 @@ export default async function StatsPage() {
       </Stagger>
 
       <Reveal delay={0.08} className="mb-4">
-        <div className="card p-4 pb-2">
-          <p className="label mb-1">Volume hebdomadaire (centaines de kg)</p>
-          <ProgressChart data={weekly} color="#8A78FF" height={200} />
-        </div>
+        <p className="label mb-2">Progression par exercice</p>
+        <LoadProgress series={series} />
       </Reveal>
 
       <Reveal delay={0.12} className="mb-4">
