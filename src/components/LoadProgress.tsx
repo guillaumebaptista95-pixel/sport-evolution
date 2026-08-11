@@ -53,30 +53,61 @@ export default function LoadProgress({ series }: { series: ExerciseSerie[] }) {
 
   return (
     <div className="card p-4 pb-2">
-      <div className="mb-3 flex items-center gap-2">
-        <select
-          value={ex.id}
-          onChange={(e) => setId(e.target.value)}
-          className="min-w-0 flex-1 truncate rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2 text-[13.5px] font-semibold text-ink-100 outline-none"
-        >
-          {series.map((s) => (
-            <option key={s.id} value={s.id} className="bg-ink-900">
+      {/* Le choix de l'exercice : une rangee de pastilles qui defile. */}
+      <div className="-mx-4 mb-3.5 flex gap-2 overflow-x-auto px-4 pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {series.map((s) => {
+          const on = s.id === ex.id;
+          return (
+            <button
+              key={s.id}
+              onClick={() => setId(s.id)}
+              className={cn(
+                'press flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12.5px] font-semibold whitespace-nowrap transition-colors',
+                on ? 'border-transparent text-ink-950' : 'border-white/[0.09] bg-white/[0.03] text-ink-300'
+              )}
+              style={on ? { background: s.color } : undefined}
+            >
+              <span
+                className="h-1.5 w-1.5 shrink-0 rounded-full"
+                style={{ background: on ? 'rgba(0,0,0,.45)' : s.color }}
+              />
               {s.name}
-            </option>
-          ))}
-        </select>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mb-1.5 flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-500">
+            {isTime ? 'Meilleur temps' : shown === 'charge' ? 'Charge max' : 'Repetitions max'}
+          </p>
+          <p className="mt-0.5 flex items-baseline gap-2">
+            <span className="num text-[26px] font-extrabold leading-none" style={{ color: ex.color }}>
+              {unit === 'kg' ? fmtWeight(last) : `${last} ${unit}`}
+            </span>
+            {data.length > 1 && delta !== 0 && (
+              <span
+                className="num text-[12.5px] font-bold"
+                style={{ color: delta > 0 ? '#9BE23C' : '#F87171' }}
+              >
+                {delta > 0 ? '+' : ''}
+                {Math.round(delta * 10) / 10}
+              </span>
+            )}
+          </p>
+        </div>
 
         {!isTime && hasLoad && (
-          <div className="flex shrink-0 rounded-xl border border-white/10 bg-white/[0.04] p-0.5">
+          <div className="flex shrink-0 rounded-xl bg-white/[0.05] p-0.5">
             {(['charge', 'reps'] as Metric[]).map((m) => (
               <button
                 key={m}
                 onClick={() => setMetric(m)}
                 className={cn(
-                  'press rounded-[10px] px-2.5 py-1.5 text-[12px] font-bold transition-colors',
-                  shown === m ? 'text-ink-950' : 'text-ink-400'
+                  'press rounded-[10px] px-2.5 py-1.5 text-[11.5px] font-bold transition-colors',
+                  shown === m ? 'bg-white/[0.12] text-white' : 'text-ink-500'
                 )}
-                style={shown === m ? { background: ex.color } : undefined}
               >
                 {m === 'charge' ? 'kg' : 'reps'}
               </button>
@@ -85,22 +116,13 @@ export default function LoadProgress({ series }: { series: ExerciseSerie[] }) {
         )}
       </div>
 
-      <div className="mb-1 flex items-baseline gap-2">
-        <span className="num text-[22px] font-extrabold leading-none">
-          {unit === 'kg' ? fmtWeight(last) : `${last} ${unit}`}
-        </span>
-        {data.length > 1 && (
-          <span
-            className="num text-[12.5px] font-bold"
-            style={{ color: delta > 0 ? '#9BE23C' : delta < 0 ? '#F87171' : '#8A94A6' }}
-          >
-            {delta > 0 ? '+' : ''}
-            {Math.round(delta * 10) / 10} depuis le debut
-          </span>
-        )}
-      </div>
+      {data.length > 1 && (
+        <p className="mb-1 text-[11.5px] text-ink-500">
+          {data.length} seances · depuis le {data[0].label}
+        </p>
+      )}
 
-      <ProgressChart data={data} color={ex.color} height={168} />
+      <ProgressChart data={data} color={ex.color} height={160} />
     </div>
   );
 }

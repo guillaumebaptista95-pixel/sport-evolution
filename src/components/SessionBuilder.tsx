@@ -4,7 +4,7 @@
 // par groupe (0/2), on coche jusqu'a atteindre le compte, puis on valide.
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, CalendarDays, Check, Play } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Check, Play, Plus } from 'lucide-react';
 import type { Exercise, MuscleGroup, WorkoutSet } from '@/lib/database.types';
 import { composeWorkout } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
@@ -44,6 +44,8 @@ export default function SessionBuilder({
   const [pending, start] = useTransition();
   const [chosen, setChosen] = useState<string[]>(preselected);
   const [blocked, setBlocked] = useState<string | null>(null);
+  // Rien n'oblige a s'en tenir aux groupes du jour : on peut tout ouvrir.
+  const [showAll, setShowAll] = useState(false);
   const today = todayISO();
 
   const gBySlug = useMemo(
@@ -65,6 +67,9 @@ export default function SessionBuilder({
       const ex = exercises.find((e) => e.id === id);
       return ex && gById.get(ex.muscle_group_id ?? '')?.slug === slug;
     }).length;
+
+  const extra = muscleGroups.map((g) => g.slug).filter((s) => !groups.includes(s));
+  const visible = showAll ? [...groups, ...extra] : groups;
 
   const total = showTargets ? groups.reduce((a, s) => a + (targets[s] ?? 2), 0) : 0;
   const complete = !showTargets || groups.every((s) => countIn(s) >= (targets[s] ?? 2));
@@ -224,15 +229,16 @@ export default function SessionBuilder({
       )}
 
       <div className="space-y-6">
-        {groups.map((slug) => {
+        {visible.map((slug) => {
           const g = gBySlug.get(slug);
+          const withTarget = showTargets && groups.includes(slug);
           const target = targets[slug] ?? 2;
           const n = countIn(slug);
           const list = exercises.filter(
             (e) => gById.get(e.muscle_group_id ?? '')?.slug === slug
           );
           if (list.length === 0) return null;
-          const done = showTargets && n >= target;
+          const done = withTarget && n >= target;
 
           return (
             <section key={slug}>
@@ -242,7 +248,7 @@ export default function SessionBuilder({
                   style={{ background: g?.color ?? '#6C5CE7' }}
                 />
                 <h2 className="flex-1 text-[17px] font-bold">{g?.name ?? slug}</h2>
-                {(showTargets || n > 0) && (
+                {(withTarget || n > 0) && (
                   <span
                     className={cn(
                       'num rounded-full px-2.5 py-1 text-[12px] font-bold',
@@ -254,7 +260,7 @@ export default function SessionBuilder({
                         : { background: 'rgba(255,255,255,.07)' }
                     }
                   >
-                    {showTargets ? `${n}/${target}` : n}
+                    {withTarget ? `${n}/${target}` : n}
                   </span>
                 )}
               </div>
@@ -315,6 +321,13 @@ export default function SessionBuilder({
           );
         })}
       </div>
+
+      {extra.length > 0 && (
+        <button onClick={() => setShowAll((v) => !v)} className="btn-ghost mt-6 w-full">
+          <Plus size={16} className={showAll ? 'rotate-45 transition-transform' : 'transition-transform'} />
+          {showAll ? 'Ne montrer que la seance du jour' : 'Choisir un autre exercice'}
+        </button>
+      )}
 
       {/* Barre de validation */}
       <div
