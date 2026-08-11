@@ -7,7 +7,7 @@ insert into public.exercises
 values
 
 (null, 'crunch', 'Crunch', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'bodyweight', 'generic',
+ array['abdos'], 'poids-du-corps', 'bodyweight', 'crunch',
  array[
    'Allonge sur le dos, genoux flechis, pieds au sol, mains sur les tempes.',
    'Enroule le buste en decollant les omoplates, sans tirer sur la nuque.',
@@ -19,7 +19,7 @@ values
  false, 60),
 
 (null, 'gainage', 'Gainage', (select id from public.muscle_groups where slug='abdos'),
- array['epaules','fessiers'], 'poids-du-corps', 'weighted_time', 'generic',
+ array['epaules','fessiers'], 'poids-du-corps', 'weighted_time', 'gainage',
  array[
    'Appuis sur les avant-bras, coudes a l''aplomb des epaules, pointes de pieds au sol.',
    'Aligne chevilles, hanches et epaules sur une meme ligne.',
@@ -31,7 +31,7 @@ values
  false, 61),
 
 (null, 'mountain-climbers', 'Mountain Climbers', (select id from public.muscle_groups where slug='abdos'),
- array['epaules','jambes'], 'poids-du-corps', 'time', 'generic',
+ array['epaules','jambes'], 'poids-du-corps', 'time', 'mountain-climbers',
  array[
    'Position de pompe, bras tendus, mains sous les epaules.',
    'Ramene un genou vers la poitrine, puis alterne rapidement.',
@@ -43,7 +43,7 @@ values
  false, 62),
 
 (null, 'releve-jambes-suspendu', 'Releve de jambes suspendu', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'bodyweight', 'generic',
+ array['abdos'], 'poids-du-corps', 'bodyweight', 'releve-jambes-suspendu',
  array[
    'Suspendu a la barre, bras tendus, corps immobile.',
    'Enroule le bassin et monte les genoux vers la poitrine.',
@@ -55,7 +55,7 @@ values
  false, 63),
 
 (null, 'crunch-inverse', 'Crunch inverse', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'bodyweight', 'generic',
+ array['abdos'], 'poids-du-corps', 'bodyweight', 'crunch-inverse',
  array[
    'Allonge sur le dos, bras le long du corps, genoux ramenes a 90 degres.',
    'Decolle le bassin en enroulant les genoux vers la poitrine.',
@@ -65,7 +65,7 @@ values
  false, 64),
 
 (null, 'gainage-lateral', 'Gainage lateral', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'time', 'generic',
+ array['abdos'], 'poids-du-corps', 'time', 'gainage-lateral',
  array[
    'Sur le cote, appui sur l''avant-bras, coude sous l''epaule.',
    'Pieds superposes, monte le bassin jusqu''a aligner le corps.',
@@ -76,7 +76,7 @@ values
  true, 65),
 
 (null, 'russian-twist', 'Russian Twist', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'halteres', 'weight_reps', 'generic',
+ array['abdos'], 'halteres', 'weight_reps', 'russian-twist',
  array[
    'Assis, buste incline en arriere a 45 degres, pieds decolles.',
    'Tiens un disque ou un haltere a deux mains devant la poitrine.',
@@ -86,7 +86,7 @@ values
  false, 66),
 
 (null, 'crunch-poulie', 'Crunch a la poulie', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poulie', 'weight_reps', 'generic',
+ array['abdos'], 'poulie', 'weight_reps', 'crunch-poulie',
  array[
    'A genoux face a la poulie haute, corde tenue de part et d''autre du visage.',
    'Enroule le buste vers le sol en rapprochant les coudes des cuisses.',
@@ -97,7 +97,7 @@ values
  false, 67),
 
 (null, 'hollow-hold', 'Hollow Hold', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'time', 'generic',
+ array['abdos'], 'poids-du-corps', 'time', 'hollow-hold',
  array[
    'Allonge sur le dos, bras tendus derriere la tete, jambes tendues.',
    'Decolle epaules et jambes du sol en creusant le ventre.',
@@ -107,7 +107,7 @@ values
  false, 68),
 
 (null, 'bicycle-crunch', 'Crunch velo', (select id from public.muscle_groups where slug='abdos'),
- array['abdos'], 'poids-du-corps', 'bodyweight', 'generic',
+ array['abdos'], 'poids-du-corps', 'bodyweight', 'bicycle-crunch',
  array[
    'Allonge sur le dos, mains sur les tempes, jambes decollees.',
    'Amene le coude vers le genou oppose en tendant l''autre jambe.',

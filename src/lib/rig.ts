@@ -484,6 +484,146 @@ export const ANIMATIONS: Record<string, ExerciseAnim> = {
     ],
   },
 
+  /* ------------------------------ ABDOS --------------------------- */
+  // Allonge sur le dos : baseRot -90 met le ventre vers le ciel, tete a gauche.
+  crunch: {
+    duration: 2.4,
+    baseRot: -90,
+    offset: [0, 52],
+    focus: [118, 130],
+    label: 'Crunch',
+    poses: [
+      P({ t: 0, torso: 0, hand: [130, 104], foot: [104, 192], handBend: -1, footBend: -1 }),
+      P({ t: 46, torso: 34, hand: [136, 122], foot: [104, 192], handBend: -1, footBend: -1 }),
+      P({ t: 100, torso: 0, hand: [130, 104], foot: [104, 192], handBend: -1, footBend: -1 }),
+    ],
+  },
+
+  'crunch-inverse': {
+    duration: 2.6,
+    baseRot: -90,
+    offset: [0, 52],
+    focus: [118, 140],
+    label: 'Crunch inverse',
+    poses: [
+      P({ t: 0, torso: 4, hand: [104, 112], foot: [112, 196], handBend: -1, footBend: -1 }),
+      P({ t: 46, torso: 4, hand: [104, 112], foot: [136, 168], handBend: -1, footBend: -1 }),
+      P({ t: 100, torso: 4, hand: [104, 112], foot: [112, 196], handBend: -1, footBend: -1 }),
+    ],
+  },
+
+  'bicycle-crunch': {
+    duration: 2.2,
+    baseRot: -90,
+    offset: [0, 52],
+    focus: [118, 134],
+    label: 'Crunch velo',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, torso: 22, hand: [132, 112], foot: [128, 176], handBend: -1, footBend: -1 }),
+      P({ t: 50, torso: 22, hand: [132, 112], foot: [110, 202], handBend: -1, footBend: -1 }),
+      P({ t: 100, torso: 22, hand: [132, 112], foot: [128, 176], handBend: -1, footBend: -1 }),
+    ],
+  },
+
+  'hollow-hold': {
+    duration: 4,
+    baseRot: -90,
+    offset: [0, 52],
+    focus: [118, 136],
+    label: 'Hollow Hold',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, torso: 16, hand: [128, 78], foot: [136, 196], handBend: -1, footBend: -1 }),
+      P({ t: 50, torso: 19, hand: [130, 76], foot: [138, 194], handBend: -1, footBend: -1 }),
+      P({ t: 100, torso: 16, hand: [128, 78], foot: [136, 196], handBend: -1, footBend: -1 }),
+    ],
+  },
+
+  // A plat ventre : baseRot 90, tete a droite, appuis vers le sol.
+  gainage: {
+    duration: 4,
+    baseRot: 90,
+    offset: [0, 42],
+    focus: [118, 130],
+    label: 'Gainage',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, torso: -4, hand: [140, 104], foot: [112, 208], handBend: 1, footBend: 1 }),
+      P({ t: 50, torso: -2, hand: [140, 104], foot: [112, 208], handBend: 1, footBend: 1 }),
+      P({ t: 100, torso: -4, hand: [140, 104], foot: [112, 208], handBend: 1, footBend: 1 }),
+    ],
+  },
+
+  'mountain-climbers': {
+    duration: 1.6,
+    baseRot: 90,
+    offset: [0, 42],
+    focus: [118, 140],
+    label: 'Mountain Climbers',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, torso: -6, hand: [148, 98], foot: [112, 208], handBend: 1, footBend: 1 }),
+      P({ t: 50, torso: -6, hand: [148, 98], foot: [142, 172], handBend: 1, footBend: 1 }),
+      P({ t: 100, torso: -6, hand: [148, 98], foot: [112, 208], handBend: 1, footBend: 1 }),
+    ],
+  },
+
+  'gainage-lateral': {
+    duration: 4,
+    baseRot: 74,
+    offset: [4, 40],
+    focus: [118, 132],
+    label: 'Gainage lateral',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, torso: -2, hand: [136, 100], foot: [114, 206], handBend: 1, footBend: 1 }),
+      P({ t: 50, torso: 1, hand: [136, 100], foot: [114, 206], handBend: 1, footBend: 1 }),
+      P({ t: 100, torso: -2, hand: [136, 100], foot: [114, 206], handBend: 1, footBend: 1 }),
+    ],
+  },
+
+  // Suspendu a la barre : le bassin s'enroule et les genoux montent.
+  'releve-jambes-suspendu': {
+    duration: 3,
+    prop: 'bar-high',
+    focus: [118, 150],
+    label: 'Releve de jambes',
+    poses: [
+      P({ t: 0, bodyY: 0, torso: -2, hand: [122, 56], foot: [108, 202], footBend: -1 }),
+      P({ t: 48, bodyY: 0, torso: -8, hand: [122, 56], foot: [150, 152], footBend: -1 }),
+      P({ t: 100, bodyY: 0, torso: -2, hand: [122, 56], foot: [108, 202], footBend: -1 }),
+    ],
+  },
+
+  // Assis au sol, buste incline, on fait pivoter le tronc avec une charge.
+  'russian-twist': {
+    duration: 2.4,
+    held: 'dumbbell',
+    focus: [118, 142],
+    label: 'Russian Twist',
+    ease: 'ease-in-out',
+    poses: [
+      P({ t: 0, bodyY: 34, torso: -26, hand: [140, 128], foot: [162, 178], footBend: -1, handBend: 1 }),
+      P({ t: 50, bodyY: 34, torso: -20, hand: [150, 136], foot: [162, 178], footBend: -1, handBend: 1 }),
+      P({ t: 100, bodyY: 34, torso: -26, hand: [140, 128], foot: [162, 178], footBend: -1, handBend: 1 }),
+    ],
+  },
+
+  // A genoux face a la poulie haute : le buste s'enroule vers le sol.
+  'crunch-poulie': {
+    duration: 2.6,
+    prop: 'cable-high',
+    held: 'rope',
+    focus: [116, 130],
+    label: 'Crunch a la poulie',
+    poses: [
+      P({ t: 0, bodyY: 30, torso: -6, hand: [140, 92], foot: [96, 186], footBend: -1, handBend: 1 }),
+      P({ t: 46, bodyY: 30, torso: 30, hand: [148, 130], foot: [96, 186], footBend: -1, handBend: 1 }),
+      P({ t: 100, bodyY: 30, torso: -6, hand: [140, 92], foot: [96, 186], footBend: -1, handBend: 1 }),
+    ],
+  },
+
   /* ----------------------------- DEFAUT --------------------------- */
   generic: {
     duration: 3,
@@ -545,6 +685,16 @@ export const MUSCLES: Record<string, MuscleKey[]> = {
   'leg-press': ['quadriceps', 'fessiers'],
   'leg-curl': ['ischios'],
   'calf-raise': ['mollets'],
+  crunch: ['abdos'],
+  'crunch-inverse': ['abdos'],
+  'bicycle-crunch': ['abdos'],
+  'hollow-hold': ['abdos'],
+  gainage: ['abdos'],
+  'mountain-climbers': ['abdos'],
+  'gainage-lateral': ['abdos'],
+  'releve-jambes-suspendu': ['abdos'],
+  'russian-twist': ['abdos'],
+  'crunch-poulie': ['abdos'],
   generic: [],
 };
 
