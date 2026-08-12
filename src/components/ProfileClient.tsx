@@ -2,8 +2,9 @@
 
 // Espace membre : mesures, reglages et deconnexion.
 import { useState, useTransition } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Check, LogOut, Ruler, Target, Timer, Weight, type LucideIcon } from 'lucide-react';
+import { Check, FileUp, LogOut, Ruler, Target, Timer, Weight, type LucideIcon } from 'lucide-react';
 import type { Profile } from '@/lib/database.types';
 import { updateProfile } from '@/app/actions';
 import { fmtDateShort, initials } from '@/lib/format';
@@ -143,6 +144,11 @@ export default function ProfileClient({
         <InfoRow Icon={Target} label="Objectif hebdo" value={`${weeklyGoal} seances`} />
         <InfoRow Icon={Timer} label="Repos" value={`${rest} s`} />
       </div>
+
+      <Link href="/import" className="press btn-ghost mt-4 w-full">
+        <FileUp size={17} />
+        Importer mon historique
+      </Link>
 
       <form action="/auth/signout" method="post" className="mt-8">
         <button type="submit" className="btn-ghost w-full !text-coral-400">

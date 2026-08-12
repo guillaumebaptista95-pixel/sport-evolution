@@ -249,6 +249,97 @@ export async function deleteSet(setId: string) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Import d'un historique venant d'un tableur                         */
+/* ------------------------------------------------------------------ */
+
+export interface ImportRow {
+  date: string;
+  exerciseId: string;
+  weight: number | null;
+  reps: number | null;
+  seconds: number | null;
+  sets: number;
+}
+
+/**
+ * Cree une seance close par journee du tableau et y insere les series.
+ * Une journee deja presente dans l'appli est ignoree : on n'ecrase jamais
+ * ce qui a ete saisi a la main.
+ */
+export async function importHistory(
+  rows: ImportRow[]
+): Promise<{ days: number; sets: number; skipped: number }> {
+  const { supabase, user } = await requireUser();
+  if (rows.length === 0) return { days: 0, sets: 0, skipped: 0 };
+
+  const dates = Array.from(new Set(rows.map((r) => r.date))).sort();
+
+  const { data: existing } = await supabase
+    .from('workouts')
+    .select('performed_on')
+    .in('performed_on', dates);
+  const taken = new Set((existing ?? []).map((w) => w.performed_on as string));
+
+  let days = 0;
+  let inserted = 0;
+  let skipped = 0;
+
+  for (const date of dates) {
+    const dayRows = rows.filter((r) => r.date === date);
+    if (taken.has(date)) {
+      skipped += dayRows.length;
+      continue;
+    }
+
+    const { data: w, error } = await supabase
+      .from('workouts')
+      .insert({
+        user_id: user.id,
+        title: 'Seance importee',
+        performed_on: date,
+        started_at: `${date}T18:00:00.000Z`,
+        ended_at: `${date}T19:15:00.000Z`,
+        planned_exercise_ids: Array.from(new Set(dayRows.map((r) => r.exerciseId))),
+      })
+      .select('id')
+      .single();
+    if (error || !w) continue;
+    days += 1;
+
+    const payload: Record<string, unknown>[] = [];
+    const order = new Map<string, number>();
+    const count = new Map<string, number>();
+
+    for (const r of dayRows) {
+      if (!order.has(r.exerciseId)) order.set(r.exerciseId, order.size);
+      for (let i = 0; i < r.sets; i++) {
+        const n = (count.get(r.exerciseId) ?? 0) + 1;
+        count.set(r.exerciseId, n);
+        payload.push({
+          workout_id: w.id,
+          user_id: user.id,
+          exercise_id: r.exerciseId,
+          set_index: n,
+          exercise_order: order.get(r.exerciseId),
+          weight_kg: r.weight,
+          reps: r.reps,
+          duration_seconds: r.seconds,
+          performed_at: `${date}T18:${String(Math.min(59, n * 3)).padStart(2, '0')}:00.000Z`,
+        });
+      }
+    }
+
+    if (payload.length) {
+      const { error: e2 } = await supabase.from('workout_sets').insert(payload);
+      if (!e2) inserted += payload.length;
+    }
+  }
+
+  revalidatePath('/', 'layout');
+  return { days, sets: inserted, skipped };
+}
+
+/* ------------------------------------------------------------------ */
 /*  Profil                                                             */
 /* ------------------------------------------------------------------ */
 
