@@ -19,6 +19,7 @@ import type { Exercise, MuscleGroup, WorkoutSet } from '@/lib/database.types';
 import type { WorkoutWithSets } from '@/lib/queries';
 import { deleteSet, finishWorkout, saveSet, startWorkout } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
+import Chrono from '@/components/Chrono';
 import ExercisePicker from '@/components/ExercisePicker';
 import { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
 import MachinePanel from '@/components/MachinePanel';
@@ -549,6 +550,11 @@ function Logger({
             </motion.div>
           ))}
         </div>
+      )}
+
+      {/* Exercice tenu : on chronometre plutot que d'estimer */}
+      {(type === 'time' || type === 'weighted_time') && (
+        <Chrono accent={color} onStop={setDuration} />
       )}
 
       {/* Saisie */}
