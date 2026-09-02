@@ -1,0 +1,13 @@
+Depose ici les videos generees sur Higgsfield, en .mp4.
+
+Nomme chaque fichier avec la cle de l'exercice, exactement comme dans
+src/lib/rig.ts. Exemples :
+
+  biceps-curl.mp4
+  pullup.mp4
+  squat.mp4
+  chest-press.mp4
+  gainage.mp4
+
+Je m'occupe du reste : extraction de 10 images par video avec ffmpeg,
+fabrication de la planche de sprites, integration dans l'app.
