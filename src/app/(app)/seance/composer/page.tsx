@@ -5,6 +5,7 @@
 // ?jour=1..7       : faire aujourd'hui le programme d'un autre jour, quand le
 //                    cycle a ete decale. Ne modifie pas le planning.
 // ?libre=1         : seance libre, tous les groupes disponibles.
+// ?preset=<id>     : ouvre directement sur une seance type enregistree.
 import { redirect } from 'next/navigation';
 import {
   getExercises,
@@ -12,6 +13,7 @@ import {
   getMuscleGroups,
   getOpenWorkout,
   getPlan,
+  getTemplates,
 } from '@/lib/queries';
 import { WEEKDAYS, todayWeekday, weekdayOf } from '@/lib/plan';
 import { todayISO } from '@/lib/format';
@@ -23,15 +25,20 @@ export const metadata = { title: 'Composer ma seance — Sport Evolution' };
 export default async function ComposerPage({
   searchParams,
 }: {
-  searchParams: { date?: string; jour?: string; libre?: string };
+  searchParams: { date?: string; jour?: string; libre?: string; preset?: string };
 }) {
-  const [plan, groups, exercises, lastPerf, open] = await Promise.all([
+  const [plan, groups, exercises, lastPerf, open, templates] = await Promise.all([
     getPlan(),
     getMuscleGroups(),
     getExercises(),
     getLastPerformances(),
     getOpenWorkout(),
+    getTemplates(),
   ]);
+
+  const preset = searchParams.preset
+    ? templates.find((t) => t.id === searchParams.preset)
+    : undefined;
 
   const today = todayISO();
   const rawDate = searchParams.date;
@@ -46,10 +53,11 @@ export default async function ComposerPage({
 
   const day = plan.find((d) => d.weekday === picked);
   const rest = !day || day.is_rest || day.groups.length === 0;
-  const free = searchParams.libre === '1' || rest;
+  // Une seance type ouvre tous les groupes : elle ne suit pas le planning.
+  const free = searchParams.libre === '1' || Boolean(preset) || rest;
 
   // Aujourd'hui, un jour de repos non force n'a rien a composer : retour accueil.
-  if (rest && !isPast && !searchParams.jour && !searchParams.libre) redirect('/');
+  if (rest && !isPast && !searchParams.jour && !searchParams.libre && !preset) redirect('/');
 
   // Les autres jours du planning proposes en bascule.
   const options = plan
@@ -63,8 +71,8 @@ export default async function ComposerPage({
 
   return (
     <SessionBuilder
-      key={`${date}-${picked}-${free}`}
-      label={free ? 'Seance libre' : day!.label || WEEKDAYS[picked - 1]}
+      key={`${date}-${picked}-${free}-${preset?.id ?? ''}`}
+      label={preset ? preset.name : free ? 'Seance libre' : day!.label || WEEKDAYS[picked - 1]}
       groups={free ? groups.map((g) => g.slug) : day!.groups}
       targets={free ? {} : (day!.targets ?? {})}
       showTargets={!free}
@@ -77,6 +85,8 @@ export default async function ComposerPage({
       dayOptions={options}
       activeWeekday={free ? null : picked}
       naturalWeekday={natural}
+      templates={templates}
+      initialTemplateId={preset?.id ?? null}
     />
   );
 }

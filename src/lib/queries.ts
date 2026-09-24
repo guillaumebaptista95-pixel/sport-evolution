@@ -143,6 +143,28 @@ export async function getLastPerformances(): Promise<Record<string, WorkoutSet[]
 }
 
 /** Programme de la semaine, toujours 7 lignes triees du lundi au dimanche. */
+/* ------------------------------------------------------------------ */
+/*  Seances types                                                      */
+/* ------------------------------------------------------------------ */
+
+export interface WorkoutTemplate {
+  id: string;
+  name: string;
+  exercise_ids: string[];
+  color: string | null;
+  sort_order: number;
+}
+
+export async function getTemplates(): Promise<WorkoutTemplate[]> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from('workout_templates')
+    .select('id, name, exercise_ids, color, sort_order')
+    .order('sort_order')
+    .order('created_at');
+  return (data ?? []) as WorkoutTemplate[];
+}
+
 export async function getPlan(): Promise<PlanDay[]> {
   const supabase = createClient();
   const { data } = await supabase.from('plan_days').select('*').order('weekday');

@@ -4,9 +4,10 @@
 // par groupe (0/2), on coche jusqu'a atteindre le compte, puis on valide.
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, CalendarDays, Check, Play, Plus } from 'lucide-react';
+import { ArrowLeft, Bookmark, CalendarDays, Check, Play, Plus, Star } from 'lucide-react';
 import type { Exercise, MuscleGroup, WorkoutSet } from '@/lib/database.types';
-import { composeWorkout } from '@/app/actions';
+import type { WorkoutTemplate } from '@/lib/queries';
+import { composeWorkout, saveTemplate } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
 import { MACHINE_LABEL, type MachineKey } from '@/components/MachineArt';
 import { cn, describeSet, fmtDateLong, todayISO } from '@/lib/format';
@@ -25,6 +26,8 @@ export default function SessionBuilder({
   dayOptions,
   activeWeekday,
   naturalWeekday,
+  templates = [],
+  initialTemplateId = null,
 }: {
   label: string;
   groups: string[];
@@ -39,13 +42,26 @@ export default function SessionBuilder({
   dayOptions: { weekday: number; label: string; short: string }[];
   activeWeekday: number | null;
   naturalWeekday: number;
+  templates?: WorkoutTemplate[];
+  initialTemplateId?: string | null;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
-  const [chosen, setChosen] = useState<string[]>(preselected);
+
+  // Une seance type demandee des l'ouverture : on charge directement ses exercices.
+  const opening = initialTemplateId
+    ? templates.find((t) => t.id === initialTemplateId)
+    : undefined;
+
+  const [chosen, setChosen] = useState<string[]>(opening ? opening.exercise_ids : preselected);
   const [blocked, setBlocked] = useState<string | null>(null);
   // Rien n'oblige a s'en tenir aux groupes du jour : on peut tout ouvrir.
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(Boolean(opening));
+  const [usedTemplate, setUsedTemplate] = useState<string | null>(opening?.id ?? null);
+  const [title, setTitle] = useState<string>(opening?.name ?? label);
+  const [saving, setSaving] = useState(false);
+  const [saveName, setSaveName] = useState('');
+  const [saved, setSaved] = useState<string | null>(null);
   const today = todayISO();
 
   const gBySlug = useMemo(
@@ -74,11 +90,36 @@ export default function SessionBuilder({
   const total = showTargets ? groups.reduce((a, s) => a + (targets[s] ?? 2), 0) : 0;
   const complete = !showTargets || groups.every((s) => countIn(s) >= (targets[s] ?? 2));
 
+  /** Charge une seance type : sa liste remplace la selection courante. */
+  function applyTemplate(t: WorkoutTemplate) {
+    const known = new Set(exercises.map((e) => e.id));
+    setChosen(t.exercise_ids.filter((id) => known.has(id)));
+    setShowAll(true); // ses exercices peuvent sortir des groupes du jour
+    setUsedTemplate(t.id);
+    setTitle(t.name);
+    setSaved(null);
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) navigator.vibrate?.(12);
+  }
+
+  function persistTemplate() {
+    const name = saveName.trim();
+    if (!name || chosen.length === 0) return;
+    start(async () => {
+      const res = await saveTemplate(name, chosen);
+      if (res && 'error' in res) return;
+      setSaved(name);
+      setSaving(false);
+      setSaveName('');
+      setTitle(name);
+      router.refresh();
+    });
+  }
+
   function validate() {
     if (chosen.length === 0) return;
     setBlocked(null);
     start(async () => {
-      const res = await composeWorkout(chosen, label, isPast ? date : undefined);
+      const res = await composeWorkout(chosen, title || label, isPast ? date : undefined);
       if ('error' in res) {
         setBlocked(res.date);
         return;
@@ -159,6 +200,34 @@ export default function SessionBuilder({
           className="shrink-0 rounded-xl border border-white/10 bg-white/[0.05] px-2.5 py-2 text-[12.5px] font-medium text-ink-200 [color-scheme:dark]"
         />
       </label>
+
+      {/* Seances types : un appui charge toute la seance d'un coup. */}
+      {templates.length > 0 && (
+        <div className="mb-5">
+          <p className="label mb-2">Mes seances types</p>
+          <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {templates.map((t) => {
+              const on = usedTemplate === t.id;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => applyTemplate(t)}
+                  className={cn(
+                    'press flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] font-semibold transition-colors',
+                    on
+                      ? 'border-transparent bg-brand-500 text-white'
+                      : 'border-white/[0.09] bg-ink-850/90 text-ink-200'
+                  )}
+                >
+                  <Star size={13} className={on ? 'fill-current' : ''} />
+                  {t.name}
+                  <span className="num text-[11.5px] opacity-70">{t.exercise_ids.length}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Bascule de programme : utile quand le cycle a ete decale. */}
       <div className="mb-5">
@@ -327,6 +396,54 @@ export default function SessionBuilder({
           <Plus size={16} className={showAll ? 'rotate-45 transition-transform' : 'transition-transform'} />
           {showAll ? 'Ne montrer que la seance du jour' : 'Choisir un autre exercice'}
         </button>
+      )}
+
+      {/* Enregistrer la selection courante comme seance type */}
+      {chosen.length > 0 && (
+        <div className="mt-6">
+          {saving ? (
+            <div className="card flex items-center gap-2 p-2.5">
+              <input
+                autoFocus
+                value={saveName}
+                onChange={(e) => setSaveName(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
+                placeholder="Nom de la seance : Dos / Biceps"
+                maxLength={40}
+                className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
+              />
+              <button
+                onClick={() => setSaving(false)}
+                className="press shrink-0 rounded-xl px-3 py-2 text-[13px] font-semibold text-ink-400"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={persistTemplate}
+                disabled={!saveName.trim() || pending}
+                className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
+              >
+                Enregistrer
+              </button>
+            </div>
+          ) : saved ? (
+            <p className="flex items-center justify-center gap-1.5 text-[12.5px] font-semibold text-lime-400">
+              <Check size={14} strokeWidth={3} />
+              « {saved} » enregistree
+            </p>
+          ) : (
+            <button
+              onClick={() => {
+                setSaveName(title === label ? '' : title);
+                setSaving(true);
+              }}
+              className="btn-ghost w-full"
+            >
+              <Bookmark size={16} />
+              Enregistrer comme seance type
+            </button>
+          )}
+        </div>
       )}
 
       {/* Barre de validation */}

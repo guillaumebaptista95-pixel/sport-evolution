@@ -1,12 +1,13 @@
 // Accueil : le programme du jour, l'objectif de la semaine, l'historique jour par jour.
 import Link from 'next/link';
-import { ArrowRight, Award, CalendarPlus, ChevronRight, Flame, Moon } from 'lucide-react';
+import { ArrowRight, Award, CalendarPlus, ChevronRight, Flame, Moon, Star } from 'lucide-react';
 import {
   getMuscleGroups,
   getOpenWorkout,
   getPlan,
   getProfile,
   getSessionDays,
+  getTemplates,
   getTopRecords,
   getTrainedDaysThisWeek,
   getWeekStreak,
@@ -21,7 +22,7 @@ import HistoryCarousel from '@/components/HistoryCarousel';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [profile, plan, muscleGroups, days, trainedDays, open, week, streak, records] =
+  const [profile, plan, muscleGroups, days, trainedDays, open, week, streak, records, templates] =
     await Promise.all([
       getProfile(),
       getPlan(),
@@ -32,6 +33,7 @@ export default async function HomePage() {
       getWeekStrip(),
       getWeekStreak(),
       getTopRecords(2),
+      getTemplates(),
     ]);
 
   const weekday = todayWeekday();
@@ -124,6 +126,25 @@ export default async function HomePage() {
           </div>
         </div>
       </Reveal>
+
+      {/* -------- Mes seances types : lancer n'importe laquelle, n'importe quand -------- */}
+      {templates.length > 0 && (
+        <Reveal delay={0.08} className="mt-3">
+          <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {templates.map((t) => (
+              <Link
+                key={t.id}
+                href={`/seance/composer?preset=${t.id}`}
+                className="press flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-white/[0.09] bg-ink-850/90 px-3.5 py-2 text-[13px] font-semibold text-ink-200"
+              >
+                <Star size={13} className="text-gold-400" />
+                {t.name}
+                <span className="num text-[11.5px] text-ink-500">{t.exercise_ids.length}</span>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+      )}
 
       {!today?.is_rest && (today?.groups ?? []).length > 0 && (
         <Reveal delay={0.1} className="mt-3">

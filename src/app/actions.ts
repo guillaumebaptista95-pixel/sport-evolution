@@ -377,6 +377,79 @@ export async function saveMachinePhoto(machine: string, path: string) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Seances types                                                      */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Enregistre une seance type. Un modele portant deja ce nom est mis a jour
+ * plutot que duplique : reenregistrer, c'est corriger.
+ */
+export async function saveTemplate(name: string, exerciseIds: string[], color?: string) {
+  const { supabase, user } = await requireUser();
+  const clean = name.trim().slice(0, 40);
+  if (!clean || exerciseIds.length === 0) return { error: 'vide' as const };
+
+  const { data: existing } = await supabase
+    .from('workout_templates')
+    .select('id')
+    .ilike('name', clean)
+    .maybeSingle();
+
+  if (existing) {
+    const { error } = await supabase
+      .from('workout_templates')
+      .update({
+        exercise_ids: exerciseIds,
+        color: color ?? null,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', existing.id);
+    if (error) throw new Error(error.message);
+    revalidatePath('/', 'layout');
+    return { id: existing.id as string, updated: true as const };
+  }
+
+  const { count } = await supabase
+    .from('workout_templates')
+    .select('id', { count: 'exact', head: true });
+
+  const { data, error } = await supabase
+    .from('workout_templates')
+    .insert({
+      user_id: user.id,
+      name: clean,
+      exercise_ids: exerciseIds,
+      color: color ?? null,
+      sort_order: count ?? 0,
+    })
+    .select('id')
+    .single();
+
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+  return { id: data!.id as string, updated: false as const };
+}
+
+export async function renameTemplate(id: string, name: string) {
+  const { supabase } = await requireUser();
+  const clean = name.trim().slice(0, 40);
+  if (!clean) return;
+  const { error } = await supabase
+    .from('workout_templates')
+    .update({ name: clean, updated_at: new Date().toISOString() })
+    .eq('id', id);
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+}
+
+export async function deleteTemplate(id: string) {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.from('workout_templates').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  revalidatePath('/', 'layout');
+}
+
+/* ------------------------------------------------------------------ */
 /*  Programme hebdomadaire                                             */
 /* ------------------------------------------------------------------ */
 
