@@ -168,8 +168,8 @@ export default async function StatsPage() {
 
       <Reveal delay={0.12} className="mb-4">
         <div className="card p-4">
-          <p className="label mb-3">Regularite · 16 dernieres semaines</p>
-          <ActivityGrid dates={activity} />
+          <p className="label mb-3">Ma regularite</p>
+          <ActivityGrid dates={activity} weeks={8} months={6} />
         </div>
       </Reveal>
 
