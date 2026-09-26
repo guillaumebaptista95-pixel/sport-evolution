@@ -32,7 +32,12 @@ export default async function StatsPage() {
   /* ---- Evolution par exercice : charge et repetitions ---- */
   const byEx = new Map<
     string,
-    { name: string; color: string; type: string; days: Map<string, { w: number; r: number; d: number }> }
+    {
+      name: string;
+      color: string;
+      type: string;
+      days: Map<string, { w: number; r: number; d: number; sets: number; vol: number; rm: number }>;
+    }
   >();
   for (const w of done) {
     for (const s of w.workout_sets) {
@@ -44,12 +49,15 @@ export default async function StatsPage() {
           name: ex.name,
           color: ex.muscle_groups?.color ?? '#6C5CE7',
           type: ex.tracking_type,
-          days: new Map<string, { w: number; r: number; d: number }>(),
+          days: new Map<string, { w: number; r: number; d: number; sets: number; vol: number; rm: number }>(),
         };
-      const cur = e.days.get(w.performed_on) ?? { w: 0, r: 0, d: 0 };
+      const cur = e.days.get(w.performed_on) ?? { w: 0, r: 0, d: 0, sets: 0, vol: 0, rm: 0 };
       cur.w = Math.max(cur.w, s.weight_kg ?? 0);
       cur.r = Math.max(cur.r, s.reps ?? 0);
       cur.d = Math.max(cur.d, s.duration_seconds ?? 0);
+      cur.sets += 1;
+      cur.vol += setVolume(s, ex.tracking_type, bw);
+      cur.rm = Math.max(cur.rm, estimate1RM(s.weight_kg ?? 0, s.reps ?? 0));
       e.days.set(w.performed_on, cur);
       byEx.set(ex.id, e);
     }
@@ -67,9 +75,13 @@ export default async function StatsPage() {
         .sort((a, b) => (a[0] < b[0] ? -1 : 1))
         .slice(-20)
         .map(([date, v]) => ({
+          date,
           label: fmtDateShort(date),
           weight: v.w,
           reps: v.r,
+          sets: v.sets,
+          volume: Math.round(v.vol),
+          oneRm: Math.round(v.rm),
           seconds: v.d,
         })),
     }));

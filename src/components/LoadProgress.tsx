@@ -3,9 +3,9 @@
 // Evolution par exercice : la charge portee ou les repetitions, seance apres
 // seance. C'est la courbe qui dit si on progresse vraiment.
 import { useMemo, useState } from 'react';
-import { TrendingUp } from 'lucide-react';
+import { ChevronDown, TrendingUp } from 'lucide-react';
 import ProgressChart from '@/components/ProgressChart';
-import { cn, fmtWeight } from '@/lib/format';
+import { cn, fmtNumber, fmtWeight } from '@/lib/format';
 
 export interface ExerciseSerie {
   id: string;
@@ -13,7 +13,16 @@ export interface ExerciseSerie {
   color: string;
   /** weight_reps | bodyweight | assisted | time | weighted_time */
   type: string;
-  points: { label: string; weight: number; reps: number; seconds: number }[];
+  points: {
+    date: string;
+    label: string;
+    weight: number;
+    reps: number;
+    seconds: number;
+    sets: number;
+    volume: number;
+    oneRm: number;
+  }[];
 }
 
 type Metric = 'charge' | 'reps';
@@ -21,6 +30,7 @@ type Metric = 'charge' | 'reps';
 export default function LoadProgress({ series }: { series: ExerciseSerie[] }) {
   const [id, setId] = useState(series[0]?.id ?? '');
   const [metric, setMetric] = useState<Metric>('charge');
+  const [open, setOpen] = useState(false);
 
   const ex = useMemo(() => series.find((s) => s.id === id) ?? series[0], [series, id]);
 
@@ -122,7 +132,78 @@ export default function LoadProgress({ series }: { series: ExerciseSerie[] }) {
         </p>
       )}
 
-      <ProgressChart data={data} color={ex.color} height={160} />
+      <ProgressChart data={data} color={ex.color} height={open ? 230 : 160} />
+
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="press mt-1 flex w-full items-center justify-center gap-1 py-2 text-[12.5px] font-semibold text-ink-300"
+      >
+        {open ? 'Replier' : 'Tout voir'}
+        <ChevronDown size={14} className={cn('transition-transform', open && 'rotate-180')} />
+      </button>
+
+      {open && <Details ex={ex} isTime={isTime} />}
+    </div>
+  );
+}
+
+/** Le detail complet d'un exercice : records, cumuls, et seance par seance. */
+function Details({ ex, isTime }: { ex: ExerciseSerie; isTime: boolean }) {
+  const pts = ex.points;
+  const best = {
+    weight: Math.max(...pts.map((p) => p.weight)),
+    reps: Math.max(...pts.map((p) => p.reps)),
+    seconds: Math.max(...pts.map((p) => p.seconds)),
+    oneRm: Math.max(...pts.map((p) => p.oneRm)),
+  };
+  const totalSets = pts.reduce((a, p) => a + p.sets, 0);
+  const totalVol = pts.reduce((a, p) => a + p.volume, 0);
+
+  const stats: [string, string][] = isTime
+    ? [
+        ['Meilleur temps', `${best.seconds} s`],
+        ['Series', String(totalSets)],
+        ['Seances', String(pts.length)],
+      ]
+    : [
+        ['Record', fmtWeight(best.weight)],
+        ['1RM estime', `${best.oneRm} kg`],
+        ['Meilleures reps', String(best.reps)],
+        ['Series', String(totalSets)],
+        ['Volume', `${fmtNumber(Math.round(totalVol / 1000))} t`],
+        ['Seances', String(pts.length)],
+      ];
+
+  return (
+    <div className="mt-3 border-t border-white/[0.06] pt-3.5">
+      <div className="mb-3 grid grid-cols-3 gap-2">
+        {stats.map(([l, v]) => (
+          <div key={l} className="card-flat px-2.5 py-2.5 text-center">
+            <p className="num text-[15px] font-extrabold leading-none" style={{ color: ex.color }}>
+              {v}
+            </p>
+            <p className="mt-1 text-[9.5px] leading-tight text-ink-400">{l}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="label mb-1.5">Seance par seance</p>
+      <div className="max-h-[260px] divide-y divide-white/[0.05] overflow-y-auto">
+        {[...pts].reverse().map((p) => (
+          <div key={p.date} className="flex items-center gap-3 py-2">
+            <span className="num w-[54px] shrink-0 text-[11.5px] text-ink-500">{p.label}</span>
+            <span className="num min-w-0 flex-1 text-[13px] font-semibold">
+              {isTime
+                ? `${p.seconds} s`
+                : `${fmtWeight(p.weight)} × ${p.reps}`}
+            </span>
+            <span className="num shrink-0 text-[11.5px] text-ink-400">
+              {p.sets} serie{p.sets > 1 ? 's' : ''}
+              {!isTime && p.volume > 0 ? ` · ${fmtNumber(p.volume)} kg` : ''}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
