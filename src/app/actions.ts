@@ -384,16 +384,25 @@ export async function saveMachinePhoto(machine: string, path: string) {
  * Enregistre une seance type. Un modele portant deja ce nom est mis a jour
  * plutot que duplique : reenregistrer, c'est corriger.
  */
-export async function saveTemplate(name: string, exerciseIds: string[], color?: string) {
+export async function saveTemplate(
+  name: string,
+  exerciseIds: string[],
+  color?: string
+): Promise<{ id: string; updated: boolean } | { error: 'vide' | 'table' | string }> {
   const { supabase, user } = await requireUser();
   const clean = name.trim().slice(0, 40);
-  if (!clean || exerciseIds.length === 0) return { error: 'vide' as const };
+  if (!clean || exerciseIds.length === 0) return { error: 'vide' };
 
-  const { data: existing } = await supabase
+  const { data: existing, error: lookupError } = await supabase
     .from('workout_templates')
     .select('id')
     .ilike('name', clean)
     .maybeSingle();
+
+  // La table n'existe pas encore : on le dit au lieu de planter l'ecran.
+  if (lookupError && /relation|does not exist|schema cache/i.test(lookupError.message)) {
+    return { error: 'table' };
+  }
 
   if (existing) {
     const { error } = await supabase
@@ -404,9 +413,9 @@ export async function saveTemplate(name: string, exerciseIds: string[], color?: 
         updated_at: new Date().toISOString(),
       })
       .eq('id', existing.id);
-    if (error) throw new Error(error.message);
+    if (error) return { error: error.message };
     revalidatePath('/', 'layout');
-    return { id: existing.id as string, updated: true as const };
+    return { id: existing.id as string, updated: true };
   }
 
   const { count } = await supabase
@@ -425,9 +434,11 @@ export async function saveTemplate(name: string, exerciseIds: string[], color?: 
     .select('id')
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    return { error: /relation|does not exist|schema cache/i.test(error.message) ? 'table' : error.message };
+  }
   revalidatePath('/', 'layout');
-  return { id: data!.id as string, updated: false as const };
+  return { id: data!.id as string, updated: false };
 }
 
 export async function renameTemplate(id: string, name: string) {

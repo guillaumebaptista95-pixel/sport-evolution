@@ -65,6 +65,7 @@ export default function SessionBuilder({
   const [saving, setSaving] = useState(false);
   const [saveName, setSaveName] = useState('');
   const [saved, setSaved] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const today = todayISO();
 
   const gBySlug = useMemo(
@@ -109,7 +110,17 @@ export default function SessionBuilder({
     if (!name || chosen.length === 0) return;
     start(async () => {
       const res = await saveTemplate(name, chosen);
-      if (res && 'error' in res) return;
+      if ('error' in res) {
+        setSaveError(
+          res.error === 'table'
+            ? "La table des seances types n'existe pas encore dans la base. Execute la migration 0007 dans Supabase."
+            : res.error === 'vide'
+              ? 'Donne un nom et coche au moins un exercice.'
+              : res.error
+        );
+        return;
+      }
+      setSaveError(null);
       // Dans la fabrique, on repart vers la liste des seances types.
       if (presetMode) {
         router.push('/programme');
@@ -431,6 +442,11 @@ export default function SessionBuilder({
         style={{ bottom: 'calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px)' }}
       >
         <div className="mx-auto w-full max-w-[520px]">
+          {saveError && (
+            <p className="card-flat mb-2.5 p-3 text-center text-[12.5px] leading-snug text-rose-200">
+              {saveError}
+            </p>
+          )}
           {presetMode ? (
             saving ? (
               <div className="card flex items-center gap-2 p-2.5">
