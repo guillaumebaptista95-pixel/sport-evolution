@@ -13,11 +13,12 @@ import {
   Plus,
   Trash2,
   TrendingUp,
+  X,
   Zap,
 } from 'lucide-react';
 import type { Exercise, MuscleGroup, WorkoutSet } from '@/lib/database.types';
 import type { WorkoutWithSets } from '@/lib/queries';
-import { deleteSet, finishWorkout, saveSet, startWorkout } from '@/app/actions';
+import { deleteSet, deleteWorkout, finishWorkout, saveSet, startWorkout } from '@/app/actions';
 import ExerciseAnimation from '@/components/ExerciseAnimation';
 import Chrono from '@/components/Chrono';
 import ExercisePicker from '@/components/ExercisePicker';
@@ -76,6 +77,7 @@ export default function SessionClient({
   const [rest, setRest] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [finishing, setFinishing] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
 
   const groupOf = useMemo(() => {
     const m = new Map(groups.map((g) => [g.id, g]));
@@ -171,6 +173,15 @@ export default function SessionClient({
     setFinishing(true);
     await finishWorkout(workoutId);
     router.push(`/seance/${workoutId}`);
+    router.refresh();
+  }
+
+  /** Abandon : la seance et ses series sont effacees, rien n'est conserve. */
+  async function onCancel() {
+    if (!workoutId) return router.push('/');
+    setFinishing(true);
+    await deleteWorkout(workoutId);
+    router.push('/');
     router.refresh();
   }
 
@@ -321,6 +332,44 @@ export default function SessionClient({
                 {finishing ? 'Enregistrement...' : 'Terminer la seance'}
               </button>
             )}
+
+            {/* Abandon : utile quand la seance a ete ouverte par erreur. */}
+            {workoutId &&
+              (cancelling ? (
+                <div className="card mt-3 p-4">
+                  <p className="text-[13.5px] font-semibold">Annuler cette seance ?</p>
+                  <p className="mt-1 text-[12.5px] leading-relaxed text-ink-400">
+                    {sets.length > 0
+                      ? `Les ${sets.length} serie${sets.length > 1 ? 's' : ''} deja enregistree${sets.length > 1 ? 's' : ''} seront definitivement perdue${sets.length > 1 ? 's' : ''}.`
+                      : 'Rien n’a encore ete enregistre, il n’y a rien a perdre.'}
+                  </p>
+                  <div className="mt-3 flex gap-2.5">
+                    <button
+                      onClick={() => setCancelling(false)}
+                      className="btn-ghost flex-1"
+                      disabled={finishing}
+                    >
+                      Revenir
+                    </button>
+                    <button
+                      onClick={onCancel}
+                      disabled={finishing}
+                      className="press flex-1 rounded-2xl bg-coral-500/20 py-3.5 text-[14px] font-bold text-coral-400 disabled:opacity-60"
+                    >
+                      {finishing ? 'Suppression...' : 'Annuler la seance'}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setCancelling(true)}
+                  disabled={finishing || pending}
+                  className="press mt-3 w-full py-3 text-[13px] font-semibold text-ink-500"
+                >
+                  <X size={15} className="mr-1.5 inline-block align-[-2px]" />
+                  Annuler la seance
+                </button>
+              ))}
           </motion.div>
         )}
       </AnimatePresence>

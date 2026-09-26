@@ -4,7 +4,7 @@
 // par groupe (0/2), on coche jusqu'a atteindre le compte, puis on valide.
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Bookmark, CalendarDays, Check, Play, Plus, Star } from 'lucide-react';
+import { ArrowLeft, Bookmark, CalendarDays, Check, Play, Plus, Star, X } from 'lucide-react';
 import type { Exercise, MuscleGroup, WorkoutSet } from '@/lib/database.types';
 import type { WorkoutTemplate } from '@/lib/queries';
 import { composeWorkout, saveTemplate } from '@/app/actions';
@@ -149,7 +149,7 @@ export default function SessionBuilder({
   const shifted = activeWeekday !== null && activeWeekday !== naturalWeekday;
 
   return (
-    <div className="pb-32 pt-4">
+    <div className="pb-44 pt-4">
       <div className="mb-5 flex items-center gap-3">
         <button
           onClick={() => router.push('/')}
@@ -398,60 +398,60 @@ export default function SessionBuilder({
         </button>
       )}
 
-      {/* Enregistrer la selection courante comme seance type */}
-      {chosen.length > 0 && (
-        <div className="mt-6">
-          {saving ? (
-            <div className="card flex items-center gap-2 p-2.5">
-              <input
-                autoFocus
-                value={saveName}
-                onChange={(e) => setSaveName(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
-                placeholder="Nom de la seance : Dos / Biceps"
-                maxLength={40}
-                className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
-              />
-              <button
-                onClick={() => setSaving(false)}
-                className="press shrink-0 rounded-xl px-3 py-2 text-[13px] font-semibold text-ink-400"
-              >
-                Annuler
-              </button>
-              <button
-                onClick={persistTemplate}
-                disabled={!saveName.trim() || pending}
-                className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
-              >
-                Enregistrer
-              </button>
-            </div>
-          ) : saved ? (
-            <p className="flex items-center justify-center gap-1.5 text-[12.5px] font-semibold text-lime-400">
-              <Check size={14} strokeWidth={3} />
-              « {saved} » enregistree
-            </p>
-          ) : (
-            <button
-              onClick={() => {
-                setSaveName(title === label ? '' : title);
-                setSaving(true);
-              }}
-              className="btn-ghost w-full"
-            >
-              <Bookmark size={16} />
-              Enregistrer comme seance type
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Barre de validation */}
+      {/* Barre du bas : enregistrer en seance type, puis commencer */}
       <div
         className="fixed inset-x-0 z-30 px-5"
         style={{ bottom: 'calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px)' }}
       >
         <div className="mx-auto w-full max-w-[520px]">
+          {chosen.length > 0 && (
+            <div className="mb-2.5">
+              {saving ? (
+                <div className="card flex items-center gap-2 p-2.5">
+                  <input
+                    autoFocus
+                    value={saveName}
+                    onChange={(e) => setSaveName(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
+                    placeholder="Nom : Dos / Biceps"
+                    maxLength={40}
+                    className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
+                  />
+                  <button
+                    onClick={() => setSaving(false)}
+                    aria-label="Annuler"
+                    className="press grid h-9 w-9 shrink-0 place-items-center rounded-xl text-ink-400"
+                  >
+                    <X size={16} />
+                  </button>
+                  <button
+                    onClick={persistTemplate}
+                    disabled={!saveName.trim() || pending}
+                    className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
+                  >
+                    Enregistrer
+                  </button>
+                </div>
+              ) : saved ? (
+                <p className="flex items-center justify-center gap-1.5 py-1 text-[12.5px] font-semibold text-lime-400">
+                  <Check size={14} strokeWidth={3} />
+                  &laquo;&nbsp;{saved}&nbsp;&raquo; enregistree
+                </p>
+              ) : (
+                <button
+                  onClick={() => {
+                    setSaveName(title === label ? '' : title);
+                    setSaving(true);
+                  }}
+                  className="press flex w-full items-center justify-center gap-1.5 rounded-2xl border border-white/[0.09] bg-ink-850/95 py-3 text-[13px] font-semibold text-ink-200 backdrop-blur"
+                >
+                  <Bookmark size={15} />
+                  Enregistrer comme seance type
+                </button>
+              )}
+            </div>
+          )}
+
           <button
             onClick={validate}
             disabled={chosen.length === 0 || pending}
@@ -466,11 +466,6 @@ export default function SessionBuilder({
                   ? `Saisir la seance (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`
                   : `Commencer (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`}
           </button>
-          {!complete && chosen.length > 0 && (
-            <p className="mt-2 text-center text-[11.5px] text-ink-500">
-              Tu peux commencer maintenant et completer en cours de seance.
-            </p>
-          )}
         </div>
       </div>
     </div>
