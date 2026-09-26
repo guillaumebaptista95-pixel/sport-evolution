@@ -4,7 +4,7 @@
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Check, Pencil, Play, Star, Trash2, X } from 'lucide-react';
+import { Check, ListPlus, Pencil, Play, Plus, Star, Trash2, X } from 'lucide-react';
 import type { WorkoutTemplate } from '@/lib/queries';
 import { deleteTemplate, renameTemplate } from '@/app/actions';
 
@@ -48,12 +48,17 @@ export default function TemplateManager({ templates }: { templates: WorkoutTempl
       {templates.length === 0 ? (
         <div className="card p-5 text-center">
           <p className="text-[13.5px] font-semibold">Aucune seance type pour l&apos;instant</p>
-          <Link href="/seance/composer?libre=1" className="btn-ghost mt-3 w-full">
-            Composer une seance
+          <Link href="/seance/composer?mode=preset" className="btn-primary mt-3 w-full">
+            <Plus size={16} strokeWidth={3} />
+            Creer ma premiere seance type
           </Link>
         </div>
       ) : (
         <div className="space-y-2.5">
+          <Link href="/seance/composer?mode=preset" className="btn-ghost w-full">
+            <Plus size={16} strokeWidth={3} />
+            Nouvelle seance type
+          </Link>
           {templates.map((t) => (
             <div key={t.id} className="card p-3.5">
               {editing === t.id ? (
@@ -109,6 +114,13 @@ export default function TemplateManager({ templates }: { templates: WorkoutTempl
                       {t.exercise_ids.length} exercice{t.exercise_ids.length > 1 ? 's' : ''}
                     </p>
                   </div>
+                  <Link
+                    href={`/seance/composer?mode=preset&preset=${t.id}`}
+                    aria-label="Modifier les exercices"
+                    className="press grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05] text-ink-300"
+                  >
+                    <ListPlus size={15} />
+                  </Link>
                   <button
                     onClick={() => {
                       setDraft(t.name);

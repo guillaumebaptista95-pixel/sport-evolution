@@ -28,6 +28,7 @@ export default function SessionBuilder({
   naturalWeekday,
   templates = [],
   initialTemplateId = null,
+  presetMode = false,
 }: {
   label: string;
   groups: string[];
@@ -44,6 +45,8 @@ export default function SessionBuilder({
   naturalWeekday: number;
   templates?: WorkoutTemplate[];
   initialTemplateId?: string | null;
+  /** Fabrique d'une seance type : on selectionne et on enregistre, sans rien lancer. */
+  presetMode?: boolean;
 }) {
   const router = useRouter();
   const [pending, start] = useTransition();
@@ -56,7 +59,7 @@ export default function SessionBuilder({
   const [chosen, setChosen] = useState<string[]>(opening ? opening.exercise_ids : preselected);
   const [blocked, setBlocked] = useState<string | null>(null);
   // Rien n'oblige a s'en tenir aux groupes du jour : on peut tout ouvrir.
-  const [showAll, setShowAll] = useState(Boolean(opening));
+  const [showAll, setShowAll] = useState(Boolean(opening) || presetMode);
   const [usedTemplate, setUsedTemplate] = useState<string | null>(opening?.id ?? null);
   const [title, setTitle] = useState<string>(opening?.name ?? label);
   const [saving, setSaving] = useState(false);
@@ -107,6 +110,12 @@ export default function SessionBuilder({
     start(async () => {
       const res = await saveTemplate(name, chosen);
       if (res && 'error' in res) return;
+      // Dans la fabrique, on repart vers la liste des seances types.
+      if (presetMode) {
+        router.push('/programme');
+        router.refresh();
+        return;
+      }
       setSaved(name);
       setSaving(false);
       setSaveName('');
@@ -152,23 +161,38 @@ export default function SessionBuilder({
     <div className="pb-44 pt-4">
       <div className="mb-5 flex items-center gap-3">
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push(presetMode ? '/programme' : '/')}
           aria-label="Retour"
           className="press grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05]"
         >
           <ArrowLeft size={18} />
         </button>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-[21px] font-extrabold leading-tight">{label}</h1>
+          <h1 className="truncate text-[21px] font-extrabold leading-tight">
+            {presetMode ? (opening ? opening.name : 'Nouvelle seance type') : label}
+          </h1>
           <p className="text-[12.5px] text-ink-400">
-            {showTargets
-              ? `Choisis tes exercices · ${chosen.length}/${total}`
-              : `Choisis tes exercices · ${chosen.length}`}
+            {presetMode
+              ? `${chosen.length} exercice${chosen.length > 1 ? 's' : ''} · rien ne demarre`
+              : showTargets
+                ? `Choisis tes exercices · ${chosen.length}/${total}`
+                : `Choisis tes exercices · ${chosen.length}`}
           </p>
         </div>
       </div>
 
+      {presetMode && (
+        <div className="card-flat mb-5 flex gap-2.5 p-3.5">
+          <Bookmark size={16} className="mt-0.5 shrink-0 text-brand-300" />
+          <p className="text-[13px] leading-relaxed text-ink-300">
+            Coche tous les exercices de ta seance habituelle, puis enregistre-la sous un nom.
+            Aucune seance ne demarre : tu la retrouveras dans tes seances types.
+          </p>
+        </div>
+      )}
+
       {/* Date de la seance : par defaut aujourd'hui, modifiable pour rattraper. */}
+      {!presetMode && (
       <label
         className={cn(
           'mb-5 flex items-center gap-3 rounded-2xl border p-3.5',
@@ -200,9 +224,10 @@ export default function SessionBuilder({
           className="shrink-0 rounded-xl border border-white/10 bg-white/[0.05] px-2.5 py-2 text-[12.5px] font-medium text-ink-200 [color-scheme:dark]"
         />
       </label>
+      )}
 
       {/* Seances types : un appui charge toute la seance d'un coup. */}
-      {templates.length > 0 && (
+      {!presetMode && templates.length > 0 && (
         <div className="mb-5">
           <p className="label mb-2">Mes seances types</p>
           <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -230,6 +255,7 @@ export default function SessionBuilder({
       )}
 
       {/* Bascule de programme : utile quand le cycle a ete decale. */}
+      {!presetMode && (
       <div className="mb-5">
         <p className="label mb-2">
           Programme {shifted || activeWeekday === null ? '· modifie pour cette seance' : 'du jour'}
@@ -289,6 +315,7 @@ export default function SessionBuilder({
           </p>
         )}
       </div>
+      )}
 
       {blocked && (
         <div className="mb-5 rounded-2xl border border-rose-400/40 bg-rose-500/10 p-3.5 text-[13px] leading-snug text-rose-200">
@@ -398,74 +425,120 @@ export default function SessionBuilder({
         </button>
       )}
 
-      {/* Barre du bas : enregistrer en seance type, puis commencer */}
+      {/* Barre du bas */}
       <div
         className="fixed inset-x-0 z-30 px-5"
         style={{ bottom: 'calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px)' }}
       >
         <div className="mx-auto w-full max-w-[520px]">
-          {chosen.length > 0 && (
-            <div className="mb-2.5">
-              {saving ? (
-                <div className="card flex items-center gap-2 p-2.5">
-                  <input
-                    autoFocus
-                    value={saveName}
-                    onChange={(e) => setSaveName(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
-                    placeholder="Nom : Dos / Biceps"
-                    maxLength={40}
-                    className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
-                  />
-                  <button
-                    onClick={() => setSaving(false)}
-                    aria-label="Annuler"
-                    className="press grid h-9 w-9 shrink-0 place-items-center rounded-xl text-ink-400"
-                  >
-                    <X size={16} />
-                  </button>
-                  <button
-                    onClick={persistTemplate}
-                    disabled={!saveName.trim() || pending}
-                    className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
-                  >
-                    Enregistrer
-                  </button>
-                </div>
-              ) : saved ? (
-                <p className="flex items-center justify-center gap-1.5 py-1 text-[12.5px] font-semibold text-lime-400">
-                  <Check size={14} strokeWidth={3} />
-                  &laquo;&nbsp;{saved}&nbsp;&raquo; enregistree
-                </p>
-              ) : (
+          {presetMode ? (
+            saving ? (
+              <div className="card flex items-center gap-2 p-2.5">
+                <input
+                  autoFocus
+                  value={saveName}
+                  onChange={(e) => setSaveName(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
+                  placeholder="Nom : Dos / Biceps"
+                  maxLength={40}
+                  className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
+                />
                 <button
-                  onClick={() => {
-                    setSaveName(title === label ? '' : title);
-                    setSaving(true);
-                  }}
-                  className="press flex w-full items-center justify-center gap-1.5 rounded-2xl border border-white/[0.09] bg-ink-850/95 py-3 text-[13px] font-semibold text-ink-200 backdrop-blur"
+                  onClick={() => setSaving(false)}
+                  aria-label="Annuler"
+                  className="press grid h-9 w-9 shrink-0 place-items-center rounded-xl text-ink-400"
                 >
-                  <Bookmark size={15} />
-                  Enregistrer comme seance type
+                  <X size={16} />
                 </button>
+                <button
+                  onClick={persistTemplate}
+                  disabled={!saveName.trim() || pending}
+                  className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
+                >
+                  {pending ? '...' : 'Enregistrer'}
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setSaveName(opening?.name ?? '');
+                  setSaving(true);
+                }}
+                disabled={chosen.length === 0}
+                className="btn-primary w-full disabled:opacity-40"
+              >
+                <Bookmark size={16} />
+                {chosen.length === 0
+                  ? 'Coche au moins un exercice'
+                  : `Enregistrer la seance type (${chosen.length})`}
+              </button>
+            )
+          ) : (
+            <>
+              {chosen.length > 0 && (
+                <div className="mb-2.5">
+                  {saving ? (
+                    <div className="card flex items-center gap-2 p-2.5">
+                      <input
+                        autoFocus
+                        value={saveName}
+                        onChange={(e) => setSaveName(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && persistTemplate()}
+                        placeholder="Nom : Dos / Biceps"
+                        maxLength={40}
+                        className="min-w-0 flex-1 bg-transparent px-2 text-[14px] font-semibold text-ink-100 outline-none placeholder:font-normal placeholder:text-ink-500"
+                      />
+                      <button
+                        onClick={() => setSaving(false)}
+                        aria-label="Annuler"
+                        className="press grid h-9 w-9 shrink-0 place-items-center rounded-xl text-ink-400"
+                      >
+                        <X size={16} />
+                      </button>
+                      <button
+                        onClick={persistTemplate}
+                        disabled={!saveName.trim() || pending}
+                        className="press shrink-0 rounded-xl bg-brand-500 px-3.5 py-2 text-[13px] font-bold text-white disabled:opacity-40"
+                      >
+                        Enregistrer
+                      </button>
+                    </div>
+                  ) : saved ? (
+                    <p className="flex items-center justify-center gap-1.5 py-1 text-[12.5px] font-semibold text-lime-400">
+                      <Check size={14} strokeWidth={3} />
+                      &laquo;&nbsp;{saved}&nbsp;&raquo; enregistree
+                    </p>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setSaveName(title === label ? '' : title);
+                        setSaving(true);
+                      }}
+                      className="press flex w-full items-center justify-center gap-1.5 rounded-2xl border border-white/[0.09] bg-ink-850/95 py-3 text-[13px] font-semibold text-ink-200 backdrop-blur"
+                    >
+                      <Bookmark size={15} />
+                      Enregistrer comme seance type
+                    </button>
+                  )}
+                </div>
               )}
-            </div>
-          )}
 
-          <button
-            onClick={validate}
-            disabled={chosen.length === 0 || pending}
-            className="btn-primary w-full disabled:opacity-40"
-          >
-            <Play size={16} strokeWidth={2.8} className="fill-current" />
-            {pending
-              ? 'Preparation...'
-              : chosen.length === 0
-                ? 'Selectionne au moins un exercice'
-                : isPast
-                  ? `Saisir la seance (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`
-                  : `Commencer (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`}
-          </button>
+              <button
+                onClick={validate}
+                disabled={chosen.length === 0 || pending}
+                className="btn-primary w-full disabled:opacity-40"
+              >
+                <Play size={16} strokeWidth={2.8} className="fill-current" />
+                {pending
+                  ? 'Preparation...'
+                  : chosen.length === 0
+                    ? 'Selectionne au moins un exercice'
+                    : isPast
+                      ? `Saisir la seance (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`
+                      : `Commencer (${chosen.length} exercice${chosen.length > 1 ? 's' : ''})`}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

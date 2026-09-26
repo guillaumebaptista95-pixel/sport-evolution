@@ -6,6 +6,7 @@
 //                    cycle a ete decale. Ne modifie pas le planning.
 // ?libre=1         : seance libre, tous les groupes disponibles.
 // ?preset=<id>     : ouvre directement sur une seance type enregistree.
+// ?mode=preset     : fabrique d'une seance type, rien ne demarre.
 import { redirect } from 'next/navigation';
 import {
   getExercises,
@@ -25,7 +26,7 @@ export const metadata = { title: 'Composer ma seance — Sport Evolution' };
 export default async function ComposerPage({
   searchParams,
 }: {
-  searchParams: { date?: string; jour?: string; libre?: string; preset?: string };
+  searchParams: { date?: string; jour?: string; libre?: string; preset?: string; mode?: string };
 }) {
   const [plan, groups, exercises, lastPerf, open, templates] = await Promise.all([
     getPlan(),
@@ -39,6 +40,8 @@ export default async function ComposerPage({
   const preset = searchParams.preset
     ? templates.find((t) => t.id === searchParams.preset)
     : undefined;
+  // Fabrique : on compose une seance type sans toucher aux seances reelles.
+  const presetMode = searchParams.mode === 'preset';
 
   const today = todayISO();
   const rawDate = searchParams.date;
@@ -54,10 +57,11 @@ export default async function ComposerPage({
   const day = plan.find((d) => d.weekday === picked);
   const rest = !day || day.is_rest || day.groups.length === 0;
   // Une seance type ouvre tous les groupes : elle ne suit pas le planning.
-  const free = searchParams.libre === '1' || Boolean(preset) || rest;
+  const free = presetMode || searchParams.libre === '1' || Boolean(preset) || rest;
 
   // Aujourd'hui, un jour de repos non force n'a rien a composer : retour accueil.
-  if (rest && !isPast && !searchParams.jour && !searchParams.libre && !preset) redirect('/');
+  if (rest && !isPast && !searchParams.jour && !searchParams.libre && !preset && !presetMode)
+    redirect('/');
 
   // Les autres jours du planning proposes en bascule.
   const options = plan
@@ -71,7 +75,7 @@ export default async function ComposerPage({
 
   return (
     <SessionBuilder
-      key={`${date}-${picked}-${free}-${preset?.id ?? ''}`}
+      key={`${date}-${picked}-${free}-${preset?.id ?? ''}-${presetMode}`}
       label={preset ? preset.name : free ? 'Seance libre' : day!.label || WEEKDAYS[picked - 1]}
       groups={free ? groups.map((g) => g.slug) : day!.groups}
       targets={free ? {} : (day!.targets ?? {})}
@@ -79,7 +83,9 @@ export default async function ComposerPage({
       exercises={exercises}
       muscleGroups={groups}
       lastPerf={lastPerf}
-      preselected={open?.performed_on === date ? (open?.planned_exercise_ids ?? []) : []}
+      preselected={
+        presetMode ? [] : open?.performed_on === date ? (open?.planned_exercise_ids ?? []) : []
+      }
       date={date}
       isPast={isPast}
       dayOptions={options}
@@ -87,6 +93,7 @@ export default async function ComposerPage({
       naturalWeekday={natural}
       templates={templates}
       initialTemplateId={preset?.id ?? null}
+      presetMode={presetMode}
     />
   );
 }
