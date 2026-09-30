@@ -154,7 +154,7 @@ values
  false, 20),
 
 (null, 'hold-dips', 'Hold Dips', (select id from public.muscle_groups where slug='triceps'),
- array['pectoraux','epaules'], 'poids-du-corps', 'time', 'dip-hold',
+ array['pectoraux','epaules'], 'poids-du-corps', 'weighted_time', 'dip-hold',
  array[
    'Position bras tendus, corps gaine, epaules basses.',
    'Maintiens la position sans bouger.',
