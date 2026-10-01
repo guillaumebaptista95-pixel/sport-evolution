@@ -47,6 +47,7 @@ export default function ImportClient({
           weight: r.weight,
           reps: r.reps,
           seconds: r.seconds,
+          assist: r.assist,
           sets: r.sets,
         }))
       );

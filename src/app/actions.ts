@@ -258,6 +258,7 @@ export interface ImportRow {
   weight: number | null;
   reps: number | null;
   seconds: number | null;
+  assist: number | null;
   sets: number;
 }
 
@@ -324,6 +325,7 @@ export async function importHistory(
           weight_kg: r.weight,
           reps: r.reps,
           duration_seconds: r.seconds,
+          assist_kg: r.assist,
           performed_at: `${date}T18:${String(Math.min(59, n * 3)).padStart(2, '0')}:00.000Z`,
         });
       }

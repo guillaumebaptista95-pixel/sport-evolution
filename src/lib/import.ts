@@ -7,6 +7,7 @@ export interface RawRow {
   weight: number | null;
   reps: number | null;
   seconds: number | null;
+  assist: number | null;
   sets: number;
 }
 
@@ -72,6 +73,7 @@ const KEYS = {
   reps: ['reps', 'repetitions', 'rep', 'repetition', 'nombre'],
   seconds: ['temps', 'duree', 'secondes', 'time', 'duration'],
   sets: ['series', 'serie', 'sets', 'set'],
+  assist: ['aide', 'assistance', 'assist'],
 };
 
 function findCol(headers: string[], names: string[]) {
@@ -97,6 +99,7 @@ export function parseCsv(text: string): { rows: RawRow[]; error?: string } {
     reps: findCol(headers, KEYS.reps),
     seconds: findCol(headers, KEYS.seconds),
     sets: findCol(headers, KEYS.sets),
+    assist: findCol(headers, KEYS.assist),
   };
 
   if (ci.date < 0 || ci.exercise < 0)
@@ -122,6 +125,7 @@ export function parseCsv(text: string): { rows: RawRow[]; error?: string } {
       weight: ci.weight >= 0 ? toNumber(c[ci.weight]) : null,
       reps: ci.reps >= 0 ? toNumber(c[ci.reps]) : null,
       seconds: ci.seconds >= 0 ? toNumber(c[ci.seconds]) : null,
+      assist: ci.assist >= 0 ? toNumber(c[ci.assist]) : null,
       sets,
     });
   }
