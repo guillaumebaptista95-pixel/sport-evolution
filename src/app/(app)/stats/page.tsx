@@ -4,6 +4,7 @@ import { Award, ChevronRight } from 'lucide-react';
 import { getExercises, getProfile, getRecentWorkouts } from '@/lib/queries';
 import {
   estimate1RM,
+  fmtDateLong,
   fmtDateShort,
   fmtNumber,
   parseDate,
@@ -148,6 +149,38 @@ export default async function StatsPage() {
   );
   const totalSets = done.reduce((a, w) => a + w.workout_sets.length, 0);
 
+  /* ---- Liste des seances : chaque ligne ouvre le meme recap qu'en fin de seance ---- */
+  const sessions = done.map((w) => ({
+    id: w.id,
+    title: w.title || 'Seance',
+    date: w.performed_on,
+    sets: w.workout_sets.length,
+    volume: Math.round(
+      w.workout_sets.reduce(
+        (x, s) => x + setVolume(s, exById.get(s.exercise_id)?.tracking_type ?? 'weight_reps', bw),
+        0
+      )
+    ),
+  }));
+  const sessionRow = (s: (typeof sessions)[number]) => (
+    <Link
+      key={s.id}
+      href={`/seance/${s.id}?from=stats`}
+      className="press card flex items-center gap-3 p-3.5"
+    >
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[14px] font-semibold">{s.title}</p>
+        <p className="text-[11.5px] capitalize text-ink-500">
+          {fmtDateLong(s.date)} · {s.sets} series
+        </p>
+      </div>
+      <span className="num shrink-0 text-[14px] font-bold text-brand-300">
+        {fmtNumber(s.volume)} kg
+      </span>
+      <ChevronRight size={16} className="shrink-0 text-ink-600" />
+    </Link>
+  );
+
   return (
     <div className="pb-8 pt-4">
       <Reveal className="mb-5">
@@ -235,6 +268,21 @@ export default async function StatsPage() {
               </StaggerItem>
             ))}
           </Stagger>
+        </>
+      )}
+
+      {sessions.length > 0 && (
+        <>
+          <h2 className="mb-3 mt-6 text-[17px] font-bold">Toutes mes seances</h2>
+          <div className="space-y-2.5">{sessions.slice(0, 8).map(sessionRow)}</div>
+          {sessions.length > 8 && (
+            <details className="group mt-2.5">
+              <summary className="press card cursor-pointer list-none p-3 text-center text-[13px] font-semibold text-ink-300 group-open:hidden">
+                Voir les {sessions.length - 8} seances plus anciennes
+              </summary>
+              <div className="space-y-2.5">{sessions.slice(8).map(sessionRow)}</div>
+            </details>
+          )}
         </>
       )}
 

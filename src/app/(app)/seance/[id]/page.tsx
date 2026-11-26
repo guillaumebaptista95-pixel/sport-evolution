@@ -16,7 +16,13 @@ import { Reveal, Stagger, StaggerItem } from '@/components/Reveal';
 
 export const dynamic = 'force-dynamic';
 
-export default async function WorkoutDetail({ params }: { params: { id: string } }) {
+export default async function WorkoutDetail({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { from?: string };
+}) {
   const [workout, exercises, profile] = await Promise.all([
     getWorkout(params.id),
     getExercises(),
@@ -50,8 +56,9 @@ export default async function WorkoutDetail({ params }: { params: { id: string }
   return (
     <div className="pb-8 pt-4">
       <Reveal className="mb-5 flex items-center gap-3">
+        {/* Ouvert depuis Progres : le retour y ramene */}
         <Link
-          href="/"
+          href={searchParams.from === 'stats' ? '/stats' : '/'}
           className="press grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05]"
         >
           <ArrowLeft size={18} />
